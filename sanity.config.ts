@@ -2,16 +2,17 @@
  * This configuration is used to for the Sanity Studio that’s mounted on the `/app/src/studio/[[...index]]/page.tsx` route
  */
 
-import { visionTool } from '@sanity/vision';
-import { defineConfig } from 'sanity';
-import { structureTool } from 'sanity/structure';
+import { visionTool } from "@sanity/vision";
+import { defineConfig } from "sanity";
+import { structureTool } from "sanity/structure";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import { apiVersion, dataset, projectId } from './src/sanity/env';
-import { schema } from './src/sanity/schema';
+import { apiVersion, dataset, projectId } from "./src/sanity/env";
+import { schema } from "./src/sanity/schema";
 
 export default defineConfig({
-  basePath: '/studio',
+  basePath: "/studio",
+  title: "Janne's Mökki",
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schema' folder

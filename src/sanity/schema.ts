@@ -1,10 +1,11 @@
-import { type SchemaTypeDefinition } from 'sanity';
+import { type SchemaTypeDefinition } from "sanity";
 
-import author from './schemaTypes/author';
-import blockContent from './schemaTypes/blockContent';
-import category from './schemaTypes/category';
-import post from './schemaTypes/post';
+import page from "./schemaTypes/documents/page";
+import hero from "./schemaTypes/objects/hero";
+import link from "./schemaTypes/objects/link";
+import textImage from "./schemaTypes/objects/text-image";
+import navigation from "./schemaTypes/documents/navigation";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [post, author, category, blockContent],
+  types: [page, hero, textImage, link, navigation],
 };
