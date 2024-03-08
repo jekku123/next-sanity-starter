@@ -18,13 +18,10 @@ const PageSchema = z.object({
 
 export function validateAndCleanupPage(page: any): Page | null {
   try {
-    // Validate the top level fields first.
     const topLevelPageData = PageSchema.omit({
       content: true,
     }).parse(page);
 
-    // Validate the content separately, one by one.
-    // This way, if one of them is invalid, we can still return the rest of the page contents.
     const validatedSections = page.content
       .map((section: any) => {
         const result = PageElementsSchema.safeParse(section);
