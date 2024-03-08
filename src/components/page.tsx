@@ -1,5 +1,5 @@
 import { Page } from "@/lib/zod/page";
-import Section from "./sections/section";
+import Section from "./section";
 
 export default function Page({ page }: { page: Page }) {
   return (

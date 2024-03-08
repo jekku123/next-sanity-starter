@@ -1,4 +1,4 @@
-import Section from "@/components/sections/section";
+import Section from "@/components/section";
 import { getFrontPage } from "@/sanity/lib/client";
 
 export default async function Home() {

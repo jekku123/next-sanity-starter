@@ -22,7 +22,6 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
   }`;
 
   const page = await client.fetch(query);
-
   const validatedPage = validateAndCleanupPage(page);
 
   return validatedPage;
@@ -39,17 +38,21 @@ export async function getFrontPage(): Promise<Page | null> {
       ...,
       _type == "hero" => {
         ...,
-        cta[] {
+        primaryLink {
           ...,
           "internal": internal->slug.current,
+          external,
+        },
+        secondaryLink {
+          ...,
+          "internal": internal->slug.current,
+          external,
         }
       },
     }
   }`;
 
   const page = await client.fetch(query);
-
-  console.log(JSON.stringify(page, null, 2));
   const validatedPage = validateAndCleanupPage(page);
 
   return validatedPage;

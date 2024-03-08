@@ -1,6 +1,6 @@
 import { Section } from "@/lib/zod/section";
-import HeroSection from "./hero-section";
-import TextImageSection from "./text-image-section";
+import HeroSection from "./sections/hero-section";
+import TextImageSection from "./sections/text-image-section";
 
 export default function Section({ section }: { section: Section }) {
   if (!section) {

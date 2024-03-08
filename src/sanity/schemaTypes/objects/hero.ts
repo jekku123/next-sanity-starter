@@ -37,14 +37,14 @@ export default defineType({
       ],
     },
     {
-      name: "cta",
-      title: "Call to action",
-      type: "array",
-      of: [
-        {
-          type: "link",
-        },
-      ],
+      name: "primaryLink",
+      title: "Primary Link",
+      type: "link",
+    },
+    {
+      name: "secondaryLink",
+      title: "Secondary Link",
+      type: "link",
     },
   ],
 });

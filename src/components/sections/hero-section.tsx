@@ -1,7 +1,7 @@
 import { Hero } from "@/lib/zod/section";
 import { urlForImage } from "@/sanity/lib/image";
-import Link from "next/link";
 import FormattedText from "../formatted-text";
+import SanityLink from "../sanity-link";
 import { Button } from "../ui/button";
 
 export default function HeroSection({ content }: { content: Hero }) {
@@ -28,9 +28,18 @@ export default function HeroSection({ content }: { content: Hero }) {
               />
 
               <div className="flex items-center justify-center space-x-4">
-                <Link href={content.cta[0].internal!}>
-                  <Button variant="secondary">{content.cta[0].label}</Button>
-                </Link>
+                {content.primaryLink && (
+                  <SanityLink href={content.primaryLink}>
+                    <Button>{content.primaryLink.label}</Button>
+                  </SanityLink>
+                )}
+                {content.secondaryLink && (
+                  <SanityLink href={content.secondaryLink}>
+                    <Button variant="secondary">
+                      {content.secondaryLink.label}
+                    </Button>
+                  </SanityLink>
+                )}
               </div>
             </div>
           </div>
