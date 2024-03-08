@@ -1,7 +1,7 @@
 import { createClient } from "next-sanity";
 
 import { Menu, validateAndCleanupMenu } from "@/lib/zod/menu";
-import { Page, validateAndCleanupPage } from "@/lib/zod/page";
+import { Page } from "@/lib/zod/page";
 import { apiVersion, dataset, projectId, useCdn } from "../env";
 
 export const client = createClient({
@@ -11,55 +11,37 @@ export const client = createClient({
   useCdn,
 });
 
-export async function getPageBySlug(slug: string): Promise<Page | null> {
-  const query = `*[_type == "page" && slug.current == "${slug}"][0]
-  {
-    _id,
-    _type,
-    slug,
-    title,
-    content[]
+export async function getResourceTypeBySlug(slug: string) {
+  const query = `*[slug.current == "${slug}"][0] {
+    _type
   }`;
+  const resource = await client.fetch(query);
 
-  const page = await client.fetch(query);
-  const validatedPage = validateAndCleanupPage(page);
-
-  return validatedPage;
+  return resource._type;
 }
 
-export async function getFrontPage(): Promise<Page | null> {
-  const query = `*[_type == "page" && title == "Frontpage"][0]
-  {
-    _id,
-    _type,
-    slug,
-    title,
-    content[] {
-      ...,
-      _type == "hero" => {
-        ...,
-        primaryLink {
-          ...,
-          "internal": internal->slug.current,
-          external,
-        },
-        secondaryLink {
-          ...,
-          "internal": internal->slug.current,
-          external,
-        }
-      },
-    }
-  }`;
+export async function getResourceBySlugTypeAndParams(
+  slug: string,
+  type: string,
+  params: string,
+) {
+  const query = `*[_type == "${type}" && slug.current == "${slug}"][0]${params}`;
+  const resource = await client.fetch(query);
 
-  const page = await client.fetch(query);
-  const validatedPage = validateAndCleanupPage(page);
-
-  return validatedPage;
+  return resource;
 }
 
-export async function getMenu(): Promise<Menu | null> {
-  const query = `*[_type == "navigation" && slug.current == "main-menu"][0]
+export async function getFrontPage(params: string): Promise<Page | null> {
+  const query = `*[_type == "page" && slug.current == "frontpage"][0]
+  ${params}`;
+
+  const resource = await client.fetch(query);
+
+  return resource;
+}
+
+export async function getMenu(slug: string): Promise<Menu> {
+  const query = `*[_type == "navigation" && slug.current == "${slug}"][0] 
   {
     _id,
     _type,
@@ -73,7 +55,12 @@ export async function getMenu(): Promise<Menu | null> {
   }`;
 
   const menu = await client.fetch(query);
+
   const validatedMenu = validateAndCleanupMenu(menu);
+
+  if (!validatedMenu) {
+    throw new Error(`Menu "${slug}" not found`);
+  }
 
   return validatedMenu;
 }

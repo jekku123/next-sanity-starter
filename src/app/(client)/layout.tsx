@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import { getCommonPageProps } from "@/sanity/lib/get-common-page-props";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -16,13 +17,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { menus } = await getCommonPageProps();
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="flex min-h-screen flex-col">
-          <Header />
+          <Header menu={menus.main} />
           <main className="grow">{children}</main>
-          <Footer />
+          <Footer menu={menus.footer} />
         </div>
       </body>
     </html>
