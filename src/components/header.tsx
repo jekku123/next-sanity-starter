@@ -1,6 +1,7 @@
 import { MenuItem } from "@/lib/zod/menu";
 import { getMenu } from "@/sanity/lib/client";
 import Link from "next/link";
+import SanityLink from "./sanity-link";
 
 export default async function Header() {
   const menu = await getMenu();
@@ -14,7 +15,7 @@ export default async function Header() {
         <ul className="flex items-center space-x-4">
           {menu?.items.map((item: MenuItem) => (
             <li key={item._key}>
-              <Link href={item.href}>{item.label}</Link>
+              <SanityLink href={item}>{item.label}</SanityLink>
             </li>
           ))}
         </ul>

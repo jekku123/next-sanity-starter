@@ -22,6 +22,7 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
   }`;
 
   const page = await client.fetch(query);
+
   const validatedPage = validateAndCleanupPage(page);
 
   return validatedPage;
@@ -34,10 +35,21 @@ export async function getFrontPage(): Promise<Page | null> {
     _type,
     slug,
     title,
-    content[]
+    content[] {
+      ...,
+      _type == "hero" => {
+        ...,
+        cta[] {
+          ...,
+          "internal": internal->slug.current,
+        }
+      },
+    }
   }`;
 
   const page = await client.fetch(query);
+
+  console.log(JSON.stringify(page, null, 2));
   const validatedPage = validateAndCleanupPage(page);
 
   return validatedPage;
@@ -51,9 +63,9 @@ export async function getMenu(): Promise<Menu | null> {
     title,
     items[] {
       _key,
-      _type,
       label,
-      "href": internal->slug.current
+      external,
+      "internal": internal->slug.current,
     }
   }`;
 

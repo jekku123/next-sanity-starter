@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { ImageSchema } from "./image";
-import { LinkSchema } from "./link";
 import { PortableTextSchema } from "./portableText";
+import { LinkSchema } from "./link";
 
 export const HeroSchema = z.object({
   _type: z.literal("hero"),

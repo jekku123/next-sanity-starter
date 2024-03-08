@@ -28,7 +28,7 @@ export default function HeroSection({ content }: { content: Hero }) {
               />
 
               <div className="flex items-center justify-center space-x-4">
-                <Link href={content.cta[0].internal?._ref!}>
+                <Link href={content.cta[0].internal!}>
                   <Button variant="secondary">{content.cta[0].label}</Button>
                 </Link>
               </div>

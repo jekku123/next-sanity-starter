@@ -14,7 +14,7 @@ export default function SanityLink({
   return (
     <>
       {href?.internal ? (
-        <Link href={href.internal.slug.current} {...props}>
+        <Link href={href.internal} {...props}>
           {children}
         </Link>
       ) : href?.external ? (
