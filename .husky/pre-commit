@@ -1,0 +1,2 @@
+echo "\nPrecommit hook checking linting..\n"
+npm run lint
