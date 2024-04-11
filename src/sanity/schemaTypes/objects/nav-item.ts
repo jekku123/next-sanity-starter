@@ -1,7 +1,7 @@
 // import { NavigationIcon } from "lucide-react";
 // import { defineType } from "sanity";
 
-// export const naviItemSchema = defineType({
+// export const navItemSchema = defineType({
 //   name: "navItem",
 //   type: "object",
 //   title: "Navigation Item",

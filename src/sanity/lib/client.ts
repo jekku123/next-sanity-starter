@@ -11,6 +11,7 @@ export const client = createClient({
   useCdn,
 });
 
+// return the type of the resource with the given slug (e.g. "page" or "post")
 export async function getResourceTypeBySlug(slug: string) {
   const query = `*[slug.current == "${slug}"][0] {
     _type

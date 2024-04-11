@@ -23,6 +23,7 @@ export default function getPageParams(type: string) {
     }
   }`;
   }
+
   if (type === "page") {
     return `{
       _id,

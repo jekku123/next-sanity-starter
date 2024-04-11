@@ -1,9 +1,10 @@
 import { z } from "zod";
-import { HeroSchema, TextImageSchema } from "./section";
+import { FormattedTextSchema, HeroSchema, TextImageSchema } from "./section";
 
 const PageElementsSchema = z.discriminatedUnion("_type", [
   HeroSchema,
   TextImageSchema,
+  FormattedTextSchema,
 ]);
 
 const PageSchema = z.object({

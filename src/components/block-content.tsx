@@ -10,15 +10,15 @@ import {
   TypographyParagraph,
 } from "./typography";
 
-interface FormattedTextProps {
+interface BlockContentProps {
   content: PortableTextBlock[];
   className?: string;
 }
 
-export default async function FormattedText({
+export default async function BlockContent({
   content,
   className,
-}: FormattedTextProps) {
+}: BlockContentProps) {
   const components = {
     block: {
       h1: ({ children }: any) => (

@@ -1,6 +1,6 @@
 import { Hero } from "@/lib/zod/section";
 import { urlForImage } from "@/sanity/lib/image";
-import FormattedText from "../formatted-text";
+import FormattedText from "../block-content";
 import SanityLink from "../sanity-link";
 import { Button } from "../ui/button";
 

@@ -16,10 +16,16 @@ export default async function CustomPage({
     redirect("/");
   }
 
+  // get the type of the resource with the given slug (e.g. "page" or "post")
   const type = await getResourceTypeBySlug(slug[0]);
-  const params = getPageParams(type);
 
-  const resource = await getResourceBySlugTypeAndParams(slug[0], type, params);
+  const resource = await getResourceBySlugTypeAndParams(
+    slug[0],
+    type,
+    getPageParams(type),
+  );
+
+  console.log("RESOURCE: ", resource);
 
   const validatedResource =
     type === "page" ? validateAndCleanupPage(resource) : null;

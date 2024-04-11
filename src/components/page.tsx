@@ -1,7 +1,7 @@
-import { Page } from "@/lib/zod/page";
+import { Page as PageType } from "@/lib/zod/page";
 import Section from "./section";
 
-export default function Page({ page }: { page: Page }) {
+export default function Page({ page }: { page: PageType }) {
   return (
     <div className="grid gap-4">
       {page.content.map((section) => {

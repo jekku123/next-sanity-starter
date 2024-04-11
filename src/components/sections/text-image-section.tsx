@@ -1,7 +1,7 @@
 import { TextImage } from "@/lib/zod/section";
 import { urlForImage } from "@/sanity/lib/image";
 import Image from "next/image";
-import FormattedText from "../formatted-text";
+import FormattedText from "../block-content";
 import { TypographyH1 } from "../typography";
 
 export default function TextImageSection({ content }: { content: TextImage }) {

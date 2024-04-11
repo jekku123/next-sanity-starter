@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const PortableTextSchema = z.array(
+export const BlockSchema = z.array(
   z.object({
     _key: z.string(),
     _type: z.string(),
@@ -23,4 +23,4 @@ export const PortableTextSchema = z.array(
   }),
 );
 
-export type PortableText = z.infer<typeof PortableTextSchema>;
+export type Block = z.infer<typeof BlockSchema>;
