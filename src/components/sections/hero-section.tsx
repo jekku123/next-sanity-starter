@@ -1,5 +1,5 @@
+import { urlForImage } from "@/lib/sanity/utils/image";
 import { Hero } from "@/lib/zod/section";
-import { urlForImage } from "@/sanity/lib/image";
 import FormattedText from "../block-content";
 import SanityLink from "../sanity-link";
 import { Button } from "../ui/button";

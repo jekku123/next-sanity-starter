@@ -1,7 +1,7 @@
 import Section from "@/components/section";
+import { getFrontPage } from "@/lib/sanity/client";
+import getPageParams from "@/lib/sanity/utils/get-page-params";
 import { validateAndCleanupPage } from "@/lib/zod/page";
-import { getFrontPage } from "@/sanity/lib/client";
-import getPageParams from "@/sanity/lib/get-page-params";
 
 export default async function Home() {
   const frontpage = await getFrontPage(getPageParams("frontpage"));

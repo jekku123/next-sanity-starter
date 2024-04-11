@@ -1,4 +1,4 @@
-import { getMenus } from "@/sanity/lib/get-menus";
+import { getMenus } from "@/lib/sanity/utils/get-menus";
 
 export type CommonPageProps = Awaited<ReturnType<typeof getCommonPageProps>>;
 

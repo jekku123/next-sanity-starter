@@ -1,6 +1,6 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
-import { getCommonPageProps } from "@/sanity/lib/get-common-page-props";
+import { getCommonPageProps } from "@/lib/sanity/utils/get-common-page-props";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";

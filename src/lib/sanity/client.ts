@@ -2,7 +2,7 @@ import { createClient } from "next-sanity";
 
 import { Menu, validateAndCleanupMenu } from "@/lib/zod/menu";
 import { Page } from "@/lib/zod/page";
-import { apiVersion, dataset, projectId, useCdn } from "../env";
+import { apiVersion, dataset, projectId, useCdn } from "./env";
 
 export const client = createClient({
   apiVersion,

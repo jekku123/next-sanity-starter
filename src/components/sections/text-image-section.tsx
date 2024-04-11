@@ -1,5 +1,5 @@
+import { urlForImage } from "@/lib/sanity/utils/image";
 import { TextImage } from "@/lib/zod/section";
-import { urlForImage } from "@/sanity/lib/image";
 import Image from "next/image";
 import FormattedText from "../block-content";
 import { TypographyH1 } from "../typography";

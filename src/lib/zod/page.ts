@@ -32,7 +32,7 @@ export function validateAndCleanupPage(page: any): Page | null {
             return result.data;
           case false:
             console.log(
-              `Error validating page section ${section.type}: `,
+              `Error validating page section ${section._type}: `,
               JSON.stringify(result.error, null, 2),
             );
             return null;

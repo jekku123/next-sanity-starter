@@ -1,4 +1,4 @@
-import { getMenu } from "./client";
+import { getMenu } from "../client";
 
 export async function getMenus() {
   const [{ items: main }, { items: footer }] = await Promise.all(

@@ -1,10 +1,10 @@
 import Page from "@/components/page";
-import { validateAndCleanupPage } from "@/lib/zod/page";
 import {
   getResourceBySlugTypeAndParams,
   getResourceTypeBySlug,
-} from "@/sanity/lib/client";
-import getPageParams from "@/sanity/lib/get-page-params";
+} from "@/lib/sanity/client";
+import getPageParams from "@/lib/sanity/utils/get-page-params";
+import { validateAndCleanupPage } from "@/lib/zod/page";
 import { redirect } from "next/navigation";
 
 export default async function CustomPage({
