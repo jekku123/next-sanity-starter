@@ -30,7 +30,29 @@ export default function getPageParams(type: string) {
       _type,
       slug,
       title,
-      content[]
+      content[]{
+        ...,
+        _type == "formattedText" => {
+          ...,
+            ...,
+            body[] {
+              ...,
+              _type == "image" => {
+                ...,
+                asset-> {
+                  ...,
+                  url,
+                  metadata {
+                    dimensions {
+                      ...,
+                      aspectRatio,
+                    },
+                  },
+                },
+              },
+            },
+        },
+      }
     }`;
   }
   return "";

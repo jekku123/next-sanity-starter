@@ -22,7 +22,7 @@ export function TypographyH2({ children, className }: TypographyProps) {
   return (
     <h2
       className={cn(
-        "scroll-m-20 pb-2 text-3xl font-semibold first:mt-0",
+        "mt-9 scroll-m-20 pb-2 text-3xl font-semibold first:mt-0",
         className,
       )}
     >
@@ -60,7 +60,10 @@ export function TypographyH4({ children, className }: TypographyProps) {
 export function TypographyParagraph({ children, className }: TypographyProps) {
   return (
     <p
-      className={cn("mx-auto max-w-4xl leading-7 text-foreground ", className)}
+      className={cn(
+        "mx-auto max-w-4xl leading-7 text-foreground [&:not(:first-child)]:mt-4 ",
+        className,
+      )}
     >
       {children}
     </p>

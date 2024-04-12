@@ -21,6 +21,14 @@ export const BlockSchema = z.array(
     ),
     style: z.string(),
   }),
+  z.object({
+    _key: z.string(),
+    _type: z.string(),
+    asset: z.object({
+      _ref: z.string(),
+      _type: z.string(),
+    }),
+  }),
 );
 
 export type Block = z.infer<typeof BlockSchema>;

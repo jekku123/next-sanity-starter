@@ -26,11 +26,10 @@ export const FormattedTextSchema = z.object({
   _type: z.literal("formattedText"),
   _key: z.string(),
   title: z.string(),
-  body: BlockSchema,
+  body: z.any(),
 });
 
 export type TextImage = z.infer<typeof TextImageSchema>;
 export type Hero = z.infer<typeof HeroSchema>;
 export type FormattedText = z.infer<typeof FormattedTextSchema>;
-
 export type Section = Hero | TextImage | FormattedText;

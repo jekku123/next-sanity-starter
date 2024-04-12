@@ -1,4 +1,8 @@
+import { urlForImage } from "@/lib/sanity/utils/image";
+import { cn } from "@/lib/utils";
 import { PortableText } from "@portabletext/react";
+import { getImageDimensions } from "@sanity/asset-utils";
+import Image from "next/image";
 import Link from "next/link";
 import { PortableTextBlock } from "sanity";
 import {
@@ -14,6 +18,27 @@ interface BlockContentProps {
   content: PortableTextBlock[];
   className?: string;
 }
+
+// This component is used to render PortableText blocks from Sanity.
+// documentation: https://github.com/portabletext/react-portabletext
+
+// const SampleImageComponent = ({ value, isInline }) => {
+//   const { width, height } = getImageDimensions(value);
+//   return (
+//     <div className={`w-[${width}px]`}>
+//       <AspectRatio ratio={width / height}>
+//         <Image
+//           width={width || 800}
+//           height={height || 600}
+//           src={urlForImage(value)}
+//           alt={value?.alt || ""}
+//           className={cn("rounded-md object-cover")}
+//           priority
+//         />
+//       </AspectRatio>
+//     </div>
+//   );
+// };
 
 export default async function BlockContent({
   content,
@@ -44,6 +69,29 @@ export default async function BlockContent({
         </TypographyBlockquote>
       ),
     },
+
+    types: {
+      image: ({ value, isInline }: { value: any; isInline: boolean }) => {
+        const { width, height } = getImageDimensions(value);
+        console.log("IS INLINE", isInline);
+        console.log("WIDTH N HEIGHT", width, height);
+
+        return (
+          <Image
+            width={width || 800}
+            height={height || 600}
+            src={urlForImage(value)}
+            alt={value?.alt || ""}
+            className={cn(
+              "rounded-md object-cover",
+              isInline ? "inline-block" : "block",
+            )}
+            priority
+          />
+        );
+      },
+    },
+
     marks: {
       link: ({ value, children }: { value?: any; children: any }) => {
         const target = (value?.href || "").startsWith("http")
@@ -63,9 +111,15 @@ export default async function BlockContent({
     },
     list: {
       bullet: ({ children }: any) => (
-        <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>
+        <div className="mx-auto w-full max-w-4xl">
+          <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>
+        </div>
       ),
-      number: ({ children }: any) => <ol className="mt-lg">{children}</ol>,
+      number: ({ children }: any) => (
+        <div className="mx-auto w-full max-w-4xl">
+          <ol className="mt-lg">{children}</ol>
+        </div>
+      ),
     },
     listItem: {
       bullet: ({ children }: any) => (

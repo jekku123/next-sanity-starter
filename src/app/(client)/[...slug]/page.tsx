@@ -25,7 +25,7 @@ export default async function CustomPage({
     getPageParams(type),
   );
 
-  console.log("RESOURCE: ", resource);
+  console.log("RESOURCE: ", JSON.stringify(resource, null, 2));
 
   const validatedResource =
     type === "page" ? validateAndCleanupPage(resource) : null;
