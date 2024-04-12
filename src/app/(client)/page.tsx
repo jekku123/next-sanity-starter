@@ -1,11 +1,11 @@
 import Section from "@/components/section";
 import { getFrontPage } from "@/lib/sanity/client";
 import getPageParams from "@/lib/sanity/utils/get-page-params";
-import { validateAndCleanupPage } from "@/lib/zod/page";
+import { validateAndCleanupFrontPage } from "@/lib/zod/frontpage";
 
 export default async function Home() {
   const frontpage = await getFrontPage(getPageParams("frontpage"));
-  const validatedFrontpage = validateAndCleanupPage(frontpage);
+  const validatedFrontpage = validateAndCleanupFrontPage(frontpage);
 
   if (!validatedFrontpage) {
     return <div>Frontpage not found</div>;

@@ -17,13 +17,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { menus } = await getCommonPageProps();
+  const { menus, settings } = await getCommonPageProps();
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="flex min-h-screen flex-col">
-          <Header menu={menus.main} />
+          <Header menu={menus.main} title={settings.title} />
           <main className="grow">{children}</main>
           <Footer menu={menus.footer} />
         </div>

@@ -1,17 +1,15 @@
 import { urlForImage } from "@/lib/sanity/utils/image";
+import { cn } from "@/lib/utils";
 import { Hero } from "@/lib/zod/section";
+import Image from "next/image";
 import FormattedText from "../block-content";
 import SanityLink from "../sanity-link";
 import { Button } from "../ui/button";
 
 export default function HeroSection({ content }: { content: Hero }) {
-  const bgImage = urlForImage(content.image);
-
-  const bgImageSrc = `url('${bgImage}')`;
-
   return (
-    <section className={`w-full bg-[${bgImageSrc}] bg-cover bg-center`}>
-      <div className="flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 py-12">
+    <section className={cn(`relative w-full`)}>
+      <div className="z-50 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 py-12">
         <div className="text-center">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-4xl text-center">
@@ -45,6 +43,14 @@ export default function HeroSection({ content }: { content: Hero }) {
           </div>
         </div>
       </div>
+      <Image
+        src={urlForImage(content.image)}
+        alt={content.image.alt}
+        fill={true}
+        className="object-cover"
+        style={{ zIndex: -1 }}
+        priority
+      />
     </section>
   );
 }
