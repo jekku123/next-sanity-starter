@@ -5,7 +5,7 @@ import {
 } from "@/lib/sanity/client";
 import getPageParams from "@/lib/sanity/utils/get-page-params";
 import { validateAndCleanupPage } from "@/lib/zod/page";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export default async function CustomPage({
   params: { slug },
@@ -19,13 +19,13 @@ export default async function CustomPage({
   // get the type of the resource with the given slug (e.g. "page" or "post")
   const type = await getResourceTypeBySlug(slug[0]);
 
+  if (!type) notFound();
+
   const resource = await getResourceBySlugTypeAndParams(
     slug[0],
     type,
     getPageParams(type),
   );
-
-  console.log("RESOURCE: ", JSON.stringify(resource, null, 2));
 
   const validatedResource =
     type === "page" ? validateAndCleanupPage(resource) : null;

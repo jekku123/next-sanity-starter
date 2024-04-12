@@ -13,12 +13,19 @@ export const client = createClient({
 
 // return the type of the resource with the given slug (e.g. "page" or "post")
 export async function getResourceTypeBySlug(slug: string) {
+  if (!slug) {
+    return null;
+  }
   const query = `*[slug.current == "${slug}"][0] {
     _type
   }`;
-  const resource = await client.fetch(query);
-
-  return resource._type;
+  try {
+    const resource = await client.fetch(query);
+    return resource._type;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
 }
 
 export async function getResourceBySlugTypeAndParams(
@@ -26,10 +33,14 @@ export async function getResourceBySlugTypeAndParams(
   type: string,
   params: string,
 ) {
-  const query = `*[_type == "${type}" && slug.current == "${slug}"][0]${params}`;
-  const resource = await client.fetch(query);
-
-  return resource;
+  try {
+    const query = `*[_type == "${type}" && slug.current == "${slug}"][0]${params}`;
+    const resource = await client.fetch(query);
+    return resource;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
 }
 
 export async function getFrontPage(params: string): Promise<Page | null> {
