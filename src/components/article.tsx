@@ -5,7 +5,6 @@ import BlockContent from "./block-content";
 import { TypographyH1, TypographyParagraph } from "./typography";
 
 export default function Article({ article }: { article: ArticleType }) {
-  console.log(article);
   return (
     <article className="mx-auto flex w-full max-w-4xl flex-col">
       <Image

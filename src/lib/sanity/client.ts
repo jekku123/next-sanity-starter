@@ -2,6 +2,7 @@ import { createClient } from "next-sanity";
 
 import { Menu, validateAndCleanupMenu } from "@/lib/zod/menu";
 import { Page } from "@/lib/zod/page";
+import { ArticleTeaser } from "../zod/article-teaser";
 import { Settings } from "../zod/settings";
 import { apiVersion, dataset, projectId, useCdn } from "./env";
 
@@ -47,6 +48,23 @@ export async function getResourceBySlugTypeAndParams(
 export async function getFrontPage(params: string): Promise<Page | null> {
   const query = `*[_type == "frontpage"][0]
   ${params}`;
+
+  const resource = await client.fetch(query);
+
+  return resource;
+}
+
+export async function getArticles(
+  limit?: number,
+): Promise<ArticleTeaser[] | null> {
+  const query = `*[_type == "article"]${limit ? `[0...${limit}]` : ""} {
+    _id,
+    _type,
+    title,
+    excerpt,
+    slug,
+    image,
+  }`;
 
   const resource = await client.fetch(query);
 

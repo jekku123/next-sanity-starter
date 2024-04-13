@@ -14,17 +14,21 @@ export default async function CustomPage({
 }: {
   params: { slug: string[] };
 }) {
-  if (slug[0] === "frontpage") {
-    redirect("/");
+  const path = `${slug.join("/")}`;
+
+  // get the type of the resource with the given slug (e.g. "frontpage", "page", "article"..)
+  const type = await getResourceTypeBySlug(path);
+
+  if (!type) {
+    return notFound();
   }
 
-  // get the type of the resource with the given slug (e.g. "page" or "post")
-  const type = await getResourceTypeBySlug(slug[0]);
-
-  if (!type) notFound();
+  if (type === "frontpage") {
+    return redirect("/");
+  }
 
   const resource = await getResourceBySlugTypeAndParams(
-    slug[0],
+    path,
     type,
     getPageParams(type),
   );

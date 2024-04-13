@@ -12,6 +12,13 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "description",
+      title: "Description",
+      type: "text",
+      description: "Short description of the page for SEO purposes.",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
@@ -19,6 +26,7 @@ export default defineType({
         source: "title",
         maxLength: 96,
       },
+      hidden: true,
       validation: (rule) => rule.required(),
     }),
     {
@@ -36,6 +44,7 @@ export default defineType({
           type: "formattedText",
         },
       ],
+      validation: (Rule) => Rule.required(),
     },
   ],
 });

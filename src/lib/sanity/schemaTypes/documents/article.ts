@@ -9,19 +9,24 @@ export default defineType({
       name: "title",
       type: "string",
       title: "Title",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "excerpt",
       type: "text",
       title: "Excerpt",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "slug",
       type: "slug",
       title: "Slug",
       options: {
-        source: "title",
+        source: (doc) => `articles/${doc.title}`,
+        slugify: (input) =>
+          input.toLowerCase().replace(/\s+/g, "-").slice(0, 200),
       },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "image",
@@ -37,6 +42,7 @@ export default defineType({
           title: "Alternative Text",
         },
       ],
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "Body",
@@ -47,6 +53,7 @@ export default defineType({
           type: "block",
         },
       ],
+      validation: (Rule) => Rule.required(),
     },
   ],
 });

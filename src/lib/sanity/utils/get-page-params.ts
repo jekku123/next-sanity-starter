@@ -62,7 +62,6 @@ export default function getPageParams(type: string) {
       _type,
       title,
       excerpt,
-      slug,
       image,
       body[],
     }`;
