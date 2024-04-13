@@ -55,5 +55,18 @@ export default function getPageParams(type: string) {
       }
     }`;
   }
+
+  if (type === "article") {
+    return `{
+      _id,
+      _type,
+      title,
+      excerpt,
+      slug,
+      image,
+      body[],
+    }`;
+  }
+
   return "";
 }

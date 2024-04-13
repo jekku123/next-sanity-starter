@@ -1,5 +1,6 @@
 import { type SchemaTypeDefinition } from "sanity";
 
+import article from "./schemaTypes/documents/article";
 import frontpage from "./schemaTypes/documents/frontpage";
 import navigation from "./schemaTypes/documents/navigation";
 import page from "./schemaTypes/documents/page";
@@ -19,5 +20,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     portableText,
     frontpage,
     settings,
+    article,
   ],
 };

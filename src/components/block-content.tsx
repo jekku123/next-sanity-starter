@@ -73,8 +73,6 @@ export default async function BlockContent({
     types: {
       image: ({ value, isInline }: { value: any; isInline: boolean }) => {
         const { width, height } = getImageDimensions(value);
-        console.log("IS INLINE", isInline);
-        console.log("WIDTH N HEIGHT", width, height);
 
         return (
           <Image
@@ -111,15 +109,9 @@ export default async function BlockContent({
     },
     list: {
       bullet: ({ children }: any) => (
-        <div className="mx-auto w-full max-w-4xl">
-          <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>
-        </div>
+        <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>
       ),
-      number: ({ children }: any) => (
-        <div className="mx-auto w-full max-w-4xl">
-          <ol className="mt-lg">{children}</ol>
-        </div>
-      ),
+      number: ({ children }: any) => <ol className="mt-lg">{children}</ol>,
     },
     listItem: {
       bullet: ({ children }: any) => (

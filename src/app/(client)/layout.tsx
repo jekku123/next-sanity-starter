@@ -1,16 +1,21 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { getCommonPageProps } from "@/lib/sanity/utils/get-common-page-props";
-import type { Metadata } from "next";
+
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Janne's Mökki",
-  description: "Page for Janne's Mökki",
-};
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { settings } = await getCommonPageProps();
+  return {
+    title: settings.title,
+    description: settings.description,
+  };
+}
 
 export default async function RootLayout({
   children,

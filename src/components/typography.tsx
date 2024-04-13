@@ -61,7 +61,7 @@ export function TypographyParagraph({ children, className }: TypographyProps) {
   return (
     <p
       className={cn(
-        "mx-auto max-w-4xl leading-7 text-foreground [&:not(:first-child)]:mt-4 ",
+        "leading-7 text-foreground [&:not(:first-child)]:mt-4 ",
         className,
       )}
     >
