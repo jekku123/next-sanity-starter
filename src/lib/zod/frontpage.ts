@@ -1,3 +1,4 @@
+import { SanityDocument } from "next-sanity";
 import { z } from "zod";
 import {
   ArticlesListingSchema,
@@ -23,7 +24,9 @@ const FrontPageSchema = z.object({
   content: z.array(FrontPageElementsSchema),
 });
 
-export function validateAndCleanupFrontPage(page: any): FrontPage | null {
+export function validateAndCleanupFrontPage(
+  page: SanityDocument,
+): FrontPage | null {
   try {
     const topLevelFrontPageData = FrontPageSchema.omit({
       content: true,

@@ -32,6 +32,7 @@ import { z } from "zod";
 
 import { BlockSchema } from "./block";
 import { ImageSchema } from "./image";
+import { SanityDocument } from "next-sanity";
 
 export const ArticleBaseSchema = z.object({
   _type: z.literal("article"),
@@ -46,7 +47,9 @@ const ArticleSchema = ArticleBaseSchema.extend({
   body: BlockSchema,
 });
 
-export function validateAndCleanupArticle(article: any): Article | null {
+export function validateAndCleanupArticle(
+  article: SanityDocument,
+): Article | null {
   try {
     return ArticleSchema.parse(article);
   } catch (error) {

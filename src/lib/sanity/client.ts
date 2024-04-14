@@ -1,7 +1,7 @@
 import { SanityDocument, createClient } from "next-sanity";
 
 import { Menu, validateAndCleanupMenu } from "@/lib/zod/menu";
-import { Settings } from "../zod/settings";
+import { validateAndCleanupSettings } from "../zod/settings";
 import { apiVersion, dataset, projectId, useCdn } from "./env";
 
 export const client = createClient({
@@ -124,7 +124,7 @@ export async function getMenu(slug: string): Promise<Menu> {
   return validatedMenu;
 }
 
-export async function getSettings(): Promise<Settings> {
+export async function getSettings() {
   const query = `*[_type == "settings"][0] {
     _id,
     _type,
@@ -134,6 +134,7 @@ export async function getSettings(): Promise<Settings> {
   }`;
 
   const settings = await client.fetch(query);
+  const validatedSettings = validateAndCleanupSettings(settings);
 
-  return settings;
+  return validatedSettings;
 }

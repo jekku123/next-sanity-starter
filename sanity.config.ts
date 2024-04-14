@@ -36,16 +36,6 @@ const defaultListItems = (S: StructureBuilder) => {
   });
 };
 
-const singletonListItem = (
-  S: StructureBuilder,
-  typeName: string,
-  title?: string,
-) =>
-  S.listItem()
-    .title(title || typeName)
-    .id(typeName)
-    .child(S.document().schemaType(typeName).documentId(typeName));
-
 export default defineConfig({
   basePath: "/studio",
   title: "Janne's Mökki",
@@ -76,6 +66,7 @@ export default defineConfig({
           .items([
             // Singleton document types
             ...singletonListItems(S, [frontpage, settings]),
+
             // Regular document types
             S.divider(),
             ...defaultListItems(S),

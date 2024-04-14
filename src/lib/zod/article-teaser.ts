@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { ArticleBaseSchema } from "@/lib/zod/article";
+import { SanityDocument } from "next-sanity";
 
 export const ArticleTeaserSchema = ArticleBaseSchema.extend({
   slug: z.object({
@@ -9,7 +10,7 @@ export const ArticleTeaserSchema = ArticleBaseSchema.extend({
 });
 
 export function validateAndCleanupArticleTeaser(
-  articleTeaser: any,
+  articleTeaser: SanityDocument,
 ): ArticleTeaser | null {
   try {
     return ArticleTeaserSchema.parse(articleTeaser);
