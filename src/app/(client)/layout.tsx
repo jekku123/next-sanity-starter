@@ -12,7 +12,7 @@ import { Metadata } from "next";
 export async function generateMetadata(): Promise<Metadata> {
   const { settings } = await getCommonPageProps();
   return {
-    title: settings.title,
+    title: settings.title.text,
     description: settings.description,
   };
 }
@@ -24,14 +24,15 @@ export default async function RootLayout({
 }>) {
   const { menus, settings } = await getCommonPageProps();
 
-  console.log("RootLayout Menus", menus);
-  console.log("RootLayout Settings", settings);
-
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="flex min-h-screen flex-col">
-          <Header menu={menus.main} title={settings.title} />
+          <Header
+            menu={menus.main}
+            title={settings.title}
+            logo={settings.logo}
+          />
           <main className="grow">{children}</main>
           <Footer menu={menus.footer} />
         </div>

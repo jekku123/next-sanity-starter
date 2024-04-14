@@ -1,10 +1,9 @@
-import { urlForImage } from "@/lib/sanity/utils/image";
 import { cn } from "@/lib/utils";
 import { Hero } from "@/lib/zod/section";
-import Image from "next/image";
 import FormattedText from "../block-content";
 import SanityLink from "../sanity-link";
 import { Button } from "../ui/button";
+import { SanityImage } from "../ui/sanity-image";
 
 export default function HeroSection({ content }: { content: Hero }) {
   return (
@@ -27,12 +26,12 @@ export default function HeroSection({ content }: { content: Hero }) {
 
               <div className="flex items-center justify-center space-x-4">
                 {content.primaryLink && (
-                  <SanityLink href={content.primaryLink}>
+                  <SanityLink link={content.primaryLink}>
                     <Button>{content.primaryLink.label}</Button>
                   </SanityLink>
                 )}
                 {content.secondaryLink && (
-                  <SanityLink href={content.secondaryLink}>
+                  <SanityLink link={content.secondaryLink}>
                     <Button variant="secondary">
                       {content.secondaryLink.label}
                     </Button>
@@ -43,14 +42,7 @@ export default function HeroSection({ content }: { content: Hero }) {
           </div>
         </div>
       </div>
-      <Image
-        src={urlForImage(content.image)}
-        alt={content.image.alt}
-        fill={true}
-        className="object-cover"
-        style={{ zIndex: -1 }}
-        priority
-      />
+      <SanityImage image={content.image} style={{ zIndex: -1 }} fill />
     </section>
   );
 }

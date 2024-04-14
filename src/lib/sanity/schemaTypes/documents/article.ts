@@ -23,6 +23,7 @@ export default defineType({
       title: "Slug",
       options: {
         source: (doc) => `articles/${doc.title}`,
+        isUnique: (value, context) => context.defaultIsUnique(value, context),
         slugify: (input) =>
           input.toLowerCase().replace(/\s+/g, "-").slice(0, 200),
       },

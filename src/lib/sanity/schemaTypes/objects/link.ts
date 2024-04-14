@@ -14,35 +14,24 @@ export default defineType({
       name: "external",
       type: "url",
       title: "URL",
-      hidden: ({ parent, value }) => !value && !!parent?.internal,
+      hidden: ({ parent, value }) =>
+        (!value && !!parent?.internal) || (!value && !!parent?.nextjsRoute),
     },
     {
       name: "internal",
       type: "reference",
       to: [{ type: "page" }, { type: "frontpage" }],
-      hidden: ({ parent, value }) => !value && !!parent?.external,
+      hidden: ({ parent, value }) =>
+        (!value && !!parent?.external) || !!parent?.nextjsRoute,
     },
     {
       name: "nextjsRoute",
       type: "string",
       title: "Next.js Route",
-    },
-    {
-      name: "internal2",
-      type: "object",
-      title: "Internal Test",
-      fields: [
-        {
-          name: "sanityRoute",
-          type: "reference",
-          to: [{ type: "page" }, { type: "frontpage" }],
-        },
-        {
-          name: "nextjsRoute",
-          type: "string",
-          title: "Next.js Route",
-        },
-      ],
+      description:
+        "The route to the page in the Next.js app, used for client-side navigation. Example: 'articles",
+      hidden: ({ parent, value }) =>
+        (!value && !!parent?.external) || !!parent?.internal,
     },
   ],
 });

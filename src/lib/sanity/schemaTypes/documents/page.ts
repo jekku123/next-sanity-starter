@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { SlugValidationContext, defineField, defineType } from "sanity";
 
 export default defineType({
   name: "page",
@@ -18,6 +18,10 @@ export default defineType({
       options: {
         source: "title",
         maxLength: 96,
+        isUnique: (value: string, context: SlugValidationContext) =>
+          context.defaultIsUnique(value, context),
+        slugify: (input: string) =>
+          input.toLowerCase().replace(/\s+/g, "-").slice(0, 200),
       },
       validation: (Rule) => Rule.required(),
     }),

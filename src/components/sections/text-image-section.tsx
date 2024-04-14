@@ -1,8 +1,7 @@
-import { urlForImage } from "@/lib/sanity/utils/image";
 import { TextImage } from "@/lib/zod/section";
-import Image from "next/image";
 import FormattedText from "../block-content";
 import { TypographyH1 } from "../typography";
+import { SanityImage } from "../ui/sanity-image";
 
 export default function TextImageSection({ content }: { content: TextImage }) {
   return (
@@ -12,14 +11,7 @@ export default function TextImageSection({ content }: { content: TextImage }) {
           <TypographyH1>{content.title}</TypographyH1>
           <FormattedText content={content.body} />
         </div>
-        <Image
-          src={urlForImage(content.image)}
-          alt={content.image.alt}
-          width={500}
-          height={400}
-          className="h-auto w-full object-cover"
-          priority
-        />
+        <SanityImage image={content.image} />
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ export default defineType({
         source: "title",
         maxLength: 96,
       },
-      hidden: true,
+      readOnly: true,
       validation: (rule) => rule.required(),
     }),
     {

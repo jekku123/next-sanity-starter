@@ -5,13 +5,34 @@ export default defineType({
   title: "Settings",
   type: "document",
   fields: [
-    defineField({
+    // defineField({
+    //   name: "title",
+    //   title: "Site Title",
+    //   description: "The title of the site",
+    //   type: "string",
+    //   validation: (rule) => rule.required(),
+    // }),
+    {
       name: "title",
       title: "Site Title",
-      description: "The title of the site",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
+      description:
+        "The title of the site, shown in the browser tab and if checked, in the header",
+      type: "object",
+      fields: [
+        defineField({
+          name: "text",
+          title: "Text",
+          type: "string",
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: "showInHeader",
+          title: "Show in Header",
+          type: "boolean",
+          description: "Show the title in the header",
+        }),
+      ],
+    },
     defineField({
       name: "description",
       title: "Site Description",
@@ -24,6 +45,9 @@ export default defineType({
       title: "Logo",
       description: "The logo of the site",
       type: "image",
+      options: {
+        hotspot: true,
+      },
       validation: (rule) => rule.required(),
     }),
   ],
