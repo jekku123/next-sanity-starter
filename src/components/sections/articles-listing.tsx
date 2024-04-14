@@ -9,6 +9,8 @@ import ArticleTeasers from "../article-teasers";
 import { TypographyH1 } from "../typography";
 import { Button } from "../ui/button";
 
+export const revalidate = 60;
+
 export default async function ArticlesListingSection({
   content,
 }: {
