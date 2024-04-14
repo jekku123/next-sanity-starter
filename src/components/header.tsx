@@ -3,6 +3,7 @@ import { MenuItem } from "@/lib/zod/menu";
 import { Settings } from "@/lib/zod/settings";
 import Image from "next/image";
 import Link from "next/link";
+import { ModeToggle } from "./ui/mode-toggle";
 import SanityLink from "./ui/sanity-link";
 
 export default async function Header({
@@ -31,13 +32,16 @@ export default async function Header({
           {title?.showInHeader && <span>{title.text}</span>}
         </Link>
 
-        <ul className="flex items-center space-x-4">
-          {menu?.map((item: MenuItem) => (
-            <li key={item._key}>
-              <SanityLink link={item}>{item.label}</SanityLink>
-            </li>
-          ))}
-        </ul>
+        <div className="flex items-center space-x-4">
+          <ul className="flex items-center space-x-4">
+            {menu?.map((item: MenuItem) => (
+              <li key={item._key}>
+                <SanityLink link={item}>{item.label}</SanityLink>
+              </li>
+            ))}
+          </ul>
+          <ModeToggle />
+        </div>
       </nav>
     </header>
   );
