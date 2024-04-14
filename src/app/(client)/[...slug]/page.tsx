@@ -47,7 +47,7 @@ export default async function CustomPage({
 
   // if the resource is not found then we return a 404
   if (!validatedResource) {
-    return notFound();
+    return null;
   }
 
   return (
