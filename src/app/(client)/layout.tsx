@@ -24,6 +24,9 @@ export default async function RootLayout({
 }>) {
   const { menus, settings } = await getCommonPageProps();
 
+  console.log("RootLayout Menus", menus);
+  console.log("RootLayout Settings", settings);
+
   return (
     <html lang="en">
       <body className={inter.className}>

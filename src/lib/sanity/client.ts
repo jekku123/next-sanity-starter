@@ -82,6 +82,7 @@ export async function getMenu(slug: string): Promise<Menu> {
       label,
       external,
       "internal": internal->slug.current,
+      nextjsRoute,
     }
   }`;
 

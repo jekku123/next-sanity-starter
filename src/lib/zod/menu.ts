@@ -5,6 +5,7 @@ export const MenuItemSchema = z.object({
   label: z.string(),
   internal: z.string().optional().nullable(),
   external: z.string().optional().nullable(),
+  nextjsRoute: z.string().optional().nullable(),
 });
 
 export const MenuSchema = z.object({

@@ -1,26 +1,31 @@
+import { Link as LinkType } from "@/lib/zod/link";
 import Link from "next/link";
 
 interface CustomLinkSchema {
-  href: any;
+  link: LinkType;
   children: React.ReactNode;
   passHref?: any;
 }
 
 export default function SanityLink({
-  href,
+  link,
   children,
   ...props
 }: CustomLinkSchema) {
   return (
     <>
-      {href?.internal ? (
-        <Link href={`/${href.internal}`} {...props}>
+      {link?.internal ? (
+        <Link href={`/${link.internal}`} {...props}>
           {children}
         </Link>
-      ) : href?.external ? (
-        <a href={href.external} target="_blank" rel="noreferrer">
+      ) : link?.external ? (
+        <a href={link.external} target="_blank" rel="noreferrer">
           {children}
         </a>
+      ) : link?.nextjsRoute ? (
+        <Link href={`${link.nextjsRoute}`} {...props}>
+          {children}
+        </Link>
       ) : null}
     </>
   );

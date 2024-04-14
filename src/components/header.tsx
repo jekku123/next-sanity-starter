@@ -18,7 +18,7 @@ export default async function Header({
         <ul className="flex items-center space-x-4">
           {menu?.map((item: MenuItem) => (
             <li key={item._key}>
-              <SanityLink href={item}>{item.label}</SanityLink>
+              <SanityLink link={item}>{item.label}</SanityLink>
             </li>
           ))}
         </ul>

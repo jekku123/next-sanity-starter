@@ -22,5 +22,27 @@ export default defineType({
       to: [{ type: "page" }, { type: "frontpage" }],
       hidden: ({ parent, value }) => !value && !!parent?.external,
     },
+    {
+      name: "nextjsRoute",
+      type: "string",
+      title: "Next.js Route",
+    },
+    {
+      name: "internal2",
+      type: "object",
+      title: "Internal Test",
+      fields: [
+        {
+          name: "sanityRoute",
+          type: "reference",
+          to: [{ type: "page" }, { type: "frontpage" }],
+        },
+        {
+          name: "nextjsRoute",
+          type: "string",
+          title: "Next.js Route",
+        },
+      ],
+    },
   ],
 });
