@@ -39,6 +39,9 @@ export default defineType({
         {
           type: "formattedText",
         },
+        {
+          type: "articlesListing",
+        },
       ],
       validation: (Rule) => Rule.required(),
     },

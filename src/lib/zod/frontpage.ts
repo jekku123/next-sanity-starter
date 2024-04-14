@@ -1,10 +1,16 @@
 import { z } from "zod";
-import { FormattedTextSchema, HeroSchema, TextImageSchema } from "./section";
+import {
+  ArticlesListingSchema,
+  FormattedTextSchema,
+  HeroSchema,
+  TextImageSchema,
+} from "./section";
 
 const FrontPageElementsSchema = z.discriminatedUnion("_type", [
   HeroSchema,
   TextImageSchema,
   FormattedTextSchema,
+  ArticlesListingSchema,
 ]);
 
 const FrontPageSchema = z.object({

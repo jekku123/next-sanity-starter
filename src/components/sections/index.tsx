@@ -1,7 +1,8 @@
 import { Section as SectionType } from "@/lib/zod/section";
-import FormattedTextSection from "./sections/formatted-text";
-import HeroSection from "./sections/hero-section";
-import TextImageSection from "./sections/text-image-section";
+import FormattedTextSection from "./formatted-text";
+import HeroSection from "./hero-section";
+import TextImageSection from "./text-image-section";
+import ArticlesListingSection from "./articles-listing";
 
 export default function Section({ section }: { section: SectionType }) {
   if (!section) {
@@ -15,6 +16,8 @@ export default function Section({ section }: { section: SectionType }) {
       return <TextImageSection content={section} />;
     case "formattedText":
       return <FormattedTextSection content={section} />;
+    case "articlesListing":
+      return <ArticlesListingSection content={section} />;
     default:
   }
 }

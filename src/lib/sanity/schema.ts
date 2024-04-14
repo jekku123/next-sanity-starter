@@ -5,6 +5,7 @@ import frontpage from "./schemaTypes/documents/frontpage";
 import navigation from "./schemaTypes/documents/navigation";
 import page from "./schemaTypes/documents/page";
 import settings from "./schemaTypes/documents/settings";
+import articlesListing from "./schemaTypes/objects/articles-listing";
 import portableText from "./schemaTypes/objects/formatted-text";
 import hero from "./schemaTypes/objects/hero";
 import link from "./schemaTypes/objects/link";
@@ -21,5 +22,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     frontpage,
     settings,
     article,
+    articlesListing,
   ],
 };

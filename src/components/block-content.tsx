@@ -22,24 +22,6 @@ interface BlockContentProps {
 // This component is used to render PortableText blocks from Sanity.
 // documentation: https://github.com/portabletext/react-portabletext
 
-// const SampleImageComponent = ({ value, isInline }) => {
-//   const { width, height } = getImageDimensions(value);
-//   return (
-//     <div className={`w-[${width}px]`}>
-//       <AspectRatio ratio={width / height}>
-//         <Image
-//           width={width || 800}
-//           height={height || 600}
-//           src={urlForImage(value)}
-//           alt={value?.alt || ""}
-//           className={cn("rounded-md object-cover")}
-//           priority
-//         />
-//       </AspectRatio>
-//     </div>
-//   );
-// };
-
 export default async function BlockContent({
   content,
   className,

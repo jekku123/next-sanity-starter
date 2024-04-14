@@ -54,10 +54,15 @@ export async function getFrontPage(params: string): Promise<Page | null> {
   return resource;
 }
 
-export async function getArticles(
-  limit?: number,
-): Promise<ArticleTeaser[] | null> {
-  const query = `*[_type == "article"]${limit ? `[0...${limit}]` : ""} {
+export async function getArticles({
+  limit,
+  order,
+}: { limit?: number; order?: "asc" | "desc" } = {}): Promise<
+  ArticleTeaser[] | null
+> {
+  const query = `*[_type == "article"]${
+    order ? `| order(_createdAt ${order})` : ""
+  }${limit ? `[0...${limit}]` : ""} {
     _id,
     _type,
     title,
@@ -107,7 +112,6 @@ export async function getSettings(): Promise<Settings> {
   }`;
 
   const settings = await client.fetch(query);
-  console.log("SETTINGS: ", settings);
 
   return settings;
 }

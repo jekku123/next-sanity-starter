@@ -4,6 +4,8 @@ import { getArticles } from "@/lib/sanity/client";
 import { validateAndCleanupArticleTeaser } from "@/lib/zod/article-teaser";
 import Link from "next/link";
 
+export const revalidate = 60;
+
 export default async function ArticlesPage() {
   const articles = await getArticles();
 
@@ -16,11 +18,11 @@ export default async function ArticlesPage() {
   );
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col">
-      <TypographyH1>Articles</TypographyH1>
-      <div className="mt-9 grid grid-cols-1 gap-4 md:grid-cols-3">
-        {validatedArticles.map((article) => {
-          return (
+    <div className="mx-auto w-full max-w-7xl px-6 py-4">
+      <div className="flex flex-col gap-6">
+        <TypographyH1>Articles</TypographyH1>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {validatedArticles.map((article) => (
             <Link
               key={article?._id}
               className="rounded-md border border-border p-2"
@@ -30,8 +32,8 @@ export default async function ArticlesPage() {
               <h2>{article?.title}</h2>
               <p>{article?.excerpt}</p>
             </Link>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );
