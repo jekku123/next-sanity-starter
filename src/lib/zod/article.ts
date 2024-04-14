@@ -39,6 +39,7 @@ export const ArticleBaseSchema = z.object({
   title: z.string(),
   excerpt: z.string(),
   image: ImageSchema,
+  tags: z.array(z.string()),
 });
 
 const ArticleSchema = ArticleBaseSchema.extend({

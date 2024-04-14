@@ -1,10 +1,9 @@
 import { urlForImage } from "@/lib/sanity/utils/image";
 import { MenuItem } from "@/lib/zod/menu";
 import { Settings } from "@/lib/zod/settings";
-import { getImageDimensions } from "@sanity/asset-utils";
 import Image from "next/image";
 import Link from "next/link";
-import SanityLink from "./sanity-link";
+import SanityLink from "./ui/sanity-link";
 
 export default async function Header({
   menu,
@@ -15,8 +14,6 @@ export default async function Header({
   title: Settings["title"];
   logo: Settings["logo"];
 }) {
-  const { width, height } = getImageDimensions(logo);
-
   return (
     <header className="top-0 z-50 w-full flex-shrink-0 bg-background md:sticky">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">

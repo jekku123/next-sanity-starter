@@ -1,8 +1,6 @@
-import { createClient } from "next-sanity";
+import { SanityDocument, createClient } from "next-sanity";
 
 import { Menu, validateAndCleanupMenu } from "@/lib/zod/menu";
-import { Page } from "@/lib/zod/page";
-import { ArticleTeaser } from "../zod/article-teaser";
 import { Settings } from "../zod/settings";
 import { apiVersion, dataset, projectId, useCdn } from "./env";
 
@@ -45,7 +43,7 @@ export async function getResourceBySlugTypeAndParams(
   }
 }
 
-export async function getFrontPage(params: string): Promise<Page | null> {
+export async function getFrontPage(params: string): Promise<SanityDocument> {
   const query = `*[_type == "frontpage"][0]
   ${params}`;
 
@@ -54,12 +52,36 @@ export async function getFrontPage(params: string): Promise<Page | null> {
   return resource;
 }
 
+// export async function getArticles({
+//   limit,
+//   order,
+// }: { limit?: number; order?: "asc" | "desc" } = {}): Promise<
+//   ArticleTeaser[] | null
+// > {
+//   const query = `*[_type == "article"]${
+//     order ? `| order(_createdAt ${order})` : ""
+//   }${limit ? `[0...${limit}]` : ""} {
+//     _id,
+//     _type,
+//     title,
+//     excerpt,
+//     slug,
+//     image,
+//     tags,
+//   }`;
+
+//   const resource = await client.fetch(query);
+
+//   return resource;
+// }
+
 export async function getArticles({
   limit,
   order,
-}: { limit?: number; order?: "asc" | "desc" } = {}): Promise<
-  ArticleTeaser[] | null
-> {
+}: {
+  limit?: number;
+  order?: "asc" | "desc";
+} = {}): Promise<SanityDocument> {
   const query = `*[_type == "article"]${
     order ? `| order(_createdAt ${order})` : ""
   }${limit ? `[0...${limit}]` : ""} {
@@ -69,10 +91,10 @@ export async function getArticles({
     excerpt,
     slug,
     image,
+    tags,
   }`;
 
   const resource = await client.fetch(query);
-
   return resource;
 }
 

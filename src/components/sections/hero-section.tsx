@@ -1,13 +1,13 @@
 import { cn } from "@/lib/utils";
 import { Hero } from "@/lib/zod/section";
 import FormattedText from "../block-content";
-import SanityLink from "../sanity-link";
 import { Button } from "../ui/button";
 import { SanityImage } from "../ui/sanity-image";
+import SanityLink from "../ui/sanity-link";
 
 export default function HeroSection({ content }: { content: Hero }) {
   return (
-    <section className={cn(`relative w-full`)}>
+    <section className={cn(`relative h-[500px] w-full`)}>
       <div className="z-50 flex h-full w-full items-center justify-center bg-gray-900 bg-opacity-50 py-12">
         <div className="text-center">
           <div className="container mx-auto px-4">

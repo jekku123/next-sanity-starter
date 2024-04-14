@@ -1,8 +1,8 @@
 import { Section as SectionType } from "@/lib/zod/section";
+import ArticlesListingSection from "./articles-listing";
 import FormattedTextSection from "./formatted-text";
 import HeroSection from "./hero-section";
 import TextImageSection from "./text-image-section";
-import ArticlesListingSection from "./articles-listing";
 
 export default function Section({ section }: { section: SectionType }) {
   if (!section) {
@@ -18,6 +18,11 @@ export default function Section({ section }: { section: SectionType }) {
       return <FormattedTextSection content={section} />;
     case "articlesListing":
       return <ArticlesListingSection content={section} />;
-    default:
+    default: {
+      console.log(
+        `No section component found for ${(section as SectionType)._type}`,
+      );
+      return null;
+    }
   }
 }

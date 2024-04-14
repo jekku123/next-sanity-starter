@@ -1,6 +1,6 @@
 import { getArticles } from "@/lib/sanity/client";
 import {
-  ArticleTeaser as ArticleTeaserType,
+  ArticleTeaser,
   validateAndCleanupArticleTeaser,
 } from "@/lib/zod/article-teaser";
 import { ArticlesListing } from "@/lib/zod/section";
@@ -16,19 +16,12 @@ export default async function ArticlesListingSection({
 }: {
   content: ArticlesListing;
 }) {
-  const articles = await getArticles({ limit: 3 });
-  if (!articles) {
-    return null;
-  }
+  const articles = await getArticles({ limit: content.limit || undefined });
 
   const validatedArticles = articles.reduce(
-    (articles: ArticleTeaserType[], article) => {
+    (articles: ArticleTeaser[], article: ArticleTeaser) => {
       const validatedArticle = validateAndCleanupArticleTeaser(article);
-      if (validatedArticle) {
-        return [...articles, validatedArticle];
-      } else {
-        return articles;
-      }
+      return validatedArticle ? [...articles, validatedArticle] : articles;
     },
     [],
   );
@@ -37,7 +30,11 @@ export default async function ArticlesListingSection({
     <div className="mx-auto w-full max-w-7xl px-6 py-4">
       <div className="flex flex-col gap-4">
         <TypographyH1>{content.title}</TypographyH1>
-        <ArticleTeasers articles={validatedArticles} />
+        {validatedArticles ? (
+          <ArticleTeasers articles={validatedArticles} />
+        ) : (
+          <p>No articles found</p>
+        )}
         <div className="place-self-center">
           <Button asChild>
             <Link href="/articles">View all articles</Link>
