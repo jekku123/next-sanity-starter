@@ -1,8 +1,6 @@
 import { ArticleTeaser as ArticleTeaserType } from "@/lib/zod/article-teaser";
 import Link from "next/link";
-import { TypographyH1 } from "./typography";
 import { AspectRatio } from "./ui/aspect-ratio";
-import { Button } from "./ui/button";
 import { SanityImage } from "./ui/sanity-image";
 
 export default function ArticleTeasers({
@@ -10,21 +8,13 @@ export default function ArticleTeasers({
   title,
 }: {
   articles: ArticleTeaserType[];
-  title: string;
+  title?: string;
 }) {
   return (
-    <div className="flex flex-col gap-6">
-      <TypographyH1>{title}</TypographyH1>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {articles.map((article) => (
-          <ArticleTeaser key={article?._id} article={article} />
-        ))}
-      </div>
-      <div className="place-self-center">
-        <Button asChild>
-          <Link href="/articles">View all articles</Link>
-        </Button>
-      </div>
+    <div className="grid grid-cols-1 gap-9 md:grid-cols-3">
+      {articles.map((article) => (
+        <ArticleTeaser key={article?._id} article={article} />
+      ))}
     </div>
   );
 }

@@ -25,8 +25,8 @@ export default async function Header({
           <Image
             src={urlForImage(logo.asset)}
             alt="Logo"
-            width={50}
-            height={50}
+            width={35}
+            height={35}
             className="rounded-full object-cover"
           />
           {title?.showInHeader && <span>{title.text}</span>}
