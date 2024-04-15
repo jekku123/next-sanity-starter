@@ -4,10 +4,7 @@ import {
   validateAndCleanupArticleTeaser,
 } from "@/lib/zod/article-teaser";
 import { ArticlesListing } from "@/lib/zod/section";
-import Link from "next/link";
 import ArticleTeasers from "../article-teasers";
-import { TypographyH1 } from "../typography";
-import { Button } from "../ui/button";
 
 export const revalidate = 60;
 
@@ -28,19 +25,11 @@ export default async function ArticlesListingSection({
 
   return (
     <div className="mx-auto w-full max-w-7xl px-6 py-4">
-      <div className="flex flex-col gap-4">
-        <TypographyH1>{content.title}</TypographyH1>
-        {validatedArticles ? (
-          <ArticleTeasers articles={validatedArticles} />
-        ) : (
-          <p>No articles found</p>
-        )}
-        <div className="place-self-center">
-          <Button asChild>
-            <Link href="/articles">View all articles</Link>
-          </Button>
-        </div>
-      </div>
+      {validatedArticles ? (
+        <ArticleTeasers articles={validatedArticles} title={content.title} />
+      ) : (
+        <p>No articles found</p>
+      )}
     </div>
   );
 }
