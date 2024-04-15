@@ -19,7 +19,7 @@ export default async function ArticlesListingSection({
   const articles = await getArticles({ limit: content.limit || undefined });
 
   const validatedArticles = articles.reduce(
-    (articles: ArticleTeaser[], article: ArticleTeaser) => {
+    (articles: ArticleTeaser[], article: any) => {
       const validatedArticle = validateAndCleanupArticleTeaser(article);
       return validatedArticle ? [...articles, validatedArticle] : articles;
     },

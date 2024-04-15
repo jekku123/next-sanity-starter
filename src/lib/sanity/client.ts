@@ -1,4 +1,4 @@
-import { SanityDocument, createClient } from "next-sanity";
+import { createClient } from "next-sanity";
 
 import { Menu, validateAndCleanupMenu } from "@/lib/zod/menu";
 import { validateAndCleanupSettings } from "../zod/settings";
@@ -43,7 +43,7 @@ export async function getResourceBySlugTypeAndParams(
   }
 }
 
-export async function getFrontPage(params: string): Promise<SanityDocument> {
+export async function getFrontPage(params: string) {
   const query = `*[_type == "frontpage"][0]
   ${params}`;
 
@@ -81,7 +81,7 @@ export async function getArticles({
 }: {
   limit?: number;
   order?: "asc" | "desc";
-} = {}): Promise<SanityDocument> {
+} = {}) {
   const query = `*[_type == "article"]${
     order ? `| order(_createdAt ${order})` : ""
   }${limit ? `[0...${limit}]` : ""} {
