@@ -1,6 +1,7 @@
 import { createClient } from "next-sanity";
 
 import { Menu, validateAndCleanupMenu } from "@/lib/zod/menu";
+import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";
 import { apiVersion, dataset, projectId, useCdn } from "./env";
 
@@ -29,7 +30,7 @@ export async function getResourceTypeBySlug(slug: string) {
   }
 }
 
-export async function getStaticPaths({ type }: { type: string }) {
+export async function getStaticPathsByType(type: string) {
   const query = `*[_type == "${type}"] {
     slug {
       current
@@ -38,6 +39,23 @@ export async function getStaticPaths({ type }: { type: string }) {
 
   const paths = await client.fetch(query);
   return paths;
+}
+
+export async function getMetadataBySlug(slug: string) {
+  const query = `*[slug.current == "${slug}"][0] {
+    title,
+    description,
+  }`;
+
+  const resource = await client.fetch(query);
+
+  const validatedResource = validateAndCleanupMetadata(resource);
+
+  if (!validatedResource) {
+    throw new Error(`Metadata for "${slug}" not found`);
+  }
+
+  return validatedResource;
 }
 
 export async function getResourceBySlugTypeAndParams(
@@ -147,6 +165,10 @@ export async function getSettings() {
 
   const settings = await client.fetch(query);
   const validatedSettings = validateAndCleanupSettings(settings);
+
+  if (!validatedSettings) {
+    throw new Error("Settings not found");
+  }
 
   return validatedSettings;
 }

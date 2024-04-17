@@ -3,11 +3,13 @@ import Page from "@/components/page";
 import {
   getResourceBySlugTypeAndParams,
   getResourceTypeBySlug,
-  getStaticPaths,
+  getStaticPathsByType,
 } from "@/lib/sanity/client";
 import getPageParams from "@/lib/sanity/utils/get-page-params";
+import { getDynamicMetadata } from "@/lib/sanity/utils/getMetadata";
 import { validateAndCleanupArticle } from "@/lib/zod/article";
 import { validateAndCleanupPage } from "@/lib/zod/page";
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound, redirect } from "next/navigation";
 
 // Add the types of the resources you want to generate static pages for
@@ -15,7 +17,7 @@ const pageTypes = ["page", "article"];
 
 export async function generateStaticParams() {
   const paths = await Promise.all(
-    pageTypes.map((type) => getStaticPaths({ type })),
+    pageTypes.map((type) => getStaticPathsByType(type)),
   );
 
   const flattedPaths = paths
@@ -27,12 +29,24 @@ export async function generateStaticParams() {
   }));
 }
 
+// TODO: Add metadata to schemas etc and do this again
+export async function generateMetadata(
+  { params }: { params: { slug: string[] } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const path = `${params.slug.join("/")}`;
+  const metadata = await getDynamicMetadata(path);
+  return {
+    ...metadata,
+  };
+}
+
 export default async function CustomPage({
   params: { slug },
 }: {
   params: { slug: string[] };
 }) {
-  // join the slug array to a string with slashes (e.g. ["about", "us"] => "about/us")
+  // join the slug array to a string with slashes (e.g. ["articles", "article-1"] => "articles/article-1")
   const path = `${slug.join("/")}`;
 
   // get the type of the resource with the given slug (e.g. "frontpage", "page", "article"..)
