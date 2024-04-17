@@ -82,29 +82,6 @@ export async function getFrontPage(params: string) {
   return resource;
 }
 
-// export async function getArticles({
-//   limit,
-//   order,
-// }: { limit?: number; order?: "asc" | "desc" } = {}): Promise<
-//   ArticleTeaser[] | null
-// > {
-//   const query = `*[_type == "article"]${
-//     order ? `| order(_createdAt ${order})` : ""
-//   }${limit ? `[0...${limit}]` : ""} {
-//     _id,
-//     _type,
-//     title,
-//     excerpt,
-//     slug,
-//     image,
-//     tags,
-//   }`;
-
-//   const resource = await client.fetch(query);
-
-//   return resource;
-// }
-
 export async function getArticles({
   limit,
   order,

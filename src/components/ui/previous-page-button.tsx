@@ -4,18 +4,14 @@ import { cn } from "@/lib/utils";
 
 import { ArrowLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Button } from "./button";
+import { Button, ButtonProps } from "./button";
 
-interface PreviousPageProps {
-  variant?: "default" | "secondary" | "ghost";
-  className?: string;
-  children?: React.ReactNode;
-}
+interface PreviousPageProps extends ButtonProps {}
 
 export function PreviousPageButton({
-  variant,
   className,
   children,
+  ...props
 }: PreviousPageProps) {
   const router = useRouter();
 
@@ -27,8 +23,8 @@ export function PreviousPageButton({
     <Button
       onClick={navigateBack}
       aria-label="back-button"
-      variant={variant}
       className={cn("group", className)}
+      {...props}
     >
       <ArrowLeftIcon
         aria-hidden

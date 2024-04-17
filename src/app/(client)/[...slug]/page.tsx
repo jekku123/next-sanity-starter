@@ -5,8 +5,8 @@ import {
   getResourceTypeBySlug,
   getStaticPathsByType,
 } from "@/lib/sanity/client";
+import { getDynamicMetadata } from "@/lib/sanity/utils/get-metadata";
 import getPageParams from "@/lib/sanity/utils/get-page-params";
-import { getDynamicMetadata } from "@/lib/sanity/utils/getMetadata";
 import { validateAndCleanupArticle } from "@/lib/zod/article";
 import { validateAndCleanupPage } from "@/lib/zod/page";
 import { Metadata, ResolvingMetadata } from "next";
@@ -77,6 +77,7 @@ export default async function CustomPage({
         ? validateAndCleanupArticle(resource)
         : null;
 
+  console.log("Resource: ", validatedResource);
   // if the resource is not found then we return a 404
   if (!validatedResource) {
     return null;

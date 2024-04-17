@@ -12,7 +12,7 @@ export default async function FrontPage() {
   }
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-6">
       {validatedFrontpage.content.map((section) => (
         <Section key={section._key} section={section} />
       ))}
