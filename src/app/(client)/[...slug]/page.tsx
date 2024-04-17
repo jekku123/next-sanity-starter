@@ -6,7 +6,8 @@ import {
   getStaticPathsByType,
 } from "@/lib/sanity/client";
 import { getDynamicMetadata } from "@/lib/sanity/utils/get-metadata";
-import getPageParams from "@/lib/sanity/utils/get-page-params";
+import getPageGroqParams from "@/lib/sanity/utils/get-page-groq-params";
+
 import { validateAndCleanupArticle } from "@/lib/zod/article";
 import { validateAndCleanupPage } from "@/lib/zod/page";
 import { Metadata, ResolvingMetadata } from "next";
@@ -65,7 +66,7 @@ export default async function CustomPage({
   const resource = await getResourceBySlugTypeAndParams(
     path,
     type,
-    getPageParams(type),
+    getPageGroqParams(type),
   );
 
   // validate and cleanup the resource based on the type

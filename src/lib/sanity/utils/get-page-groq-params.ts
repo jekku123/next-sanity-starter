@@ -1,4 +1,6 @@
-export default function getPageParams(type: string) {
+export type ResourceType = "frontpage" | "page" | "article";
+
+export default function getPageGroqParams(type: ResourceType) {
   if (type === "frontpage") {
     return `{
     _id,

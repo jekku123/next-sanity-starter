@@ -22,6 +22,7 @@ export default function ArticleTeasers({
 
 export function ArticleTeaser({ article }: { article: ArticleTeaserType }) {
   const date = formatDate(article._createdAt);
+
   return (
     <Link
       href={article.slug.current}

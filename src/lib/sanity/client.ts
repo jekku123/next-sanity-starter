@@ -79,7 +79,6 @@ export async function getFrontPage(params: string) {
   ${params}`;
 
   const resource = await client.fetch(query);
-
   return resource;
 }
 
