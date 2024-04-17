@@ -11,11 +11,11 @@ export const ArticleBaseSchema = z.object({
   excerpt: z.string(),
   image: ImageSchema,
   tags: z.array(z.string()),
+  _createdAt: z.string(),
 });
 
 const ArticleSchema = ArticleBaseSchema.extend({
   body: BlockSchema,
-  _createdAt: z.string(),
 });
 
 export function validateAndCleanupArticle(

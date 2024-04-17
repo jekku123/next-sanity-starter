@@ -99,6 +99,7 @@ export async function getArticles({
     slug,
     image,
     tags,
+    _createdAt,
   }`;
 
   const resource = await client.fetch(query);

@@ -1,3 +1,4 @@
+import { formatDate } from "@/lib/utils";
 import { ArticleTeaser as ArticleTeaserType } from "@/lib/zod/article-teaser";
 import Link from "next/link";
 import { AspectRatio } from "./ui/aspect-ratio";
@@ -20,6 +21,7 @@ export default function ArticleTeasers({
 }
 
 export function ArticleTeaser({ article }: { article: ArticleTeaserType }) {
+  const date = formatDate(article._createdAt);
   return (
     <Link
       href={article.slug.current}
@@ -37,9 +39,10 @@ export function ArticleTeaser({ article }: { article: ArticleTeaserType }) {
       )}
       <div className="flex h-full flex-col p-3">
         <div className="mb-1 text-xs">
-          <span className="uppercase text-muted-foreground">
+          <p className="uppercase text-muted-foreground">{date} </p>
+          <p className="uppercase text-muted-foreground">
             {article.tags.map((tag) => tag).join(", ")}
-          </span>
+          </p>
         </div>
         <h3 className="mt-1 line-clamp-2 text-xl font-bold text-secondary-foreground underline-offset-2 group-hover:underline">
           {article.title}
