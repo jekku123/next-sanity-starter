@@ -3,11 +3,29 @@ import Page from "@/components/page";
 import {
   getResourceBySlugTypeAndParams,
   getResourceTypeBySlug,
+  getStaticPaths,
 } from "@/lib/sanity/client";
 import getPageParams from "@/lib/sanity/utils/get-page-params";
 import { validateAndCleanupArticle } from "@/lib/zod/article";
 import { validateAndCleanupPage } from "@/lib/zod/page";
 import { notFound, redirect } from "next/navigation";
+
+// Add the types of the resources you want to generate static pages for
+const pageTypes = ["page", "article"];
+
+export async function generateStaticParams() {
+  const paths = await Promise.all(
+    pageTypes.map((type) => getStaticPaths({ type })),
+  );
+
+  const flattedPaths = paths
+    .flat()
+    .map((path: any) => path.slug.current.split("/"));
+
+  return flattedPaths.map((page: any) => ({
+    slug: page,
+  }));
+}
 
 export default async function CustomPage({
   params: { slug },

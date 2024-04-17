@@ -19,6 +19,7 @@ export async function getResourceTypeBySlug(slug: string) {
   const query = `*[slug.current == "${slug}"][0] {
     _type
   }`;
+
   try {
     const resource = await client.fetch(query);
     return resource._type;
@@ -26,6 +27,17 @@ export async function getResourceTypeBySlug(slug: string) {
     console.error(e);
     return null;
   }
+}
+
+export async function getStaticPaths({ type }: { type: string }) {
+  const query = `*[_type == "${type}"] {
+    slug {
+      current
+    }
+  }`;
+
+  const paths = await client.fetch(query);
+  return paths;
 }
 
 export async function getResourceBySlugTypeAndParams(
