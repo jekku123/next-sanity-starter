@@ -20,21 +20,20 @@ export async function generateStaticParams() {
     pageTypes.map((type) => getStaticPathsByType(type)),
   );
 
-  const flattedPaths = paths
+  const flattedParams = paths
     .flat()
-    .map((path: any) => path.slug.current.split("/"));
+    .map((path) => path.slug.current.split("/"));
 
-  return flattedPaths.map((page: any) => ({
-    slug: page,
+  return flattedParams.map((params) => ({
+    slug: params,
   }));
 }
 
-// TODO: Add metadata to schemas etc and do this again
 export async function generateMetadata(
   { params }: { params: { slug: string[] } },
-  parent: ResolvingMetadata,
+  _parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const path = `${params.slug.join("/")}`;
+  const path = params.slug.join("/");
   const metadata = await getDynamicMetadata(path);
   return {
     ...metadata,
@@ -77,7 +76,6 @@ export default async function CustomPage({
         ? validateAndCleanupArticle(resource)
         : null;
 
-  console.log("Resource: ", validatedResource);
   // if the resource is not found then we return a 404
   if (!validatedResource) {
     return null;

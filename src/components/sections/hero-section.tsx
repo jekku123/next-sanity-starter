@@ -26,7 +26,7 @@ export default function HeroSection({ content }: { content: Hero }) {
             )}
           </div>
         </div>
-        <SanityImage image={content.image} />
+        <SanityImage image={content.image} className="rounded-xl" />
       </div>
     </div>
   );

@@ -37,8 +37,9 @@ export async function getStaticPathsByType(type: string) {
     }
   }`;
 
-  const paths = await client.fetch(query);
-  return paths;
+  const params = await client.fetch(query);
+
+  return params;
 }
 
 export async function getMetadataBySlug(slug: string) {

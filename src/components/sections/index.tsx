@@ -19,7 +19,7 @@ export default function Section({ section }: { section: SectionType }) {
     case "articlesListing":
       return <ArticlesListingSection content={section} />;
     default: {
-      console.log(
+      console.error(
         `No section component found for ${(section as SectionType)._type}`,
       );
       return null;

@@ -11,11 +11,6 @@ export default defineType({
       type: "string",
     },
     {
-      name: "subtitle",
-      title: "Subtitle",
-      type: "string",
-    },
-    {
       title: "Body",
       name: "body",
       type: "array",

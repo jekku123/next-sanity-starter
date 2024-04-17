@@ -23,7 +23,7 @@ export function SanityImage({
       height={!fill ? height || 600 : undefined}
       src={urlForImage(image)}
       alt={image?.alt || ""}
-      className={cn("object-cover", className)}
+      className={cn("h-auto w-full object-cover", className)}
       fill={fill}
       priority
       {...props}

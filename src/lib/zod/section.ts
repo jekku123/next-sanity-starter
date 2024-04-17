@@ -7,7 +7,6 @@ export const HeroSchema = z.object({
   _type: z.literal("hero"),
   _key: z.string(),
   title: z.string(),
-  subtitle: z.string(),
   body: BlockSchema,
   image: ImageSchema,
   primaryLink: LinkSchema.optional().nullable(),

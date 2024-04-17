@@ -20,17 +20,19 @@ export function PreviousPageButton({
   };
 
   return (
-    <Button
-      onClick={navigateBack}
-      aria-label="back-button"
-      className={cn("group", className)}
-      {...props}
-    >
-      <ArrowLeftIcon
-        aria-hidden
-        className="mr-3 h-5 w-5 transition-transform duration-500 group-hover:-translate-x-2"
-      />
-      {children || "Previous Page"}
-    </Button>
+    <div className="flex">
+      <Button
+        onClick={navigateBack}
+        aria-label="back-button"
+        className={cn("group", className)}
+        {...props}
+      >
+        <ArrowLeftIcon
+          aria-hidden
+          className="mr-3 h-5 w-5 transition-transform duration-500 group-hover:-translate-x-2"
+        />
+        {children || "Previous Page"}
+      </Button>
+    </div>
   );
 }

@@ -3,6 +3,8 @@ import { getFrontPage } from "@/lib/sanity/client";
 import getPageParams from "@/lib/sanity/utils/get-page-params";
 import { validateAndCleanupFrontPage } from "@/lib/zod/frontpage";
 
+export const revalidate = 60;
+
 export default async function FrontPage() {
   const frontpage = await getFrontPage(getPageParams("frontpage"));
   const validatedFrontpage = validateAndCleanupFrontPage(frontpage);
