@@ -1,9 +1,9 @@
 import { createClient } from "next-sanity";
 
-import { Menu, validateAndCleanupMenu } from "@/lib/zod/menu";
 import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";
 import { apiVersion, dataset, projectId, useCdn } from "./env";
+import { Menu, validateAndCleanupMenu } from "../zod/menu";
 
 export const client = createClient({
   apiVersion,
@@ -75,35 +75,29 @@ export async function getResourceBySlugTypeAndParams(
 }
 
 export async function getFrontPage(params: string) {
-  const query = `*[_type == "frontpage"][0]
-  ${params}`;
+  const query = `*[_type == "frontpage"][0]${params}`;
 
   const resource = await client.fetch(query);
   return resource;
 }
 
-export async function getArticles({
-  limit,
-  order,
-}: {
-  limit?: number;
-  order?: "asc" | "desc";
-} = {}) {
-  const query = `*[_type == "article"]${
-    order ? `| order(_createdAt ${order})` : ""
-  }${limit ? `[0...${limit}]` : ""} {
+export async function getSettings() {
+  const query = `*[_type == "settings"][0] {
     _id,
     _type,
     title,
-    excerpt,
-    slug,
-    image,
-    tags,
-    _createdAt,
+    description,
+    logo,
   }`;
 
-  const resource = await client.fetch(query);
-  return resource;
+  const settings = await client.fetch(query);
+  const validatedSettings = validateAndCleanupSettings(settings);
+
+  if (!validatedSettings) {
+    throw new Error("Settings not found");
+  }
+
+  return validatedSettings;
 }
 
 export async function getMenu(slug: string): Promise<Menu> {
@@ -130,23 +124,4 @@ export async function getMenu(slug: string): Promise<Menu> {
   }
 
   return validatedMenu;
-}
-
-export async function getSettings() {
-  const query = `*[_type == "settings"][0] {
-    _id,
-    _type,
-    title,
-    description,
-    logo,
-  }`;
-
-  const settings = await client.fetch(query);
-  const validatedSettings = validateAndCleanupSettings(settings);
-
-  if (!validatedSettings) {
-    throw new Error("Settings not found");
-  }
-
-  return validatedSettings;
 }

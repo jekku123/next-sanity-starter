@@ -51,7 +51,7 @@ export default async function BlockContent({
             src={urlForImage(value)}
             alt={value?.alt || ""}
             className={cn(
-              "rounded-md object-cover",
+              "h-auto w-auto rounded-xl object-cover",
               isInline ? "inline-block" : "block",
             )}
             priority
