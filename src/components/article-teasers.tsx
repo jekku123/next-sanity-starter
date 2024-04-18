@@ -34,7 +34,7 @@ export function ArticleTeaser({ article }: { article: ArticleTeaserType }) {
             ratio={16 / 9}
             className="transform transition-transform duration-700 group-hover:scale-110"
           >
-            <SanityImage image={article.image} fill />
+            <SanityImage image={article.image} />
           </AspectRatio>
         </div>
       )}

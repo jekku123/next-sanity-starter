@@ -1,4 +1,4 @@
-describe("template spec", () => {
+describe("basic layout test", () => {
   it("Visits the frontpage and checks that the main components are in place", () => {
     cy.visit("http://localhost:3000");
     cy.get("header").should("be.visible").should("exist");

@@ -3,8 +3,8 @@ import { MenuItem } from "@/lib/zod/menu";
 import { Settings } from "@/lib/zod/settings";
 import Image from "next/image";
 import Link from "next/link";
+import MainMenu from "./main-menu";
 import { ModeToggle } from "./ui/mode-toggle";
-import SanityLink from "./ui/sanity-link";
 
 export default async function Header({
   menu,
@@ -20,7 +20,7 @@ export default async function Header({
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
         <Link
           href="/"
-          className="flex items-center space-x-2 text-2xl font-bold"
+          className="flex items-center space-x-3 text-2xl font-bold"
         >
           <Image
             src={urlForImage(logo.asset)}
@@ -33,13 +33,7 @@ export default async function Header({
         </Link>
 
         <div className="flex items-center space-x-4">
-          <ul className="flex items-center space-x-4">
-            {menu?.map((item: MenuItem) => (
-              <li key={item._key}>
-                <SanityLink link={item}>{item.label}</SanityLink>
-              </li>
-            ))}
-          </ul>
+          <MainMenu menu={menu} />
           <ModeToggle />
         </div>
       </nav>
