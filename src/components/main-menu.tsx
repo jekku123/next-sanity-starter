@@ -15,6 +15,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { usePathname } from "next/navigation";
 
 export function MainMenu({
   menu,
@@ -75,9 +76,15 @@ const NavigationMenuItemSingle = ({
   url: string;
   title: string;
 }) => {
+  const pathname = usePathname();
+  const pathOrigin = pathname.split("/")[1];
+  const isActive = pathOrigin === url || pathname === url;
   return (
     <Link href={url} legacyBehavior passHref>
-      <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+      <NavigationMenuLink
+        className={navigationMenuTriggerStyle()}
+        active={isActive}
+      >
         {title}
       </NavigationMenuLink>
     </Link>
