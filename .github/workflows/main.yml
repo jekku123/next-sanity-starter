@@ -1,0 +1,21 @@
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-n-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Start Server
+        run: npm start
+      - name: Test
+        run: npm run cypress:run
