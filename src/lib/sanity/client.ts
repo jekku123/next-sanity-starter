@@ -120,8 +120,6 @@ export async function getMenu(slug: string): Promise<Menu> {
 
   const menu = await client.fetch(query);
 
-  console.log("MENU: ", menu);
-
   const validatedMenu = validateAndCleanupMenu(menu);
 
   if (!validatedMenu) {

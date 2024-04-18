@@ -3,7 +3,7 @@ import { MenuItem } from "@/lib/zod/menu";
 import { Settings } from "@/lib/zod/settings";
 import Image from "next/image";
 import Link from "next/link";
-import { MainMenu2 } from "./main-menu2";
+import { MainMenu } from "./main-menu";
 import { ModeToggle } from "./ui/mode-toggle";
 
 export default async function Header({
@@ -33,8 +33,7 @@ export default async function Header({
         </Link>
 
         <div className="flex items-center space-x-4">
-          {/* <MainMenu menu={menu} /> */}
-          <MainMenu2 menu={menu} />
+          <MainMenu menu={menu} />
           <ModeToggle />
         </div>
       </nav>

@@ -1,7 +1,7 @@
 import { Link as LinkType } from "@/lib/zod/link";
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 
-interface CustomLinkSchema {
+interface CustomLinkSchema extends Omit<LinkProps, "href"> {
   link: LinkType;
   children: React.ReactNode;
   className?: string;
