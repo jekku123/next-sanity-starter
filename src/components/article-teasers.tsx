@@ -12,7 +12,7 @@ export default function ArticleTeasers({
   title?: string;
 }) {
   return (
-    <div className="grid grid-cols-1 gap-9 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-9 md:grid-cols-2 lg:grid-cols-3">
       {articles.map((article) => (
         <ArticleTeaser key={article?._id} article={article} />
       ))}

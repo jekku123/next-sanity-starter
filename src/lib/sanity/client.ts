@@ -1,9 +1,9 @@
 import { createClient } from "next-sanity";
 
+import { Menu, validateAndCleanupMenu } from "../zod/menu";
 import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";
 import { apiVersion, dataset, projectId, useCdn } from "./env";
-import { Menu, validateAndCleanupMenu } from "../zod/menu";
 
 export const client = createClient({
   apiVersion,
@@ -109,13 +109,18 @@ export async function getMenu(slug: string): Promise<Menu> {
     items[] {
       _key,
       label,
-      external,
-      "internal": internal->slug.current,
-      nextjsRoute,
+      "href": coalesce(external, internal->slug.current, nextjsRoute),
+      subItems[] {
+        _key,
+        label,
+        "href": coalesce(external, internal->slug.current, nextjsRoute),
+      }
     }
   }`;
 
   const menu = await client.fetch(query);
+
+  console.log("MENU: ", menu);
 
   const validatedMenu = validateAndCleanupMenu(menu);
 

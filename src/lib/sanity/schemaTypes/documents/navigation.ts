@@ -24,7 +24,7 @@ export default defineType({
       name: "items",
       type: "array",
       title: "Navigation items",
-      of: [{ type: "link" }],
+      of: [{ type: "navItem" }],
     },
   ],
 });

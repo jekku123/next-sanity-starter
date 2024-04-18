@@ -8,6 +8,8 @@ export default function MainMenu({ menu }: { menu: MenuItem[] }) {
   //   const pathname = usePathname();
   //   const pathOrigin = pathname.split("/")[1];
 
+  console.log("MENU: ", menu);
+
   return (
     <ul className="flex gap-4">
       {menu?.map((item: MenuItem) => (

@@ -2,6 +2,11 @@ import ArticleTeasers from "@/components/article-teasers";
 import { TypographyH1 } from "@/components/typography";
 import { getArticles } from "@/lib/sanity/utils/get-articles";
 
+export const metadata = {
+  title: "Articles",
+  description: "All articles on the site",
+};
+
 export const revalidate = 60;
 
 export default async function ArticlesPage() {

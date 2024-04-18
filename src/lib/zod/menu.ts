@@ -4,9 +4,17 @@ import { z } from "zod";
 export const MenuItemSchema = z.object({
   _key: z.string(),
   label: z.string(),
-  internal: z.string().optional().nullable(),
-  external: z.string().optional().nullable(),
-  nextjsRoute: z.string().optional().nullable(),
+  href: z.string(),
+  subItems: z
+    .array(
+      z.object({
+        _key: z.string(),
+        label: z.string(),
+        href: z.string(),
+      }),
+    )
+    .optional()
+    .nullable(),
 });
 
 export const MenuSchema = z.object({
