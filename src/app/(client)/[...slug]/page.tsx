@@ -6,7 +6,9 @@ import {
   getStaticPathsByType,
 } from "@/lib/sanity/client";
 import { getDynamicMetadata } from "@/lib/sanity/utils/get-metadata";
-import getPageGroqParams from "@/lib/sanity/utils/get-page-groq-params";
+import getPageGroqParams, {
+  ResourceType,
+} from "@/lib/sanity/utils/get-page-groq-params";
 
 import { validateAndCleanupArticle } from "@/lib/zod/article";
 import { validateAndCleanupPage } from "@/lib/zod/page";
@@ -50,7 +52,7 @@ export default async function CustomPage({
   const path = `${slug.join("/")}`;
 
   // get the type of the resource with the given slug (e.g. "frontpage", "page", "article"..)
-  const type = await getResourceTypeBySlug(path);
+  const type: ResourceType = await getResourceTypeBySlug(path);
 
   // if the type is not found then there is no resource with the given slug and we return a 404
   if (!type) {
