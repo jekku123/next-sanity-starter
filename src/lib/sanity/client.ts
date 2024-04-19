@@ -1,14 +1,14 @@
 import { createClient } from "next-sanity";
 
-import { apiVersion, dataset, projectId, useCdn } from "../env";
+import { env, useCdn } from "../env";
 import { validateAndCleanupMenu } from "../zod/menu";
 import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";
 
 export const client = createClient({
-  apiVersion,
-  dataset,
-  projectId,
+  apiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION,
+  dataset: env.NEXT_PUBLIC_SANITY_DATASET,
+  projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn,
 });
 

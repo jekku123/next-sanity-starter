@@ -9,13 +9,15 @@ import { StructureBuilder, structureTool } from "sanity/structure";
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import frontpage from "@/lib/sanity/schemaTypes/documents/frontpage";
 import settings from "@/lib/sanity/schemaTypes/documents/settings";
-import { apiVersion, dataset, projectId } from "./src/lib/env";
+import { env } from "./src/lib/env";
 import { schema } from "./src/lib/sanity/schema";
 
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 // Define the singleton document types
 const singletonTypes = new Set(["frontpage", "settings"]);
+
+console.log("ENV: ", env);
 
 const singletonListItems = (
   S: StructureBuilder,
@@ -39,8 +41,8 @@ const defaultListItems = (S: StructureBuilder) => {
 export default defineConfig({
   basePath: "/studio",
   title: "Janne's Mökki",
-  projectId,
-  dataset,
+  projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   // Add and edit the content schema in the './sanity/schema' folder
   schema: {
     types: schema.types,
@@ -58,7 +60,7 @@ export default defineConfig({
   plugins: [
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({ defaultApiVersion: apiVersion }),
+    visionTool({ defaultApiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION }),
     structureTool({
       structure: (S) =>
         S.list()
