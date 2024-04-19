@@ -30,7 +30,7 @@ export function MainMenu({
         <NavigationMenuList>
           {menu.map((item) => {
             return (
-              <NavigationMenuItem key={item._key}>
+              <NavigationMenuItem key={item._key} data-test-id={`${item.href}`}>
                 {item.subItems ? (
                   <NavigationMenuItemWithChildren item={item} />
                 ) : (
@@ -103,6 +103,7 @@ const ListItem = React.forwardRef<
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className,
           )}
+          data-test-id={`nested/${href}`}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">

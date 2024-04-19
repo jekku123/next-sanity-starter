@@ -25,6 +25,7 @@ export function PreviousPageButton({
         onClick={navigateBack}
         aria-label="back-button"
         className={cn("group", className)}
+        data-test-id="previous-page-button"
         {...props}
       >
         <ArrowLeftIcon

@@ -25,8 +25,9 @@ export function ArticleTeaser({ article }: { article: ArticleTeaserType }) {
 
   return (
     <Link
-      href={article.slug.current}
+      href={`/${article.slug.current}`}
       className="group grid h-full rounded-3xl pb-3 shadow-md shadow-muted transition-all"
+      data-test-id={`${article.slug.current}`}
     >
       {article.image && (
         <div className="mb-2 overflow-hidden rounded-t-xl">
