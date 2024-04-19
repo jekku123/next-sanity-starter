@@ -1,7 +1,7 @@
 import { createClient } from "next-sanity";
 
 import { apiVersion, dataset, projectId, useCdn } from "../env";
-import { Menu, validateAndCleanupMenu } from "../zod/menu";
+import { validateAndCleanupMenu } from "../zod/menu";
 import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";
 
@@ -49,12 +49,7 @@ export async function getMetadataBySlug(slug: string) {
   }`;
 
   const resource = await client.fetch(query);
-
   const validatedResource = validateAndCleanupMetadata(resource);
-
-  if (!validatedResource) {
-    throw new Error(`Metadata for "${slug}" not found`);
-  }
 
   return validatedResource;
 }
@@ -93,14 +88,10 @@ export async function getSettings() {
   const settings = await client.fetch(query);
   const validatedSettings = validateAndCleanupSettings(settings);
 
-  if (!validatedSettings) {
-    throw new Error("Settings not found");
-  }
-
   return validatedSettings;
 }
 
-export async function getMenu(slug: string): Promise<Menu> {
+export async function getMenu(slug: string) {
   const query = `*[_type == "navigation" && slug.current == "${slug}"][0] 
   {
     _id,
@@ -119,11 +110,10 @@ export async function getMenu(slug: string): Promise<Menu> {
   }`;
 
   const menu = await client.fetch(query);
-
   const validatedMenu = validateAndCleanupMenu(menu);
 
   if (!validatedMenu) {
-    throw new Error(`Menu "${slug}" not found`);
+    throw new Error(`Menu with slug "${slug}" not found`);
   }
 
   return validatedMenu;

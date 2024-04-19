@@ -80,7 +80,7 @@ const NavigationMenuItemSingle = ({
   const pathOrigin = pathname.split("/")[1];
   const isActive = pathOrigin === url || pathname === url;
   return (
-    <Link href={url} legacyBehavior passHref>
+    <Link href={`/${url}`} legacyBehavior passHref>
       <NavigationMenuLink
         className={navigationMenuTriggerStyle()}
         active={isActive}
