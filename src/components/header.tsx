@@ -21,6 +21,7 @@ export default async function Header({
         <Link
           href="/"
           className="flex items-center space-x-3 text-2xl font-bold"
+          data-test-id="header-logo"
         >
           <Image
             src={urlForImage(logo.asset)}

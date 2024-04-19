@@ -21,7 +21,7 @@ describe("Dark mode and light mode", () => {
   });
 });
 
-describe("Navigation test", () => {
+describe("Navigation tests", () => {
   it("Visit about page and homepage", () => {
     cy.visit("http://localhost:3000");
     cy.get('[data-test-id="about"]').click();
@@ -36,9 +36,11 @@ describe("Navigation test", () => {
     cy.get('[data-test-id="articles"]').click();
     cy.url().should("include", "articles");
     cy.get("h1").contains("Articles");
+
     cy.get('[data-test-id="articles/article-1"]').click();
     cy.url().should("include", "article-1");
     cy.get("h1").contains("Article 1");
+
     cy.get('[data-test-id="previous-page-button"]').click();
     cy.url().should("include", "articles");
   });
@@ -48,6 +50,6 @@ describe("Navigation test", () => {
     cy.get('[data-test-id="nested"]').click();
     cy.get('[data-test-id="nested/nested"]').click();
     cy.url().should("include", "nested");
-    cy.get("h1").contains("I'm");
+    cy.get("h1").contains("Nested");
   });
 });
