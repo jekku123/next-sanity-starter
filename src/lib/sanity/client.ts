@@ -1,6 +1,6 @@
 import { createClient } from "next-sanity";
 
-import { env, useCdn } from "../env";
+import { env, useCdn } from "../../env";
 import { validateAndCleanupMenu } from "../zod/menu";
 import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";

@@ -9,15 +9,13 @@ import { StructureBuilder, structureTool } from "sanity/structure";
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import frontpage from "@/lib/sanity/schemaTypes/documents/frontpage";
 import settings from "@/lib/sanity/schemaTypes/documents/settings";
-import { env } from "./src/lib/env";
+import { env } from "./src/env";
 import { schema } from "./src/lib/sanity/schema";
 
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 // Define the singleton document types
 const singletonTypes = new Set(["frontpage", "settings"]);
-
-console.log("ENV: ", env);
 
 const singletonListItems = (
   S: StructureBuilder,
