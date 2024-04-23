@@ -4,8 +4,7 @@ import { Image as ImageType } from "@/lib/zod/image";
 import { getImageDimensions } from "@sanity/asset-utils";
 import Image, { ImageProps } from "next/image";
 
-export interface SanityImageProps
-  extends Omit<ImageProps, "src" | "alt" | "priority"> {
+export interface SanityImageProps extends Omit<ImageProps, "src" | "alt"> {
   image: ImageType;
 }
 

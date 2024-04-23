@@ -1,8 +1,10 @@
+import { groq } from "next-sanity";
+
 export type ResourceType = "frontpage" | "page" | "article";
 
 export default function getPageGroqParams(type: ResourceType) {
   if (type === "frontpage") {
-    return `{
+    return groq`{
     _id,
     _type,
     slug,
@@ -27,7 +29,7 @@ export default function getPageGroqParams(type: ResourceType) {
   }
 
   if (type === "page") {
-    return `{
+    return groq`{
       _id,
       _type,
       slug,
@@ -59,7 +61,7 @@ export default function getPageGroqParams(type: ResourceType) {
   }
 
   if (type === "article") {
-    return `{
+    return groq`{
       _id,
       _type,
       title,

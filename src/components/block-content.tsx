@@ -1,7 +1,6 @@
 import { urlForImage } from "@/lib/sanity/utils/image";
 import { cn } from "@/lib/utils";
 import { PortableText } from "@portabletext/react";
-import { getImageDimensions } from "@sanity/asset-utils";
 import Image from "next/image";
 import Link from "next/link";
 import { PortableTextBlock } from "sanity";
@@ -42,16 +41,16 @@ export default async function BlockContent({
 
     types: {
       image: ({ value, isInline }: { value: any; isInline: boolean }) => {
-        const { width, height } = getImageDimensions(value);
+        // const { width, height } = getImageDimensions(value);
 
         return (
           <Image
-            width={width || 800}
-            height={height || 600}
+            width={300}
+            height={200}
             src={urlForImage(value)}
             alt={value?.alt || ""}
             className={cn(
-              "h-auto w-auto rounded-xl object-cover",
+              "h-[200px] w-auto rounded-xl object-cover",
               isInline ? "inline-block" : "block",
             )}
             priority
