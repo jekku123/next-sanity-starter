@@ -5,10 +5,10 @@ import {
   getResourceTypeBySlug,
   getStaticPathsByType,
 } from "@/lib/sanity/client";
-import { getDynamicMetadata } from "@/lib/sanity/utils/get-metadata";
 import getPageGroqParams, {
   ResourceType,
-} from "@/lib/sanity/utils/get-page-groq-params";
+} from "@/lib/sanity/get-page-groq-params";
+import { getDynamicMetadata } from "@/lib/sanity/utils/get-metadata";
 
 import { validateAndCleanupArticle } from "@/lib/zod/article";
 import { validateAndCleanupPage } from "@/lib/zod/page";

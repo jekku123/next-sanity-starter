@@ -17,7 +17,7 @@ export async function getArticles({
       _id,
       _type,
       title,
-      excerpt,
+      description,
       slug,
       image,
       tags,

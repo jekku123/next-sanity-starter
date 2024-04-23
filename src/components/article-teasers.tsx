@@ -6,10 +6,8 @@ import { SanityImage } from "./ui/sanity-image";
 
 export default function ArticleTeasers({
   articles,
-  title,
 }: {
   articles: ArticleTeaserType[];
-  title?: string;
 }) {
   return (
     <div className="grid grid-cols-1 gap-9 md:grid-cols-2 lg:grid-cols-3">
@@ -50,7 +48,7 @@ export function ArticleTeaser({ article }: { article: ArticleTeaserType }) {
           {article.title}
         </h2>
         <p className="mt-2 leading-5 text-muted-foreground">
-          {article.excerpt}
+          {article.description}
         </p>
       </div>
     </Link>

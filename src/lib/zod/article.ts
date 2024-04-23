@@ -8,7 +8,7 @@ export const ArticleBaseSchema = z.object({
   _type: z.literal("article"),
   _id: z.string(),
   title: z.string(),
-  excerpt: z.string(),
+  description: z.string(),
   image: ImageSchema,
   tags: z.array(z.string()),
   _createdAt: z.string(),

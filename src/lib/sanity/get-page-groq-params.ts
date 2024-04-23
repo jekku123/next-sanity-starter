@@ -63,7 +63,7 @@ export default function getPageGroqParams(type: ResourceType) {
       _id,
       _type,
       title,
-      excerpt,
+      description,
       image,
       _createdAt,
       body[],

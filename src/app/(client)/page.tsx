@@ -1,6 +1,6 @@
 import Section from "@/components/sections";
 import { getFrontPage } from "@/lib/sanity/client";
-import getPageGroqParams from "@/lib/sanity/utils/get-page-groq-params";
+import getPageGroqParams from "@/lib/sanity/get-page-groq-params";
 
 import { validateAndCleanupFrontPage } from "@/lib/zod/frontpage";
 

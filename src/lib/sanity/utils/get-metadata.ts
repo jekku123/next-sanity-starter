@@ -9,6 +9,6 @@ export async function getDynamicMetadata(path: string): Promise<Metadata> {
 
   return {
     title: `${metadata?.title} | ${settings?.title.text}`,
-    description: metadata?.description || settings?.description,
+    description: metadata?.description,
   };
 }

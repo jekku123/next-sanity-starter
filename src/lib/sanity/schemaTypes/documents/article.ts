@@ -12,9 +12,9 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "excerpt",
+      name: "description",
       type: "text",
-      title: "Excerpt",
+      title: "Description",
       validation: (Rule) => Rule.required(),
     },
     {
