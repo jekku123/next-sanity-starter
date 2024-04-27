@@ -1,33 +1,33 @@
-import { defineField } from 'sanity';
-import {TokenIcon} from '@sanity/icons'
+import { TokenIcon } from "@sanity/icons";
+import { defineField } from "sanity";
 
 const passwordResetToken = {
-  name: 'passwordResetToken',
-  title: 'PasswordReset Token',
-  type: 'document',
+  name: "passwordResetToken",
+  title: "PasswordReset Token",
+  type: "document",
   icon: TokenIcon,
   fields: [
     defineField({
-      name: 'identifier',
-      title: 'Identifier',
-      type: 'string',
+      name: "identifier",
+      title: "Identifier",
+      type: "string",
     }),
     defineField({
-        name: 'token',
-        title: 'Token',
-        type: 'string',
-        validation: Rule => Rule.required(),
+      name: "token",
+      title: "Token",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'expires',
-      title: 'Token Expiry',
-      type: 'datetime',
-      validation: Rule => Rule.required(),
+      name: "expires",
+      title: "Token Expiry",
+      type: "datetime",
+      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {
     select: {
-      title: 'token',
+      title: "token",
     },
   },
 };

@@ -1,40 +1,40 @@
-import { defineField } from 'sanity';
-import {DatabaseIcon} from '@sanity/icons'
+import { DatabaseIcon } from "@sanity/icons";
+import { defineField } from "sanity";
 
 const session = {
-  name: 'session',
-  title: 'Session',
-  type: 'document',
+  name: "session",
+  title: "Session",
+  type: "document",
   icon: DatabaseIcon,
   fields: [
     defineField({
-      name: 'sessionToken',
-      title: 'Session Token',
-      type: 'string',
-      validation: Rule => Rule.required(),
+      name: "sessionToken",
+      title: "Session Token",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-        name: 'userId',
-        title: 'User Id',
-        type: 'string',
-        validation: Rule => Rule.required(),
+      name: "userId",
+      title: "User Id",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'expires',
-      title: 'Session Expiry',
-      type: 'datetime',
-      validation: Rule => Rule.required(),
+      name: "expires",
+      title: "Session Expiry",
+      type: "datetime",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-        name: 'user',
-      title: 'User',
-      type: 'reference',
-      to: [{type: 'user'}],
+      name: "user",
+      title: "User",
+      type: "reference",
+      to: [{ type: "user" }],
     }),
   ],
   preview: {
     select: {
-      title: '_id',
+      title: "_id",
     },
   },
 };

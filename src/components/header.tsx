@@ -1,9 +1,13 @@
+import { deleteTestUser } from "@/lib/auth/actions/delete-test-user";
 import { urlForImage } from "@/lib/sanity/utils/image";
 import { MenuItem } from "@/lib/zod/menu";
 import { Settings } from "@/lib/zod/settings";
 import Image from "next/image";
 import Link from "next/link";
+import { LogoutButton } from "./logout-button";
 import { MainMenu } from "./main-menu";
+import { SocialLogin } from "./social-login";
+import { Button } from "./ui/button";
 import { ModeToggle } from "./ui/mode-toggle";
 
 export default async function Header({
@@ -35,6 +39,13 @@ export default async function Header({
 
         <div className="flex items-center space-x-4">
           <MainMenu menu={menu} />
+          <Link href="auth/login">Login</Link>
+          <Link href="auth/register">Register</Link>
+          <SocialLogin />
+          <LogoutButton>Logout</LogoutButton>
+          <form action={deleteTestUser}>
+            <Button type="submit">Delete Test User</Button>
+          </form>
           <ModeToggle />
         </div>
       </nav>

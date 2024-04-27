@@ -4,7 +4,7 @@ import session from "./session";
 import user from "./user";
 import verificationToken from "./verificationToken";
 
-export const schemaTypes = [
+export const userSchemaTypes = [
   user,
   session,
   account,

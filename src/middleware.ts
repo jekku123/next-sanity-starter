@@ -4,9 +4,10 @@
 //   apiAuthPrefix,
 //   authRoutes,
 //   publicRoutes,
-// } from "./routes";
+// } from "@/routes";
 
-// export default auth((req) => {
+// // @ts-ignore
+// export default auth(({ req }) => {
 //   const { nextUrl } = req;
 //   const isLoggedIn = !!req.auth;
 
@@ -32,7 +33,16 @@
 //   return null;
 // });
 
-// Optionally, don't invoke Middleware on some paths
+// // Optionally, don't invoke Middleware on some paths
+// export const config = {
+//   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+// };
+
+import NextAuth from "next-auth";
+import { authConfig } from "./auth.config";
+
+export default NextAuth(authConfig).auth;
+
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/((?!api|static|.*\\..*|_next).*)"],
 };

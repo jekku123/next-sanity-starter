@@ -30,7 +30,6 @@ export function SanityAdapter(
           name: user.name,
           email: user.email,
           image: user.image,
-          // isTwoFactorEnabled: false,
           emailVerified: user.emailVerified,
         });
 

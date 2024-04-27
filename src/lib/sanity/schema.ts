@@ -11,6 +11,7 @@ import articlesListing from "./schemaTypes/sections/articles-listing";
 import portableText from "./schemaTypes/sections/formatted-text";
 import hero from "./schemaTypes/sections/hero";
 import textImage from "./schemaTypes/sections/text-image";
+import { userSchemaTypes } from "./schemaTypes/user";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -25,5 +26,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     article,
     articlesListing,
     navItem,
+    ...userSchemaTypes,
   ],
 };

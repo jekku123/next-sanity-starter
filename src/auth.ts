@@ -1,14 +1,16 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { SanityAdapter } from "./lib/auth/sanity-adapter";
 import { client } from "./lib/sanity/client";
 
 import bcrypt from "bcryptjs";
 
+import { env } from "@/env";
+import GitHub from "next-auth/providers/github";
+import { authConfig } from "./auth.config";
 import { getAccountByUserId } from "./lib/auth/data-access/account";
 import { getUserById } from "./lib/auth/data-access/user";
+import { SanityAdapter } from "./lib/auth/sanity-adapter";
 import { LoginSchema } from "./lib/zod/auth";
-import { UserRole } from "./models/typings";
 
 export const {
   handlers: { GET, POST },
@@ -18,26 +20,26 @@ export const {
   //unstable update in Beta version
   unstable_update,
 } = NextAuth({
-  pages: {
-    signIn: "/auth/login",
-    error: "/auth/error",
-  },
+  secret: env.NEXTAUTH_SECRET,
+  // pages: {
+  //   signIn: "/auth/login",
+  //   error: "/auth/error",
+  // },
   providers: [
-    // GitHub({
-    //   clientId: process.env.GITHUB_CLIENT_ID,
-    //   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    // }),
+    GitHub({
+      clientId: env.AUTH_GITHUB_ID,
+      clientSecret: env.AUTH_GITHUB_SECRET,
+    }),
     // Google({
     //   clientId: process.env.GOOGLE_CLIENT_ID,
     //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     // }),
     Credentials({
       async authorize(credentials) {
-        //if not using zod resolvers validated fields arent necessary
         const validatedFields = LoginSchema.safeParse(credentials);
         if (!validatedFields.success) return null;
 
-        const user_qry = `*[_type == "user" && email== "${credentials?.email}"][0]`;
+        const user_qry = `*[_type == "user" && email == "${credentials?.email}"][0]`;
         const user = await client.fetch(user_qry);
 
         if (!user || !user.password) return null;
@@ -59,8 +61,8 @@ export const {
       },
     }),
   ],
-  session: { strategy: "jwt" },
   adapter: SanityAdapter(client),
+  session: { strategy: "jwt" },
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider !== "credentials") return true;
@@ -73,23 +75,23 @@ export const {
       return true;
     },
     //@ts-ignore
-    async session({ session, token }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
-      }
+    // async session({ session, token }) {
+    //   if (token.sub && session.user) {
+    //     session.user.id = token.sub;
+    //   }
 
-      if (token.role && session.user) {
-        session.user.role = token.role as UserRole;
-      }
+    //   if (token.role && session.user) {
+    //     session.user.role = token.role as UserRole;
+    //   }
 
-      if (session.user) {
-        session.user.name = token.name;
-        session.user.email = token.email as string;
-        session.user.isOAuth = token.isOAuth as boolean;
-      }
+    //   if (session.user) {
+    //     session.user.name = token.name;
+    //     session.user.email = token.email as string;
+    //     session.user.isOAuth = token.isOAuth as boolean;
+    //   }
 
-      return session;
-    },
+    //   return session;
+    // },
     async jwt({ token }) {
       if (!token.sub) return token;
 
@@ -106,5 +108,6 @@ export const {
 
       return token;
     },
+    ...authConfig.callbacks,
   },
 });

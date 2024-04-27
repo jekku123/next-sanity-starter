@@ -1,6 +1,6 @@
 import { createClient } from "next-sanity";
 
-import { env, useCdn } from "../../env";
+import { env, useCdn } from "@/env";
 import { validateAndCleanupMenu } from "../zod/menu";
 import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";
@@ -10,6 +10,7 @@ export const client = createClient({
   dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn,
+  token: env.NEXT_PUBLIC_SANITY_API_TOKEN,
 });
 
 // return the type of the resource with the given slug (e.g. "page" or "post")
