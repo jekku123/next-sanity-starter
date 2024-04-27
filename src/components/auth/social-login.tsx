@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { Icons } from "./icons";
+import { Icons } from "../icons";
 
 export const SocialLogin = () => {
   const searchParams = useSearchParams();

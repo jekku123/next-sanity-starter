@@ -19,7 +19,7 @@ import {
 import { login } from "@/lib/auth/actions/login";
 import { LoginSchema } from "@/lib/zod/auth-forms";
 import { AlertTriangleIcon, CheckCircleIcon } from "lucide-react";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();

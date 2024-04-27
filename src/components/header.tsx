@@ -4,9 +4,9 @@ import { MenuItem } from "@/lib/zod/menu";
 import { Settings } from "@/lib/zod/settings";
 import Image from "next/image";
 import Link from "next/link";
-import { LogoutButton } from "./logout-button";
+import { LogoutButton } from "./auth/logout-button";
+import { SocialLogin } from "./auth/social-login";
 import { MainMenu } from "./main-menu";
-import { SocialLogin } from "./social-login";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./ui/mode-toggle";
 
