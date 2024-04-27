@@ -10,7 +10,7 @@ import { getUserByEmail } from "@/lib/auth/data-access/user";
 import { sendVerificationEmail } from "@/lib/auth/utils/mail";
 
 import { generateVerificationToken } from "@/lib/auth/utils/tokens";
-import { LoginSchema } from "@/lib/zod/auth";
+import { LoginSchema } from "@/lib/zod/auth-forms";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);

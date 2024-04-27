@@ -7,7 +7,7 @@ import { unstable_update } from "@/auth";
 import { getUserByEmail, getUserById } from "@/lib/auth/data-access/user";
 import { sendVerificationEmail } from "@/lib/auth/utils/mail";
 import { client } from "@/lib/sanity/client";
-import { SettingsSchema } from "@/lib/zod/auth";
+import { SettingsSchema } from "@/lib/zod/auth-forms";
 import { currentUser } from "../utils/auth";
 import { generateVerificationToken } from "../utils/tokens";
 

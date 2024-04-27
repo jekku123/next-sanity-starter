@@ -1,4 +1,4 @@
-import { UserRole } from "@/models/typings";
+import { UserRole } from "@/types/authentication";
 import * as z from "zod";
 
 export const SettingsSchema = z

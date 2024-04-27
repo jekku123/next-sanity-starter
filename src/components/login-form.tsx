@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { login } from "@/lib/auth/actions/login";
-import { LoginSchema } from "@/lib/zod/auth";
+import { LoginSchema } from "@/lib/zod/auth-forms";
 import { AlertTriangleIcon, CheckCircleIcon } from "lucide-react";
 import { Input } from "./ui/input";
 

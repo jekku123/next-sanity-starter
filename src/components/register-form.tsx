@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { register } from "@/lib/auth/actions/register";
-import { RegisterSchema } from "@/lib/zod/auth";
+import { RegisterSchema } from "@/lib/zod/auth-forms";
 import { FormError, FormSuccess } from "./login-form";
 import { Button } from "./ui/button";
 

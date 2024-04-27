@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useSearchParams } from "next/navigation";
 
@@ -11,6 +11,7 @@ import { LoaderIcon } from "lucide-react";
 export const NewVerificationForm = () => {
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
+  const effectRan = useRef(false);
 
   const searchParams = useSearchParams();
 
@@ -35,8 +36,13 @@ export const NewVerificationForm = () => {
   }, [token, success, error]);
 
   useEffect(() => {
-    onSubmit();
-  }, []);
+    if (effectRan.current === true || process.env.NODE_ENV !== "development") {
+      onSubmit();
+    }
+    return () => {
+      effectRan.current = true;
+    };
+  }, [onSubmit]);
 
   return (
     <div className="flex w-full items-center justify-center">

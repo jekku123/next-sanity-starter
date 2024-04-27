@@ -3,9 +3,9 @@
 import { getUserByEmail } from "@/lib/auth/data-access/user";
 import { sendVerificationEmail } from "@/lib/auth/utils/mail";
 import { client } from "@/lib/sanity/client";
-import { RegisterSchema } from "@/lib/zod/auth";
+import { RegisterSchema } from "@/lib/zod/auth-forms";
 
-import { UserRole } from "@/models/typings";
+import { UserRole } from "@/types/authentication";
 import { uuid } from "@sanity/uuid";
 import bcrypt from "bcryptjs";
 import * as z from "zod";

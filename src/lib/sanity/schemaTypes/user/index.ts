@@ -1,8 +1,8 @@
 import account from "./account";
-import passwordResetToken from "./passwordResetToken";
+import passwordResetToken from "./password-reset-token";
 import session from "./session";
 import user from "./user";
-import verificationToken from "./verificationToken";
+import verificationToken from "./verification-token";
 
 export const userSchemaTypes = [
   user,
