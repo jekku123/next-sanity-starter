@@ -11,7 +11,6 @@ export default async function FrontPage() {
   const frontpage = await getFrontPage(getPageGroqParams("frontpage"));
   const validatedFrontpage = validateAndCleanupFrontPage(frontpage);
   const user = await currentUser();
-  console.log("CURRENT USER: ", user);
 
   if (!validatedFrontpage) {
     return <div>Frontpage not found</div>;

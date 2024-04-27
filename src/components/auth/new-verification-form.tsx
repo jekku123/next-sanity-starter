@@ -4,9 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useSearchParams } from "next/navigation";
 
-import { FormError, FormSuccess } from "@/components/auth/login-form";
 import { newVerification } from "@/lib/auth/actions/new-verification";
 import { LoaderIcon } from "lucide-react";
+import { FormError } from "../ui/form-error";
+import { FormSuccess } from "../ui/form-success";
 
 export const NewVerificationForm = () => {
   const [error, setError] = useState<string | undefined>();

@@ -1,4 +1,5 @@
 import { deleteTestUser } from "@/lib/auth/actions/delete-test-user";
+import { currentUser } from "@/lib/auth/utils/auth";
 import { urlForImage } from "@/lib/sanity/utils/image";
 import { MenuItem } from "@/lib/zod/menu";
 import { Settings } from "@/lib/zod/settings";
@@ -19,6 +20,8 @@ export default async function Header({
   title: Settings["title"];
   logo: Settings["logo"];
 }) {
+  const user = await currentUser();
+
   return (
     <header className="top-0 z-50 w-full flex-shrink-0 bg-background md:sticky">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
@@ -39,10 +42,17 @@ export default async function Header({
 
         <div className="flex items-center space-x-4">
           <MainMenu menu={menu} />
-          <Link href="auth/login">Login</Link>
-          <Link href="auth/register">Register</Link>
+          {user ? (
+            <LogoutButton>Logout</LogoutButton>
+          ) : (
+            <>
+              <Link href="/auth/login">Login</Link>
+              <Link href="/auth/register">Register</Link>
+            </>
+          )}
+
           <SocialLogin />
-          <LogoutButton>Logout</LogoutButton>
+
           <form action={deleteTestUser}>
             <Button type="submit">Delete Test User</Button>
           </form>

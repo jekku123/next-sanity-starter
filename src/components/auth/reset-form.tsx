@@ -17,7 +17,8 @@ import { Input } from "@/components/ui/input";
 import { reset } from "@/lib/auth/actions/reset";
 import { ResetSchema } from "@/lib/zod/auth-forms";
 import { Button } from "../ui/button";
-import { FormError, FormSuccess } from "./login-form";
+import { FormError } from "../ui/form-error";
+import { FormSuccess } from "../ui/form-success";
 
 export const ResetForm = () => {
   const [error, setError] = useState<string | undefined>("");

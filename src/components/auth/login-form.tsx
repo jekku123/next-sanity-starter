@@ -18,7 +18,8 @@ import {
 } from "@/components/ui/form";
 import { login } from "@/lib/auth/actions/login";
 import { LoginSchema } from "@/lib/zod/auth-forms";
-import { AlertTriangleIcon, CheckCircleIcon } from "lucide-react";
+import { FormError } from "../ui/form-error";
+import { FormSuccess } from "../ui/form-success";
 import { Input } from "../ui/input";
 
 export const LoginForm = () => {
@@ -117,35 +118,5 @@ export const LoginForm = () => {
         </Button>
       </form>
     </Form>
-  );
-};
-
-interface FormErrorProps {
-  message?: string;
-}
-
-export const FormError = ({ message }: FormErrorProps) => {
-  if (!message) return null;
-
-  return (
-    <div className="flex items-center gap-x-2 rounded-md bg-destructive/15 p-3 text-sm text-destructive">
-      <AlertTriangleIcon className="h-4 w-4" />
-      <p>{message}</p>
-    </div>
-  );
-};
-
-interface FormSuccessProps {
-  message?: string;
-}
-
-export const FormSuccess = ({ message }: FormSuccessProps) => {
-  if (!message) return null;
-
-  return (
-    <div className="flex items-center gap-x-2 rounded-md bg-emerald-500/15 p-3 text-sm text-emerald-500">
-      <CheckCircleIcon className="h-4 w-4" />
-      <p>{message}</p>
-    </div>
   );
 };

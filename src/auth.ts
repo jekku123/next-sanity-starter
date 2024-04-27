@@ -21,8 +21,10 @@ export const {
   unstable_update,
 } = NextAuth({
   secret: env.NEXTAUTH_SECRET,
+
   adapter: SanityAdapter(client),
   session: { strategy: "jwt" },
+
   providers: [
     GitHub({
       clientId: env.AUTH_GITHUB_ID,

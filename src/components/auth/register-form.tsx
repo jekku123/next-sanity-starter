@@ -17,7 +17,8 @@ import { Input } from "@/components/ui/input";
 import { register } from "@/lib/auth/actions/register";
 import { RegisterSchema } from "@/lib/zod/auth-forms";
 import { Button } from "../ui/button";
-import { FormError, FormSuccess } from "./login-form";
+import { FormError } from "../ui/form-error";
+import { FormSuccess } from "../ui/form-success";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
