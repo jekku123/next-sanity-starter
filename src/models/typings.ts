@@ -12,8 +12,6 @@ export type User = {
   password: string;
   role: string;
   accounts: Account[];
-  isTwoFactorEnabled: boolean;
-  twoFactorConfirmation: TwoFactorConfirmation;
   sessions: Session[];
 };
 
@@ -55,17 +53,4 @@ export type PasswordResetToken = {
   email: string;
   token: string;
   expires: string;
-};
-
-export type TwoFactorToken = {
-  _id: string;
-  email: string;
-  token: string;
-  expires: string;
-};
-
-export type TwoFactorConfirmation = {
-  _id: string;
-  userId: string;
-  user: User;
 };

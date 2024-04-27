@@ -1,17 +1,13 @@
-import user from './user';
-import session from './session';
-import account from './account';
-import verificationToken from './verificationToken';
-import passwordResetToken from './passwordResetToken';
-import twoFactorToken from './twoFactorToken';
-import twoFactorConfirmation from './twoFactorConfirmation';
+import account from "./account";
+import passwordResetToken from "./passwordResetToken";
+import session from "./session";
+import user from "./user";
+import verificationToken from "./verificationToken";
 
 export const schemaTypes = [
-    user,
-    session,
-    account,
-    verificationToken,
-    passwordResetToken,
-    twoFactorToken,
-    twoFactorConfirmation
-]
+  user,
+  session,
+  account,
+  verificationToken,
+  passwordResetToken,
+];
