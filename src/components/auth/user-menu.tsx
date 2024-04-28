@@ -24,7 +24,7 @@ export const UserMenu = async ({ user }: { user?: User }) => {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40" align="end">
+      <DropdownMenuContent className="w-40" align="center">
         <LogoutButton>
           <DropdownMenuItem>
             <LogOut className="mr-2 h-4 w-4" />

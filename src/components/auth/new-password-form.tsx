@@ -17,9 +17,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { newPassword } from "@/lib/auth/actions/new-password";
 import { NewPasswordSchema } from "@/lib/zod/auth-forms";
+import { FormError } from "../form-error";
+import { FormSuccess } from "../form-success";
 import { Button } from "../ui/button";
-import { FormError } from "../ui/form-error";
-import { FormSuccess } from "../ui/form-success";
 
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams();

@@ -1,7 +1,7 @@
 import { TextImage } from "@/lib/zod/section";
 import BlockContent from "../block-content";
+import { SanityImage } from "../sanity-image";
 import { TypographyH1 } from "../typography";
-import { SanityImage } from "../ui/sanity-image";
 
 export default function TextImageSection({ content }: { content: TextImage }) {
   return (

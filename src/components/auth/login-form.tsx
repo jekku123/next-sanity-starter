@@ -18,8 +18,8 @@ import {
 } from "@/components/ui/form";
 import { login } from "@/lib/auth/actions/login";
 import { LoginSchema } from "@/lib/zod/auth-forms";
-import { FormError } from "../ui/form-error";
-import { FormSuccess } from "../ui/form-success";
+import { FormError } from "../form-error";
+import { FormSuccess } from "../form-success";
 import { Input } from "../ui/input";
 import { SocialLogin } from "./social-login";
 
@@ -64,7 +64,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <>
+    <div className="mx-auto w-full max-w-xs">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
@@ -121,6 +121,6 @@ export const LoginForm = () => {
         </form>
       </Form>
       <SocialLogin />
-    </>
+    </div>
   );
 };

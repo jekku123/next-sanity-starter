@@ -16,6 +16,13 @@ import { schema } from "./src/lib/sanity/schema";
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 // Define the singleton document types
 const singletonTypes = new Set(["frontpage", "settings"]);
+// Define the hidden document types
+const hiddenTypes = new Set([
+  "account",
+  "session",
+  "verificationToken",
+  "passwordResetToken",
+]);
 
 const singletonListItems = (
   S: StructureBuilder,
@@ -32,13 +39,17 @@ const singletonListItems = (
 const defaultListItems = (S: StructureBuilder) => {
   return S.documentTypeListItems().filter((listItem) => {
     const listItemId = listItem.getId();
-    return listItemId && !singletonTypes.has(listItemId);
+    return (
+      listItemId &&
+      !singletonTypes.has(listItemId) &&
+      !hiddenTypes.has(listItemId)
+    );
   });
 };
 
 export default defineConfig({
   basePath: "/studio",
-  title: "Janne's Mökki",
+  title: "My Pagebuilder Studio",
   projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   // Add and edit the content schema in the './sanity/schema' folder

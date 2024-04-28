@@ -1,9 +1,9 @@
 import { Hero } from "@/lib/zod/section";
 import BlockContent from "../block-content";
+import { SanityImage } from "../sanity-image";
+import SanityLink from "../sanity-link";
 import { TypographyH1 } from "../typography";
 import { Button } from "../ui/button";
-import { SanityImage } from "../ui/sanity-image";
-import SanityLink from "../ui/sanity-link";
 export default function HeroSection({ content }: { content: Hero }) {
   return (
     <div className="mx-auto w-full max-w-7xl px-6 py-4">
