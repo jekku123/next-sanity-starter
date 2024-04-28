@@ -121,6 +121,7 @@ export function SanityAdapter(
     },
 
     async linkAccount(account) {
+      console.log("LINKING ACCOUNT: ", account);
       try {
         const createdAccount = await sanityClient.create({
           _type: options.schemas.account,
@@ -170,7 +171,6 @@ export function SanityAdapter(
           account.userId,
         );
 
-        // Filter out the user account to be deleted
         const updatedUserAccounts = (accountUser?.accounts || []).filter(
           (ac) => ac._ref !== account._id,
         );
@@ -188,6 +188,7 @@ export function SanityAdapter(
     },
 
     async createSession(session) {
+      console.log("CREATING SESSION: ", session);
       try {
         await sanityClient.create({
           _type: "session",
@@ -203,6 +204,7 @@ export function SanityAdapter(
         throw new Error("Error Creating Session");
       }
     },
+
     async getSessionAndUser(
       sessionToken: string,
     ): Promise<{ session: AdapterSession; user: AdapterUser } | null> {
@@ -223,6 +225,7 @@ export function SanityAdapter(
         throw new Error("Operation Failed");
       }
     },
+
     async updateSession({ sessionToken }) {
       try {
         const session_qry = `*[_type == "session" && sessionToken == "${sessionToken}"][0]`;
@@ -240,6 +243,7 @@ export function SanityAdapter(
         throw new Error("Operation Failed");
       }
     },
+
     async deleteSession(sessionToken) {
       try {
         const session_qry = `*[_type == "session" && sessionToken == "${sessionToken}"][0]`;
@@ -252,6 +256,7 @@ export function SanityAdapter(
         throw new Error("Operation Failed");
       }
     },
+
     async createVerificationToken({ identifier, expires, token }) {
       const verificationToken = await sanityClient.create({
         _type: options.schemas.verificationToken,
@@ -262,6 +267,7 @@ export function SanityAdapter(
 
       return verificationToken;
     },
+
     async useVerificationToken({ identifier, token }) {
       const verToken_qry = `*[_type == "verificationToken" && identifier == "${identifier}" && token == "${token}"][0]`;
       const verToken = await sanityClient.fetch(verToken_qry);

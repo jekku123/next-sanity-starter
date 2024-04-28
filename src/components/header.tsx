@@ -25,13 +25,14 @@ export default async function Header({
         <SiteTitle title={title} logo={logo} />
         <MainMenu menu={menu} />
         <div className="flex items-center space-x-4">
-          {!user && (
+          {!user ? (
             <>
               <Link href="/auth/login">Login</Link>
               <Link href="/auth/register">Register</Link>
             </>
+          ) : (
+            <UserMenu user={user} />
           )}
-          <UserMenu user={user} />
           <ModeToggle />
         </div>
       </nav>

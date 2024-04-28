@@ -12,7 +12,7 @@ export const publicRoutes: string[] = [
  * An array of routes that are protected
  * These routes require authentication and will redirect unauthenticated users to /auth/login
  */
-export const protectedRoutes: string[] = ["/about"];
+export const protectedRoutes: string[] = ["/protected"];
 
 /**
  * An array of routes that are used for authentication

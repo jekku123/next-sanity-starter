@@ -4,15 +4,15 @@ import { useCurrentRole } from "@/hooks/use-current-role";
 import { UserRole } from "@/types/authentication";
 import { FormError } from "../form-error";
 
-interface RoleGateProps {
+interface AuthGateProps {
   children: React.ReactNode;
-  allowedRole: UserRole;
+  allowedRoles: UserRole[];
 }
 
-export const RoleGate = ({ children, allowedRole }: RoleGateProps) => {
+export const AuthGate = ({ children, allowedRoles }: AuthGateProps) => {
   const role = useCurrentRole();
 
-  if (role !== allowedRole) {
+  if (!role || !allowedRoles.includes(role)) {
     return (
       <FormError message="You do not have permission to view this content!" />
     );

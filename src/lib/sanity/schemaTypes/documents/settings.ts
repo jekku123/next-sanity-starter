@@ -1,17 +1,12 @@
+import { CogIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
   name: "settings",
   title: "Settings",
   type: "document",
+  icon: CogIcon,
   fields: [
-    // defineField({
-    //   name: "title",
-    //   title: "Site Title",
-    //   description: "The title of the site",
-    //   type: "string",
-    //   validation: (rule) => rule.required(),
-    // }),
     {
       name: "title",
       title: "Site Title",

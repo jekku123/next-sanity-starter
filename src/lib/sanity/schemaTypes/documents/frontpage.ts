@@ -1,9 +1,11 @@
+import { HomeIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
 
 export default defineType({
   name: "frontpage",
   title: "Frontpage",
   type: "document",
+  icon: HomeIcon,
   fields: [
     defineField({
       name: "title",
