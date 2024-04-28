@@ -24,6 +24,7 @@ export const {
 
   adapter: SanityAdapter(client),
   session: { strategy: "jwt" },
+  trustHost: true, // Required to run CI e2e tests with cypress
 
   providers: [
     GitHub({
