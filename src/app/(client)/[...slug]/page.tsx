@@ -3,27 +3,26 @@ import Page from "@/components/page";
 import {
   getResourceBySlugTypeAndParams,
   getResourceTypeBySlug,
-  getStaticPathsByType,
+  getSlugsByType,
 } from "@/lib/sanity/client";
-import getPageGroqParams, {
+import getResourceGroqParams, {
   ResourceType,
-} from "@/lib/sanity/get-page-groq-params";
+} from "@/lib/sanity/get-resource-groq-params";
 import { getDynamicMetadata } from "@/lib/sanity/utils/get-metadata";
 
 import { validateAndCleanupArticle } from "@/lib/zod/article";
 import { validateAndCleanupPage } from "@/lib/zod/page";
 import { Metadata, ResolvingMetadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 // Add the types of the resources you want to generate static pages for
 const pageTypes = ["page", "article"];
 
 export async function generateStaticParams() {
-  const paths = await Promise.all(
-    pageTypes.map((type) => getStaticPathsByType(type)),
+  const slugs = await Promise.all(
+    pageTypes.map((type) => getSlugsByType(type)),
   );
-
-  const flattedParams = paths
+  const flattedParams = slugs
     .flat()
     .map((path) => path.slug.current.split("/"));
 
@@ -39,36 +38,32 @@ export async function generateMetadata(
   const path = params.slug.join("/");
   const metadata = await getDynamicMetadata(path);
   return {
-    ...metadata,
+    title: metadata.title,
+    description: metadata.description,
   };
 }
 
 export default async function CustomPage({
-  params: { slug },
+  params,
 }: {
   params: { slug: string[] };
 }) {
   // join the slug array to a string with slashes (e.g. ["articles", "article-1"] => "articles/article-1")
-  const path = `${slug.join("/")}`;
+  const slug = `${params.slug.join("/")}`;
 
-  // get the type of the resource with the given slug (e.g. "frontpage", "page", "article"..)
-  const type: ResourceType = await getResourceTypeBySlug(path);
+  // get the type of the resource with the given slug (e.g. "page", "article"..)
+  const type: ResourceType = await getResourceTypeBySlug(slug);
 
   // if the type is not found then there is no resource with the given slug and we return a 404
   if (!type) {
     return notFound();
   }
 
-  // if the type is "frontpage" then we redirect to the frontpage
-  if (type === "frontpage") {
-    return redirect("/");
-  }
-
-  // get the resource with the given path, type and get the params for the query using the getPageParams function
+  // get the resource with the given slug, type and get the params for the query using the getPageParams function
   const resource = await getResourceBySlugTypeAndParams(
-    path,
+    slug,
     type,
-    getPageGroqParams(type),
+    getResourceGroqParams(type),
   );
 
   // validate and cleanup the resource based on the type

@@ -1,16 +1,14 @@
 import Section from "@/components/sections";
-import { currentUser } from "@/lib/auth/utils/auth";
 import { getFrontPage } from "@/lib/sanity/client";
-import getPageGroqParams from "@/lib/sanity/get-page-groq-params";
+import getResourceGroqParams from "@/lib/sanity/get-resource-groq-params";
 
 import { validateAndCleanupFrontPage } from "@/lib/zod/frontpage";
 
 export const revalidate = 60;
 
 export default async function FrontPage() {
-  const frontpage = await getFrontPage(getPageGroqParams("frontpage"));
+  const frontpage = await getFrontPage(getResourceGroqParams("frontpage"));
   const validatedFrontpage = validateAndCleanupFrontPage(frontpage);
-  const user = await currentUser();
 
   if (!validatedFrontpage) {
     return <div>Frontpage not found</div>;

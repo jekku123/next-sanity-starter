@@ -1,7 +1,6 @@
 import { getMetadataBySlug, getSettings } from "@/lib/sanity/client";
-import { Metadata } from "next";
 
-export async function getDynamicMetadata(path: string): Promise<Metadata> {
+export async function getDynamicMetadata(path: string) {
   const [metadata, settings] = await Promise.all([
     getMetadataBySlug(path),
     getSettings(),
@@ -9,6 +8,6 @@ export async function getDynamicMetadata(path: string): Promise<Metadata> {
 
   return {
     title: `${metadata?.title} | ${settings?.title.text}`,
-    description: metadata?.description,
+    description: `${metadata?.description}`,
   };
 }
