@@ -5,6 +5,7 @@ import frontpage from "./schemaTypes/documents/frontpage";
 import navigation from "./schemaTypes/documents/navigation";
 import page from "./schemaTypes/documents/page";
 import settings from "./schemaTypes/documents/settings";
+import submissions from "./schemaTypes/documents/submissions";
 import link from "./schemaTypes/objects/link";
 import navItem from "./schemaTypes/objects/nav-item";
 import articlesListing from "./schemaTypes/sections/articles-listing";
@@ -26,6 +27,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     article,
     articlesListing,
     navItem,
+    submissions,
     ...userSchemaTypes,
   ],
 };

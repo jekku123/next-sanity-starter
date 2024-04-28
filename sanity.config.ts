@@ -18,9 +18,9 @@ const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 const singletonTypes = new Set(["frontpage", "settings"]);
 // Define the hidden document types
 const hiddenTypes = new Set([
-  // "account",
-  // "session",
-  // "verificationToken",
+  "account",
+  "session",
+  "verificationToken",
   "passwordResetToken",
 ]);
 
@@ -69,7 +69,6 @@ export default defineConfig({
   plugins: [
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({ defaultApiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION }),
     structureTool({
       structure: (S) =>
         S.list()
@@ -83,5 +82,6 @@ export default defineConfig({
             ...defaultListItems(S),
           ]),
     }),
+    visionTool({ defaultApiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION }),
   ],
 });

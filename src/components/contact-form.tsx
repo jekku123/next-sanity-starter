@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { sendContactFormAction } from "@/lib/sanity/actions/contact";
 import { ContactSchema } from "@/lib/zod/contact-form";
 import { UserRole } from "@/types/authentication";
 import { AuthGate } from "./auth/auth-gate";
@@ -38,24 +39,22 @@ export const ContactForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof ContactSchema>) => {
-    console.log(values);
-    // setError("");
-    // setSuccess("");
+    setError("");
+    setSuccess("");
 
-    // startTransition(() => {
-    //     login(values)
-    //       .then((data) => {
-    //         if (data?.error) {
-    //           form.reset();
-    //           setError(data.error);
-    //         }
-    //         if (data?.success) {
-    //           form.reset();
-    //           setSuccess(data.success);
-    //         }
-    //       })
-    //       .catch(() => setError("Something went wrong"));
-    // });
+    startTransition(() => {
+      sendContactFormAction(values)
+        .then((data) => {
+          if (data?.error) {
+            setError(data.error);
+          }
+          if (data?.success) {
+            form.reset();
+            setSuccess(data.success);
+          }
+        })
+        .catch(() => setError("Something went wrong"));
+    });
   };
 
   return (
