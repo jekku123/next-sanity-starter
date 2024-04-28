@@ -18,7 +18,7 @@ export const SocialLogin = () => {
   };
 
   return (
-    <div className="flex w-full items-center gap-x-2">
+    <div className="flex items-center gap-x-2">
       <Button
         size="lg"
         className="w-full"
