@@ -1,0 +1,2 @@
+echo "\nRunning Cypress tests\n"
+npm run cypress:run
