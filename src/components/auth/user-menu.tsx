@@ -13,7 +13,7 @@ import { User } from "next-auth";
 export const UserMenu = async ({ user }: { user: User }) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger data-test-id="user-menu-button">
         <Avatar>
           <AvatarImage src={user.image || ""} />
           <AvatarFallback>
