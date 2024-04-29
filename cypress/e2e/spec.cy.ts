@@ -30,7 +30,7 @@ describe("Navigation tests", () => {
     cy.url().should("include", "about");
     cy.get("h1").contains("Test");
     cy.get('[data-test-id="/"]').click();
-    cy.url().should("eq", "//");
+    cy.url().should("eq", "localhost:3000/");
   });
 
   it("Visit articles page, test teaser link to navigate to single article and come back using previous page button", () => {
