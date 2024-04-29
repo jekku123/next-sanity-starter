@@ -12,9 +12,9 @@ export default function Article({ article }: { article: ArticleType }) {
     <article className="mx-auto w-full max-w-7xl px-6 py-4">
       <div className="grid gap-6">
         <PreviousPageButton variant="outline" />
-        <SanityImage image={article.image} className="rounded-xl" />
         <TypographyH1>{article.title}</TypographyH1>
         <TypographySmall>{date}</TypographySmall>
+        <SanityImage image={article.image} className="rounded-xl" />
         <BlockContent content={article.body} />
       </div>
     </article>

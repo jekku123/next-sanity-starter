@@ -20,7 +20,6 @@ export const SocialLogin = () => {
   return (
     <div className="flex w-full items-center gap-x-2">
       <Button
-        size="lg"
         className="w-full"
         variant="outline"
         onClick={() => onClick("google")}
@@ -28,7 +27,6 @@ export const SocialLogin = () => {
         <Icons.google className="h-5 w-5" />
       </Button>
       <Button
-        size="lg"
         className="w-full"
         variant="outline"
         onClick={() => onClick("github")}

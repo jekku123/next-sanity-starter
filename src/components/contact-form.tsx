@@ -21,9 +21,16 @@ import { UserRole } from "@/types/authentication";
 import { AuthGate } from "./auth/auth-gate";
 import { FormError } from "./form-error";
 import { FormSuccess } from "./form-success";
-import { TypographyH2 } from "./typography";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export const ContactForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -60,75 +67,83 @@ export const ContactForm = () => {
 
   return (
     <AuthGate allowedRoles={[UserRole.USER]}>
-      <TypographyH2 className="mb-4">Contact Us</TypographyH2>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6"
-          data-test-id="contact-form"
-        >
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="John Doe"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="john@doe.com"
-                      type="email"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Message</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      className="resize-none"
-                      {...field}
-                      disabled={isPending}
-                      placeholder="This is my message"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit" className="w-full">
-            Send
-          </Button>
-        </form>
-      </Form>
+      <Card className="mx-auto w-full max-w-sm">
+        <CardHeader className="space-y-2 text-center">
+          <CardTitle className="text-2xl">Contact Us</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          {" "}
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-6"
+              data-test-id="contact-form"
+            >
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          placeholder="John Doe"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          placeholder="john@doe.com"
+                          type="email"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          className="resize-none"
+                          {...field}
+                          disabled={isPending}
+                          placeholder="This is my message"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <FormError message={error} />
+              <FormSuccess message={success} />
+              <Button disabled={isPending} type="submit" className="w-full">
+                Send
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+        <CardFooter></CardFooter>
+      </Card>
     </AuthGate>
   );
 };

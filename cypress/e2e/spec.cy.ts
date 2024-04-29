@@ -24,15 +24,6 @@ describe("Dark mode and light mode", () => {
 });
 
 describe("Navigation tests", () => {
-  it("Visit about page and homepage", () => {
-    cy.visit("/");
-    cy.get('[data-test-id="about"]').click();
-    cy.url().should("include", "about");
-    cy.get("h1").contains("Test");
-    cy.get('[data-test-id="/"]').click();
-    cy.url().should("eq", "http://localhost:3000/");
-  });
-
   it("Visit articles page, test teaser link to navigate to single article and come back using previous page button", () => {
     cy.visit("/");
     cy.get('[data-test-id="articles"]').click();

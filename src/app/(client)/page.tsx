@@ -17,7 +17,7 @@ export default async function FrontPage() {
 
   return (
     <>
-      <div className="grid gap-12">
+      <div className="grid gap-20">
         {validatedFrontpage.content.map((section) => (
           <Section key={section._key} section={section} />
         ))}
