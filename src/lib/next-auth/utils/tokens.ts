@@ -1,5 +1,5 @@
-import { getPasswordResetTokenByEmail } from "@/lib/auth/data-access/password-reset-token";
-import { getVerificationTokenByEmail } from "@/lib/auth/data-access/verification-token";
+import { getPasswordResetTokenByEmail } from "@/lib/next-auth/data-access/password-reset-token";
+import { getVerificationTokenByEmail } from "@/lib/next-auth/data-access/verification-token";
 import { client } from "../../sanity/client";
 
 import { uuid } from "@sanity/uuid";

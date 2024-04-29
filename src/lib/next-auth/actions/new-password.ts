@@ -3,8 +3,8 @@
 import bcrypt from "bcryptjs";
 import * as z from "zod";
 
-import { getPasswordResetTokenByToken } from "@/lib/auth/data-access/password-reset-token";
-import { getUserByEmail } from "@/lib/auth/data-access/user";
+import { getPasswordResetTokenByToken } from "@/lib/next-auth/data-access/password-reset-token";
+import { getUserByEmail } from "@/lib/next-auth/data-access/user";
 import { client } from "@/lib/sanity/client";
 import { NewPasswordSchema } from "@/lib/zod/auth-forms";
 

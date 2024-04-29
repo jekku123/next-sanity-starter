@@ -4,8 +4,8 @@ import bcrypt from "bcryptjs";
 import * as z from "zod";
 
 import { unstable_update } from "@/auth";
-import { getUserByEmail, getUserById } from "@/lib/auth/data-access/user";
-import { sendVerificationEmail } from "@/lib/auth/utils/mail";
+import { getUserByEmail, getUserById } from "@/lib/next-auth/data-access/user";
+import { sendVerificationEmail } from "@/lib/next-auth/utils/mail";
 import { client } from "@/lib/sanity/client";
 import { SettingsSchema } from "@/lib/zod/auth-forms";
 import { currentUser } from "../utils/auth";

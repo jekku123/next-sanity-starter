@@ -1,4 +1,4 @@
-import { currentUser } from "@/lib/auth/utils/auth";
+import { currentUser } from "@/lib/next-auth/utils/auth";
 import { urlForImage } from "@/lib/sanity/utils/image";
 import { MenuItem } from "@/lib/zod/menu";
 import { Settings } from "@/lib/zod/settings";

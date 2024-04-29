@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { reset } from "@/lib/auth/actions/reset";
+import { reset } from "@/lib/next-auth/actions/reset";
 import { ResetSchema } from "@/lib/zod/auth-forms";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";

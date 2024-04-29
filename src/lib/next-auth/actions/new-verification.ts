@@ -1,7 +1,7 @@
 "use server";
 
-import { getUserByEmail } from "@/lib/auth/data-access/user";
-import { getVerificationTokenByToken } from "@/lib/auth/data-access/verification-token";
+import { getUserByEmail } from "@/lib/next-auth/data-access/user";
+import { getVerificationTokenByToken } from "@/lib/next-auth/data-access/verification-token";
 import { client } from "@/lib/sanity/client";
 
 export const newVerification = async (token: string) => {

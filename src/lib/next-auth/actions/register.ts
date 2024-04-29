@@ -1,7 +1,7 @@
 "use server";
 
-import { getUserByEmail } from "@/lib/auth/data-access/user";
-import { sendVerificationEmail } from "@/lib/auth/utils/mail";
+import { getUserByEmail } from "@/lib/next-auth/data-access/user";
+import { sendVerificationEmail } from "@/lib/next-auth/utils/mail";
 import { client } from "@/lib/sanity/client";
 import { RegisterSchema } from "@/lib/zod/auth-forms";
 

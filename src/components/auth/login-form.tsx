@@ -16,7 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { login } from "@/lib/auth/actions/login";
+import { login } from "@/lib/next-auth/actions/login";
 import { LoginSchema } from "@/lib/zod/auth-forms";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";

@@ -5,7 +5,6 @@ import {
   apiAuthPrefix,
   authRoutes,
   protectedRoutes,
-  publicRoutes,
 } from "@/routes";
 
 export default auth((req) => {
@@ -13,7 +12,6 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
 
@@ -25,10 +23,6 @@ export default auth((req) => {
     return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
   }
 
-  // if (!isLoggedIn && !isPublicRoute) {
-  //   return Response.redirect(new URL(DEFAULT_LOGIN_PATH, nextUrl));
-  // }
-
   if (isProtectedRoute && !isLoggedIn) {
     return Response.redirect(new URL(DEFAULT_LOGIN_PATH, nextUrl));
   }
@@ -39,12 +33,3 @@ export default auth((req) => {
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
-
-// import NextAuth from "next-auth";
-// import { authConfig } from "./auth.config";
-
-// export default NextAuth(authConfig).auth;
-
-// export const config = {
-//   matcher: ["/((?!api|static|.*\\..*|_next).*)"],
-// };

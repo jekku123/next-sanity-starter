@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { newPassword } from "@/lib/auth/actions/new-password";
+import { newPassword } from "@/lib/next-auth/actions/new-password";
 import { NewPasswordSchema } from "@/lib/zod/auth-forms";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";

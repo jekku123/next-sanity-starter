@@ -5,9 +5,9 @@ import { env } from "@/env";
 import bcrypt from "bcryptjs";
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
-import { getAccountByUserId } from "./lib/auth/data-access/account";
-import { getUserById } from "./lib/auth/data-access/user";
-import { SanityAdapter } from "./lib/auth/sanity-adapter";
+import { getAccountByUserId } from "./lib/next-auth/data-access/account";
+import { getUserById } from "./lib/next-auth/data-access/user";
+import { SanityAdapter } from "./lib/next-auth/sanity-adapter";
 import { LoginSchema } from "./lib/zod/auth-forms";
 import { UserRole } from "./types/authentication";
 

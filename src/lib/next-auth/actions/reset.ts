@@ -2,8 +2,8 @@
 
 import * as z from "zod";
 
-import { getUserByEmail } from "@/lib/auth/data-access/user";
-import { sendPasswordResetEmail } from "@/lib/auth/utils/mail";
+import { getUserByEmail } from "@/lib/next-auth/data-access/user";
+import { sendPasswordResetEmail } from "@/lib/next-auth/utils/mail";
 import { ResetSchema } from "@/lib/zod/auth-forms";
 import { generatePasswordResetToken } from "../utils/tokens";
 

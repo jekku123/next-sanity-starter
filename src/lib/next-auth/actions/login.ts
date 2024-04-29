@@ -5,11 +5,11 @@ import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
 import * as z from "zod";
 
-import { getUserByEmail } from "@/lib/auth/data-access/user";
+import { getUserByEmail } from "@/lib/next-auth/data-access/user";
 
-import { sendVerificationEmail } from "@/lib/auth/utils/mail";
+import { sendVerificationEmail } from "@/lib/next-auth/utils/mail";
 
-import { generateVerificationToken } from "@/lib/auth/utils/tokens";
+import { generateVerificationToken } from "@/lib/next-auth/utils/tokens";
 import { LoginSchema } from "@/lib/zod/auth-forms";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
