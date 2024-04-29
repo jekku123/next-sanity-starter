@@ -46,11 +46,10 @@ export const LoginForm = () => {
     setError("");
     setSuccess("");
 
-    startTransition(() => {
+    startTransition(async () => {
       login(values)
         .then((data) => {
           if (data?.error) {
-            form.reset();
             setError(data.error);
           }
 
@@ -66,7 +65,11 @@ export const LoginForm = () => {
   return (
     <div className="mx-auto w-full max-w-xs">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-6"
+          data-test-id="login-form"
+        >
           <div className="space-y-4">
             <FormField
               control={form.control}
@@ -80,6 +83,7 @@ export const LoginForm = () => {
                       disabled={isPending}
                       placeholder="john.doe@example.com"
                       type="email"
+                      data-test-id="login-form-email"
                     />
                   </FormControl>
                   <FormMessage />
@@ -98,6 +102,7 @@ export const LoginForm = () => {
                       disabled={isPending}
                       placeholder="******"
                       type="password"
+                      data-test-id="login-form-password"
                     />
                   </FormControl>
                   <Button
@@ -106,7 +111,12 @@ export const LoginForm = () => {
                     asChild
                     className="px-0 font-normal"
                   >
-                    <Link href="/auth/reset">Forgot password?</Link>
+                    <Link
+                      href="/auth/reset"
+                      data-test-id="login-form-forgot-password"
+                    >
+                      Forgot password?
+                    </Link>
                   </Button>
                   <FormMessage />
                 </FormItem>
@@ -115,7 +125,12 @@ export const LoginForm = () => {
           </div>
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit" className="w-full">
+          <Button
+            disabled={isPending}
+            type="submit"
+            className="w-full"
+            data-test-id="login-form-login-button"
+          >
             Login
           </Button>
         </form>

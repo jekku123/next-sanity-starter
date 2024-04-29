@@ -12,7 +12,12 @@ export const LogoutButton = ({ children }: LogoutButtonProps) => {
   };
 
   return (
-    <span onClick={onClick} className="cursor-pointer">
+    <span
+      onClick={onClick}
+      className="cursor-pointer"
+      data-test-id="logout-button"
+      aria-label="Logout button"
+    >
       {children}
     </span>
   );

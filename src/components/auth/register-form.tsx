@@ -49,7 +49,11 @@ export const RegisterForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6"
+        data-test-id="register-form"
+      >
         <div className="space-y-4">
           <FormField
             control={form.control}
@@ -62,6 +66,7 @@ export const RegisterForm = () => {
                     {...field}
                     disabled={isPending}
                     placeholder="John Doe"
+                    data-test-id="register-form-name"
                   />
                 </FormControl>
                 <FormMessage />
@@ -80,6 +85,7 @@ export const RegisterForm = () => {
                     disabled={isPending}
                     placeholder="john.doe@example.com"
                     type="email"
+                    data-test-id="register-form-email"
                   />
                 </FormControl>
                 <FormMessage />
@@ -98,6 +104,7 @@ export const RegisterForm = () => {
                     disabled={isPending}
                     placeholder="******"
                     type="password"
+                    data-test-id="register-form-password"
                   />
                 </FormControl>
                 <FormMessage />
@@ -116,6 +123,7 @@ export const RegisterForm = () => {
                     disabled={isPending}
                     placeholder="******"
                     type="password"
+                    data-test-id="register-form-confirm-password"
                   />
                 </FormControl>
                 <FormMessage />
@@ -123,9 +131,14 @@ export const RegisterForm = () => {
             )}
           />
         </div>
-        <FormError message={error} />
-        <FormSuccess message={success} />
-        <Button disabled={isPending} type="submit" className="w-full">
+        <FormError message={error} data-test-id="register-form-error" />
+        <FormSuccess message={success} data-test-id="register-form-success" />
+        <Button
+          disabled={isPending}
+          type="submit"
+          className="w-full"
+          data-test-id="register-form-submit"
+        >
           Create an account
         </Button>
       </form>
