@@ -21,6 +21,7 @@ import { UserRole } from "@/types/authentication";
 import { AuthGate } from "./auth/auth-gate";
 import { FormError } from "./form-error";
 import { FormSuccess } from "./form-success";
+import { TypographyH2 } from "./typography";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 
@@ -59,6 +60,7 @@ export const ContactForm = () => {
 
   return (
     <AuthGate allowedRoles={[UserRole.USER]}>
+      <TypographyH2 className="mb-4">Contact Us</TypographyH2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
@@ -105,6 +107,7 @@ export const ContactForm = () => {
                   <FormLabel>Message</FormLabel>
                   <FormControl>
                     <Textarea
+                      className="resize-none"
                       {...field}
                       disabled={isPending}
                       placeholder="This is my message"

@@ -121,7 +121,6 @@ export function SanityAdapter(
     },
 
     async linkAccount(account) {
-      console.log("LINKING ACCOUNT: ", account);
       try {
         const createdAccount = await sanityClient.create({
           _type: options.schemas.account,
@@ -188,7 +187,6 @@ export function SanityAdapter(
     },
 
     async createSession(session) {
-      console.log("CREATING SESSION: ", session);
       try {
         await sanityClient.create({
           _type: "session",

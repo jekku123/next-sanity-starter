@@ -1,15 +1,15 @@
 import NextAuth from "next-auth";
-import { client } from "./lib/sanity/client";
+import { client } from "../../sanity/client";
 
 import { env } from "@/env";
 import bcrypt from "bcryptjs";
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
-import { getAccountByUserId } from "./lib/auth/data-access/account";
-import { getUserById } from "./lib/auth/data-access/user";
-import { SanityAdapter } from "./lib/auth/sanity-adapter";
-import { LoginSchema } from "./lib/zod/auth-forms";
-import { UserRole } from "./types/authentication";
+import { UserRole } from "../../../types/authentication";
+import { LoginSchema } from "../../zod/auth-forms";
+import { getAccountByUserId } from "../data-access/account";
+import { getUserById } from "../data-access/user";
+import { SanityAdapter } from "../sanity-adapter";
 
 export const {
   handlers: { GET, POST },

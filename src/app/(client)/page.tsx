@@ -16,11 +16,15 @@ export default async function FrontPage() {
   }
 
   return (
-    <div className="grid gap-6">
-      {validatedFrontpage.content.map((section) => (
-        <Section key={section._key} section={section} />
-      ))}
-      <ContactForm />
-    </div>
+    <>
+      <div className="grid gap-12">
+        {validatedFrontpage.content.map((section) => (
+          <Section key={section._key} section={section} />
+        ))}
+        <div className="mx-auto w-full max-w-md">
+          <ContactForm />
+        </div>
+      </div>
+    </>
   );
 }
