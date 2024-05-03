@@ -3,7 +3,7 @@
 import bcrypt from "bcryptjs";
 import * as z from "zod";
 
-import { unstable_update } from "@/auth";
+import { unstable_update } from "@/lib/next-auth/auth";
 import { getUserByEmail, getUserById } from "@/lib/next-auth/data-access/user";
 import { sendVerificationEmail } from "@/lib/next-auth/utils/mail";
 import { client } from "@/lib/sanity/client";

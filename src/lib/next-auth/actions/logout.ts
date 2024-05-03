@@ -1,7 +1,7 @@
 "use server";
 
-import { signOut } from "@/auth";
+import { signOut } from "@/lib/next-auth/auth";
 
 export const logout = async () => {
-    await signOut();
-}
+  await signOut();
+};

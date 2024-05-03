@@ -7,8 +7,8 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-import { auth } from "@/auth";
 import { ThemeProvider } from "@/components/theme-provider";
+import { auth } from "@/lib/next-auth/auth";
 import { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 

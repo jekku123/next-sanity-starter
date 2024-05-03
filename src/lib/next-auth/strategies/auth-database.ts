@@ -1,11 +1,12 @@
 import NextAuth from "next-auth";
-import { client } from "../../sanity/client";
+import GitHub from "next-auth/providers/github";
 
 import { env } from "@/env";
-import GitHub from "next-auth/providers/github";
-import { UserRole } from "../../../types/authentication";
-import { getUserById } from "../data-access/user";
-import { SanityAdapter } from "../sanity-adapter";
+import { getAccountByUserId } from "@/lib/next-auth/data-access/account";
+import { getUserById } from "@/lib/next-auth/data-access/user";
+import { SanityAdapter } from "@/lib/next-auth/sanity-adapter";
+import { client } from "@/lib/sanity/client";
+import { UserRole } from "@/types/authentication";
 
 export const {
   handlers: { GET, POST },
@@ -55,6 +56,23 @@ export const {
       }
 
       return session;
+    },
+
+    async jwt({ token }) {
+      if (!token.sub) return token;
+
+      const existingUser = await getUserById(token.sub);
+
+      if (!existingUser) return token;
+
+      const existingAccount = await getAccountByUserId(existingUser._id);
+
+      token.isOAuth = !!existingAccount;
+      token.name = existingUser.name;
+      token.email = existingUser.email;
+      token.role = existingUser.role;
+
+      return token;
     },
   },
 });

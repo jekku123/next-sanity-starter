@@ -1,15 +1,15 @@
-import NextAuth from "next-auth";
-import { client } from "../../sanity/client";
-
-import { env } from "@/env";
 import bcrypt from "bcryptjs";
+import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
-import { UserRole } from "../../../types/authentication";
-import { LoginSchema } from "../../zod/auth-forms";
-import { getAccountByUserId } from "../data-access/account";
-import { getUserById } from "../data-access/user";
-import { SanityAdapter } from "../sanity-adapter";
+
+import { env } from "@/env";
+import { getAccountByUserId } from "@/lib/next-auth/data-access/account";
+import { getUserById } from "@/lib/next-auth/data-access/user";
+import { SanityAdapter } from "@/lib/next-auth/sanity-adapter";
+import { client } from "@/lib/sanity/client";
+import { LoginSchema } from "@/lib/zod/auth-forms";
+import { UserRole } from "@/types/authentication";
 
 export const {
   handlers: { GET, POST },
@@ -19,11 +19,13 @@ export const {
   unstable_update,
 } = NextAuth({
   trustHost: true, // Required to run CI e2e tests with cypress
+  secret: env.NEXTAUTH_SECRET,
   pages: {
     signIn: "auth/login",
     error: "auth/error",
   },
-  secret: env.NEXTAUTH_SECRET,
+  adapter: SanityAdapter(client),
+  session: { strategy: "jwt" },
 
   providers: [
     GitHub({
@@ -57,9 +59,6 @@ export const {
       },
     }),
   ],
-
-  adapter: SanityAdapter(client),
-  session: { strategy: "jwt" },
 
   callbacks: {
     async signIn({ user, account }) {

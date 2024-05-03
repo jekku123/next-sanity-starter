@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/next-auth/auth";
 import {
   DEFAULT_LOGIN_PATH,
   DEFAULT_LOGIN_REDIRECT,
