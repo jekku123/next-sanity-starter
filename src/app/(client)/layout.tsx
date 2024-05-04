@@ -7,6 +7,7 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+import { ScrollTop } from "@/components/scroll-top";
 import { ThemeProvider } from "@/components/theme-provider";
 import { auth } from "@/lib/next-auth/auth";
 import { Metadata } from "next";
@@ -49,6 +50,7 @@ export default async function RootLayout({
               </main>
               <Footer menu={menus.footer} />
             </div>
+            <ScrollTop />
           </ThemeProvider>
         </body>
       </html>

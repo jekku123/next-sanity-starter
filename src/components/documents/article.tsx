@@ -1,22 +1,38 @@
-import { formatDateFull } from "@/lib/utils";
+import { formatDate, formatDateFull } from "@/lib/utils";
 import { Article as ArticleType } from "@/lib/zod/article";
 import BlockContent from "../block-content";
 import { SanityImage } from "../sanity-image";
-import { TypographyH1, TypographySmall } from "../typography";
+import { TypographyMuted, TypographySmall } from "../typography";
 import { PreviousPageButton } from "../ui/previous-page-button";
 
 export default function Article({ article }: { article: ArticleType }) {
   const date = formatDateFull(article._createdAt);
+  const updated = article._updatedAt ? formatDate(article._updatedAt) : null;
 
   return (
-    <article className="mx-auto w-full max-w-7xl px-6 py-4">
-      <div className="grid gap-6">
-        <PreviousPageButton variant="outline" />
-        <TypographyH1>{article.title}</TypographyH1>
-        <TypographySmall>{date}</TypographySmall>
-        <SanityImage image={article.image} className="rounded-xl" />
-        <BlockContent content={article.body} />
+    <article className="mx-auto w-full max-w-5xl px-6 py-4">
+      <SanityImage
+        image={article.image}
+        className="h-[420px] w-full rounded-xl"
+      />
+
+      <div className="flex items-center gap-4">
+        <TypographySmall>
+          Published: <span className="underline">{date}</span>
+        </TypographySmall>
+        {updated && (
+          <TypographyMuted>
+            Updated: <span className="underline">{updated}</span>
+          </TypographyMuted>
+        )}
       </div>
+      <TypographyMuted className="pt-2 uppercase text-muted-foreground">
+        {article.tags.map((tag) => tag).join(" / ")}
+      </TypographyMuted>
+
+      <BlockContent className="mt-9" content={article.body} />
+
+      <PreviousPageButton className="mt-9" variant="outline" />
     </article>
   );
 }

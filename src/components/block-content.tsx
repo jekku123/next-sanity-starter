@@ -27,7 +27,9 @@ export default async function BlockContent({
 }: BlockContentProps) {
   const components = {
     block: {
-      h1: ({ children }: any) => <TypographyH1>{children}</TypographyH1>,
+      h1: ({ children }: any) => (
+        <TypographyH1 className="mb-6">{children}</TypographyH1>
+      ),
       h2: ({ children }: any) => <TypographyH2>{children}</TypographyH2>,
       h3: ({ children }: any) => <TypographyH3>{children}</TypographyH3>,
       h4: ({ children }: any) => <TypographyH4>{children}</TypographyH4>,

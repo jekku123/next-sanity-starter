@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 import { SanityDocument } from "next-sanity";
-import { BlockSchema } from "./block";
 import { ImageSchema } from "./image";
 
 export const ArticleBaseSchema = z.object({
@@ -15,7 +14,8 @@ export const ArticleBaseSchema = z.object({
 });
 
 const ArticleSchema = ArticleBaseSchema.extend({
-  body: BlockSchema,
+  _updatedAt: z.string().optional().nullable(),
+  body: z.any(),
 });
 
 export function validateAndCleanupArticle(

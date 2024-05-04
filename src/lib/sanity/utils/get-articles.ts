@@ -6,7 +6,7 @@ import { client } from "../client";
 
 export async function getArticles({
   limit,
-  order,
+  order = "desc",
 }: {
   limit?: number;
   order?: "asc" | "desc";

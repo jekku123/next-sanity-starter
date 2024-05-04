@@ -1,7 +1,7 @@
 import { ContactForm } from "@/components/contact-form";
 import Section from "@/components/sections";
 import { getFrontPage } from "@/lib/sanity/client";
-import getResourceGroqParams from "@/lib/sanity/get-resource-groq-params";
+import getResourceGroqParams from "@/lib/sanity/utils/get-resource-groq-params";
 
 import { validateAndCleanupFrontPage } from "@/lib/zod/frontpage";
 

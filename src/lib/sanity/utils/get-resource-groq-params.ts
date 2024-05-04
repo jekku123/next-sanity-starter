@@ -82,6 +82,7 @@ export default function getResourceGroqParams(type: ResourceType) {
       description,
       image,
       _createdAt,
+      _updatedAt,
       body[],
       tags,
     }`;
