@@ -1,9 +1,9 @@
 import { formatDateFull } from "@/lib/utils";
 import { Article as ArticleType } from "@/lib/zod/article";
-import BlockContent from "./block-content";
-import { SanityImage } from "./sanity-image";
-import { TypographyH1, TypographySmall } from "./typography";
-import { PreviousPageButton } from "./ui/previous-page-button";
+import BlockContent from "../block-content";
+import { SanityImage } from "../sanity-image";
+import { TypographyH1, TypographySmall } from "../typography";
+import { PreviousPageButton } from "../ui/previous-page-button";
 
 export default function Article({ article }: { article: ArticleType }) {
   const date = formatDateFull(article._createdAt);

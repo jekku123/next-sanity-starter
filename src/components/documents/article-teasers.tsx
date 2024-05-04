@@ -1,8 +1,8 @@
 import { formatDate } from "@/lib/utils";
 import { ArticleTeaser as ArticleTeaserType } from "@/lib/zod/article-teaser";
 import Link from "next/link";
-import { SanityImage } from "./sanity-image";
-import { AspectRatio } from "./ui/aspect-ratio";
+import { SanityImage } from "../sanity-image";
+import { AspectRatio } from "../ui/aspect-ratio";
 
 export default function ArticleTeasers({
   articles,

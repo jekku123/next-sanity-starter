@@ -1,7 +1,7 @@
 import { getArticles } from "@/lib/sanity/utils/get-articles";
 import { ArticlesListing } from "@/lib/zod/section";
 import Link from "next/link";
-import ArticleTeasers from "../article-teasers";
+import ArticleTeasers from "../documents/article-teasers";
 import { TypographyH1 } from "../typography";
 import { Button } from "../ui/button";
 

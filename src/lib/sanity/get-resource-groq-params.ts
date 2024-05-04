@@ -34,6 +34,7 @@ export default function getResourceGroqParams(type: ResourceType) {
       _type,
       slug,
       title,
+      isProtected,
       content[]{
         ...,
         _type == "formattedText" => {
@@ -56,7 +57,20 @@ export default function getResourceGroqParams(type: ResourceType) {
               },
             },
         },
-      }
+        _type == "hero" => {
+          ...,
+          primaryLink {
+            ...,
+            "internal": internal->slug.current,
+            external,
+          },
+          secondaryLink {
+            ...,
+            "internal": internal->slug.current,
+            external,
+          },
+        },
+      },
     }`;
   }
 

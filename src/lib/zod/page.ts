@@ -22,6 +22,7 @@ const PageSchema = z.object({
     current: z.string(),
   }),
   content: z.array(PageElementsSchema),
+  isProtected: z.boolean().optional(),
 });
 
 export function validateAndCleanupPage(page: SanityDocument): Page | null {

@@ -1,22 +1,26 @@
-"use client";
-
-import { useCurrentRole } from "@/hooks/use-current-role";
-import { UserRole } from "@/types/authentication";
+import { currentUser } from "@/lib/next-auth/utils/auth";
 import { FormError } from "../form-error";
 
-interface AuthGateProps {
+type AuthGateProps = {
   children: React.ReactNode;
-  allowedRoles: UserRole[];
-}
+  isProtected?: boolean;
+};
 
-export const AuthGate = ({ children, allowedRoles }: AuthGateProps) => {
-  const role = useCurrentRole();
+export default async function AuthGate({
+  children,
+  isProtected = false,
+}: AuthGateProps) {
+  if (!isProtected) {
+    return <>{children}</>;
+  }
 
-  if (!role || !allowedRoles.includes(role)) {
+  const user = await currentUser();
+
+  if (!user) {
     return (
       <FormError message="You do not have permission to view this content!" />
     );
   }
 
   return <>{children}</>;
-};
+}

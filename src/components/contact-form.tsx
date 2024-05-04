@@ -18,7 +18,7 @@ import {
 import { sendContactFormAction } from "@/lib/sanity/actions/contact";
 import { ContactSchema } from "@/lib/zod/contact-form";
 import { UserRole } from "@/types/authentication";
-import { AuthGate } from "./auth/auth-gate";
+import { RoleGate } from "./auth/role-gate";
 import { FormError } from "./form-error";
 import { FormSuccess } from "./form-success";
 import { Input } from "./ui/input";
@@ -66,7 +66,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <AuthGate allowedRoles={[UserRole.USER]}>
+    <RoleGate allowedRoles={[UserRole.USER]}>
       <Card className="mx-auto w-full max-w-sm">
         <CardHeader className="space-y-2 text-center">
           <CardTitle className="text-2xl">Contact Us</CardTitle>
@@ -144,6 +144,6 @@ export const ContactForm = () => {
         </CardContent>
         <CardFooter></CardFooter>
       </Card>
-    </AuthGate>
+    </RoleGate>
   );
 };

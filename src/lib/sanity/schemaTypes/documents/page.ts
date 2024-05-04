@@ -52,5 +52,13 @@ export default defineType({
       ],
       validation: (Rule) => Rule.required(),
     },
+    {
+      name: "isProtected",
+      title: "Protected",
+      type: "boolean",
+      description:
+        "If enabled, only authenticated users can view this page. Otherwise, anyone can view it.",
+      initialValue: false,
+    },
   ],
 });

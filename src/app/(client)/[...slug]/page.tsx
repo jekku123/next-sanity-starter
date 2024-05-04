@@ -1,5 +1,5 @@
-import Article from "@/components/article";
-import Page from "@/components/page";
+import Article from "@/components/documents/article";
+import Page from "@/components/documents/page";
 import {
   getResourceBySlugTypeAndParams,
   getResourceTypeBySlug,
