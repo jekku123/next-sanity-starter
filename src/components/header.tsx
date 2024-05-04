@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { UserMenu } from "./auth/user-menu";
 import { MainMenu } from "./main-menu";
+import { MobileMenu } from "./mobile-menu";
 import { ModeToggle } from "./ui/mode-toggle";
 
 export default async function Header({
@@ -22,8 +23,9 @@ export default async function Header({
   return (
     <header className="top-0 z-50 w-full flex-shrink-0 bg-background md:sticky">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
+        <MobileMenu menu={menu} className="z-50 flex lg:hidden" />
         <SiteTitle title={title} logo={logo} />
-        <MainMenu menu={menu} />
+        <MainMenu menu={menu} className="hidden lg:flex" />
         <div className="flex items-center space-x-4">
           {!user ? (
             <>
@@ -50,7 +52,7 @@ function SiteTitle({
   return (
     <Link
       href="/"
-      className="flex items-center space-x-3 text-2xl font-bold"
+      className="hidden items-center space-x-3 text-2xl font-bold sm:flex"
       data-test-id="header-logo"
     >
       <Image
