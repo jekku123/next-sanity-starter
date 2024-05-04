@@ -60,7 +60,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Card className="mx-auto w-full max-w-md">
+    <Card className="mx-auto w-full max-w-sm">
       <CardHeader className="space-y-2 text-center">
         <CardTitle className="text-2xl">Sign Up</CardTitle>
         <CardDescription>Sign-up to access the app</CardDescription>

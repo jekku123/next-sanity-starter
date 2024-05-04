@@ -1,7 +1,7 @@
 "use server";
 
 import { signIn } from "@/lib/next-auth/auth";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { DEFAULT_LOGIN_REDIRECT } from "@/lib/next-auth/routes";
 import { AuthError } from "next-auth";
 import * as z from "zod";
 

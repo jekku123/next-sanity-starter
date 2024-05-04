@@ -1,8 +1,12 @@
-import { Section as SectionType } from "@/lib/zod/section";
+import {
+  ContactSectionSchema,
+  Section as SectionType,
+} from "@/lib/zod/section";
 import ArticlesListingSection from "./articles-listing";
 import FormattedTextSection from "./formatted-text";
 import HeroSection from "./hero-section";
 import TextImageSection from "./text-image-section";
+import ContactSection from "./contact-section";
 
 export default function Section({ section }: { section: SectionType }) {
   if (!section) {
@@ -18,6 +22,8 @@ export default function Section({ section }: { section: SectionType }) {
       return <FormattedTextSection content={section} />;
     case "articlesListing":
       return <ArticlesListingSection content={section} />;
+    case "contactSection":
+      return <ContactSection content={section} />;
     default: {
       console.error(
         `No section component found for ${(section as SectionType)._type}`,

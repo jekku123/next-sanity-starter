@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { DEFAULT_LOGIN_REDIRECT } from "@/lib/next-auth/routes";
 import { Icons } from "../icons";
 
 export const SocialLogin = () => {
@@ -23,6 +23,7 @@ export const SocialLogin = () => {
         className="w-full"
         variant="outline"
         onClick={() => onClick("google")}
+        disabled
       >
         <Icons.google className="h-5 w-5" />
       </Button>

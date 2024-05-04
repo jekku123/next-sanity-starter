@@ -5,7 +5,7 @@ import {
   apiAuthPrefix,
   authRoutes,
   protectedRoutes,
-} from "@/routes";
+} from "@/lib/next-auth/routes";
 
 export default auth((req) => {
   const { nextUrl } = req;

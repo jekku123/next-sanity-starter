@@ -1,4 +1,3 @@
-import { ContactForm } from "@/components/contact-form";
 import Section from "@/components/sections";
 import { getFrontPage } from "@/lib/sanity/client";
 import getResourceGroqParams from "@/lib/sanity/utils/get-resource-groq-params";
@@ -21,9 +20,6 @@ export default async function FrontPage() {
         {validatedFrontpage.content.map((section) => (
           <Section key={section._key} section={section} />
         ))}
-        <div className="mx-auto w-full max-w-md">
-          <ContactForm />
-        </div>
       </div>
     </>
   );

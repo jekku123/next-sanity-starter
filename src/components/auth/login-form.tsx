@@ -73,7 +73,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <Card className="mx-auto w-full max-w-md">
+    <Card className="mx-auto w-full max-w-sm">
       <CardHeader className="space-y-2 text-center">
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>Login in to access the app</CardDescription>

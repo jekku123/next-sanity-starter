@@ -2,16 +2,25 @@ import { SanityDocument } from "next-sanity";
 import { z } from "zod";
 import {
   ArticlesListingSchema,
+  ContactSectionSchema,
   FormattedTextSchema,
   HeroSchema,
   TextImageSchema,
 } from "./section";
+
+/**
+ * This schema defines the structure of a page in Sanity
+ * It is used to validate and cleanup the data before it is used in the application
+ * It validates the top level fields and then validates each section in the content array
+ * @see src/lib/zod/section.ts
+ */
 
 const PageElementsSchema = z.discriminatedUnion("_type", [
   HeroSchema,
   TextImageSchema,
   FormattedTextSchema,
   ArticlesListingSchema,
+  ContactSectionSchema,
 ]);
 
 const PageSchema = z.object({

@@ -2,6 +2,7 @@ import { SanityDocument } from "next-sanity";
 import { z } from "zod";
 import {
   ArticlesListingSchema,
+  ContactSectionSchema,
   FormattedTextSchema,
   HeroSchema,
   TextImageSchema,
@@ -12,6 +13,7 @@ const FrontPageElementsSchema = z.discriminatedUnion("_type", [
   TextImageSchema,
   FormattedTextSchema,
   ArticlesListingSchema,
+  ContactSectionSchema,
 ]);
 
 const FrontPageSchema = z.object({

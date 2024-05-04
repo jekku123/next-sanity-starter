@@ -27,12 +27,14 @@ import { Textarea } from "./ui/textarea";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ContactSection } from "@/lib/zod/section";
 
-export const ContactForm = () => {
+export const ContactForm = ({ content }: { content?: ContactSection }) => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -69,10 +71,12 @@ export const ContactForm = () => {
     <RoleGate allowedRoles={[UserRole.USER]}>
       <Card className="mx-auto w-full max-w-sm">
         <CardHeader className="space-y-2 text-center">
-          <CardTitle className="text-2xl">Contact Us</CardTitle>
+          <CardTitle className="text-2xl">
+            {content?.heading || "Contact Us"}
+          </CardTitle>
+          <CardDescription>{content?.subHeading || ""}</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          {" "}
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}

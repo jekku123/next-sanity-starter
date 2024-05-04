@@ -49,6 +49,9 @@ export default defineType({
         {
           type: "articlesListing",
         },
+        {
+          type: "contactSection",
+        },
       ],
       validation: (Rule) => Rule.required(),
     },
