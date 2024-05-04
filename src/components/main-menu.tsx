@@ -31,10 +31,7 @@ export function MainMenu({
         <NavigationMenuList>
           {menu.map((item) => {
             return (
-              <AuthGateClient
-                key={item._key}
-                isProtected={item.isProtected || undefined}
-              >
+              <AuthGateClient key={item._key} isProtected={item.isProtected}>
                 <NavigationMenuItem
                   key={item._key}
                   data-test-id={`${item.href}`}

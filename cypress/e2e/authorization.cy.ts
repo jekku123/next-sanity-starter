@@ -20,8 +20,15 @@ describe("Authorization tests as logged in", () => {
   });
 
   it("Check protected sanity page", () => {
-    cy.visit("/AuthGateServer");
-    cy.get("h1").contains("AuthGateServer");
+    cy.visit("/authgate");
+    cy.get("h1").contains("AuthGate");
+  });
+
+  it("Check that protected menu item is visible and works", () => {
+    cy.get('[data-test-id="hidden"]').should("exist");
+    cy.get('[data-test-id="hidden"]').click();
+    cy.url().should("include", "hidden");
+    cy.get("h1").contains("Hidden");
   });
 
   it("Check that contact form is shown at frontpage", () => {
@@ -49,8 +56,12 @@ describe("Authorization tests as logged out", () => {
   });
 
   it("Check that protected sanity page is not accessible", () => {
-    cy.visit("/AuthGateServer");
+    cy.visit("/authgate");
     cy.get('[data-test-id="form-error"]').should("exist");
+  });
+
+  it("Check that protected menu item is not visible", () => {
+    cy.get('[data-test-id="hidden"]').should("not.exist");
   });
 
   it("Check that contact form is not shown at frontpage", () => {

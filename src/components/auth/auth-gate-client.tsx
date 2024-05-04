@@ -13,8 +13,6 @@ export default function AuthGateClient({
 }: AuthGateClientProps) {
   const user = useCurrentUser();
 
-  console.log("user", user);
-
   if (!user && isProtected) {
     return null;
   }

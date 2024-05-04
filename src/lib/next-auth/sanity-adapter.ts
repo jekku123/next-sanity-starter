@@ -121,7 +121,6 @@ export function SanityAdapter(
     },
 
     async linkAccount(account) {
-      console.log("ACCOUNT: ", account);
       try {
         const createdAccount = await sanityClient.create({
           _type: options.schemas.account,
