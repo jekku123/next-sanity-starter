@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 export default function HeroSection({ content }: { content: Hero }) {
   return (
     <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-      <div className="flex flex-col justify-center gap-4">
+      <div className="mr-5 flex flex-col justify-center gap-4">
         <TypographyH1>{content.title}</TypographyH1>
         <BlockContent content={content.body} />
         <div className="flex items-center space-x-4">

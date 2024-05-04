@@ -46,7 +46,7 @@ export const ContactSectionSchema = z.object({
   _type: z.literal("contactSection"),
   _key: z.string(),
   heading: z.string(),
-  subHeading: z.string(),
+  body: z.any(),
 });
 
 export type ContactSection = z.infer<typeof ContactSectionSchema>;

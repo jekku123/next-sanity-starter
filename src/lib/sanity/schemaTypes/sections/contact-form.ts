@@ -11,9 +11,10 @@ export default defineType({
       type: "string",
     },
     {
-      name: "subHeading",
-      title: "Subheading",
-      type: "string",
+      title: "Body",
+      name: "body",
+      type: "array",
+      of: [{ type: "block" }],
     },
   ],
 });

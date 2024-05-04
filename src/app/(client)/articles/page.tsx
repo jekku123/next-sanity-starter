@@ -55,7 +55,7 @@ export default async function ArticlesPage({
   };
 
   return (
-    <div className="mx-auto w-full max-w-7xl grow px-6 py-4">
+    <div className="mx-auto w-full">
       <TypographyH1 className="text-center md:text-start">
         Articles
       </TypographyH1>
