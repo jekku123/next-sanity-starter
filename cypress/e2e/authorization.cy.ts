@@ -20,8 +20,8 @@ describe("Authorization tests as logged in", () => {
   });
 
   it("Check protected sanity page", () => {
-    cy.visit("/authgate");
-    cy.get("h1").contains("AuthGate");
+    cy.visit("/AuthGateServer");
+    cy.get("h1").contains("AuthGateServer");
   });
 
   it("Check that contact form is shown at frontpage", () => {
@@ -49,7 +49,7 @@ describe("Authorization tests as logged out", () => {
   });
 
   it("Check that protected sanity page is not accessible", () => {
-    cy.visit("/authgate");
+    cy.visit("/AuthGateServer");
     cy.get('[data-test-id="form-error"]').should("exist");
   });
 

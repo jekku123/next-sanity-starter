@@ -16,6 +16,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { usePathname } from "next/navigation";
+import AuthGateClient from "./auth/auth-gate-client";
 
 export function MainMenu({
   menu,
@@ -30,16 +31,24 @@ export function MainMenu({
         <NavigationMenuList>
           {menu.map((item) => {
             return (
-              <NavigationMenuItem key={item._key} data-test-id={`${item.href}`}>
-                {item.subItems ? (
-                  <NavigationMenuItemWithChildren item={item} />
-                ) : (
-                  <NavigationMenuItemSingle
-                    url={item.href}
-                    title={item.label}
-                  />
-                )}
-              </NavigationMenuItem>
+              <AuthGateClient
+                key={item._key}
+                isProtected={item.isProtected || undefined}
+              >
+                <NavigationMenuItem
+                  key={item._key}
+                  data-test-id={`${item.href}`}
+                >
+                  {item.subItems ? (
+                    <NavigationMenuItemWithChildren item={item} />
+                  ) : (
+                    <NavigationMenuItemSingle
+                      url={item.href}
+                      title={item.label}
+                    />
+                  )}
+                </NavigationMenuItem>
+              </AuthGateClient>
             );
           })}
         </NavigationMenuList>

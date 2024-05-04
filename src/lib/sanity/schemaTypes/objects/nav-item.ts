@@ -34,6 +34,13 @@ export default defineType({
         (!value && !!parent?.external) || !!parent?.internal,
     },
     {
+      name: "isProtected",
+      type: "boolean",
+      title: "Protected",
+      description: "If enabled, only authenticated users can see this in menu.",
+      initialValue: false,
+    },
+    {
       name: "subItems",
       type: "array",
       title: "Sub Items",

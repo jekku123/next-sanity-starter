@@ -5,6 +5,7 @@ export const MenuItemSchema = z.object({
   _key: z.string(),
   label: z.string(),
   href: z.string(),
+  isProtected: z.boolean().optional().nullable(),
   subItems: z
     .array(
       z.object({

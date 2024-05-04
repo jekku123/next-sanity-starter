@@ -91,6 +91,7 @@ export async function getMenu(slug: string) {
       _key,
       label,
       "href": coalesce(external, internal->slug.current, nextjsRoute),
+      isProtected,
       subItems[] {
         _key,
         label,
