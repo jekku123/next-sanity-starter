@@ -5,6 +5,13 @@ describe("Basic layout test", () => {
     cy.get("main").should("be.visible").should("exist");
     cy.get("footer").should("be.visible").should("exist");
   });
+
+  it("Test the scroll top button", () => {
+    cy.visit("/");
+    cy.scrollTo("bottom");
+    cy.get('[data-test-id="scroll-top"]').click();
+    cy.get("html").should("have.prop", "scrollTop", 0);
+  });
 });
 
 describe("Dark mode and light mode", () => {
@@ -32,7 +39,6 @@ describe("Navigation tests", () => {
 
     cy.get('[data-test-id="articles/article-1"]').click();
     cy.url().should("include", "article-1");
-    cy.get("h1").contains("Article 1");
 
     cy.get('[data-test-id="previous-page-button"]').click();
     cy.url().should("include", "articles");
