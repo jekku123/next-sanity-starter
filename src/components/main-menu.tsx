@@ -65,9 +65,9 @@ const NavigationMenuItemWithChildren = ({ item }: { item: MenuItem }) => {
               key={component._key}
               title={component.label}
               href={component.href}
-            >
-              {component.label}
-            </ListItem>
+            />
+            //   {component.label}
+            // </ListItem>
           ))}
         </ul>
       </NavigationMenuContent>
@@ -88,7 +88,7 @@ const NavigationMenuItemSingle = ({
   return (
     <Link href={`/${url}`} legacyBehavior passHref>
       <NavigationMenuLink
-        className={navigationMenuTriggerStyle()}
+        className={cn(navigationMenuTriggerStyle())}
         active={isActive}
       >
         {title}

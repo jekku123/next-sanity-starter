@@ -10,7 +10,7 @@ export default function FormattedTextSection({
   return (
     <div className="flex flex-col gap-4">
       <TypographyH1>{content.title}</TypographyH1>
-      <BlockContent content={content.body} />
+      <BlockContent className="px-2" content={content.body} />
     </div>
   );
 }
