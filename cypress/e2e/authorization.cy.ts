@@ -14,9 +14,14 @@ describe("Authorization tests as logged in", () => {
     cy.visit("/");
   });
 
-  it("Check protected route", () => {
+  it("Check middleware protected route", () => {
     cy.visit("/protected");
     cy.get("h1").contains("Protected route");
+  });
+
+  it("Check protected sanity page", () => {
+    cy.visit("/authgate");
+    cy.get("h1").contains("AuthGate");
   });
 
   it("Check that contact form is shown at frontpage", () => {
@@ -38,9 +43,14 @@ describe("Authorization tests as logged out", () => {
     cy.visit("/");
   });
 
-  it("Check that protected route is not accessible", () => {
+  it("Check that middleware protected route is not accessible", () => {
     cy.visit("/protected");
     cy.url().should("eq", "http://localhost:3000/auth/login");
+  });
+
+  it("Check that protected sanity page is not accessible", () => {
+    cy.visit("/authgate");
+    cy.get('[data-test-id="form-error"]').should("exist");
   });
 
   it("Check that contact form is not shown at frontpage", () => {
