@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
 import { useState } from "react";
+import AuthGateClient from "./auth/auth-gate-client";
 
 const variants = {
   open: {
@@ -101,20 +102,21 @@ export function MobileMenu({ className, menu }: MobileMenuProps) {
               variants={variants}
             >
               {menu.map((item) => (
-                <div
-                  key={item._key}
-                  className="flex flex-col items-center gap-4"
-                  onClick={() => setOpen(false)}
-                >
-                  <motion.div
-                    className="hover:text-primary-accent text-3xl"
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
+                <AuthGateClient key={item._key} isProtected={item.isProtected}>
+                  <div
+                    className="flex flex-col items-center gap-4"
+                    onClick={() => setOpen(false)}
                   >
-                    <Link href={item.href}>{item.label}</Link>
-                  </motion.div>
-                </div>
+                    <motion.div
+                      className="hover:text-primary-accent text-3xl"
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Link href={item.href}>{item.label}</Link>
+                    </motion.div>
+                  </div>
+                </AuthGateClient>
               ))}
             </motion.div>
           </motion.div>

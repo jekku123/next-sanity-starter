@@ -23,10 +23,10 @@ export default async function Header({
   return (
     <header className="top-0 z-50 w-full flex-shrink-0 bg-background md:sticky">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
-        <MobileMenu menu={menu} className="z-50 flex lg:hidden" />
+        <MobileMenu menu={menu} className="flex lg:hidden" />
         <SiteTitle title={title} logo={logo} />
         <MainMenu menu={menu} className="hidden lg:flex" />
-        <div className="flex items-center space-x-4">
+        <div className="z-50 flex items-center space-x-4">
           {!user ? (
             <>
               <Link href="/auth/login">Login</Link>
@@ -52,7 +52,7 @@ function SiteTitle({
   return (
     <Link
       href="/"
-      className="hidden items-center space-x-3 text-2xl font-bold sm:flex"
+      className="z-50 hidden items-center space-x-3 text-2xl font-bold sm:flex"
       data-test-id="header-logo"
     >
       <Image
