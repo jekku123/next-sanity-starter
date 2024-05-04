@@ -12,12 +12,12 @@ export default function HeroSection({ content }: { content: Hero }) {
         <BlockContent content={content.body} />
         <div className="flex items-center space-x-4">
           {content.primaryLink && (
-            <SanityLink link={content.primaryLink}>
+            <SanityLink href={content.primaryLink}>
               <Button>{content.primaryLink.label}</Button>
             </SanityLink>
           )}
           {content.secondaryLink && (
-            <SanityLink link={content.secondaryLink}>
+            <SanityLink href={content.secondaryLink}>
               <Button variant="secondary">{content.secondaryLink.label}</Button>
             </SanityLink>
           )}
