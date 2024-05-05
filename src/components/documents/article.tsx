@@ -15,20 +15,21 @@ export default function Article({ article }: { article: ArticleType }) {
         image={article.image}
         className="h-[420px] w-full rounded-xl"
       />
-
-      <div className="flex items-center gap-4">
-        <TypographySmall>
-          Published: <span className="underline">{date}</span>
-        </TypographySmall>
-        {updated && (
-          <TypographyMuted>
-            Updated: <span className="underline">{updated}</span>
-          </TypographyMuted>
-        )}
+      <div className="ml-1">
+        <div className="mt-2 flex items-center gap-4">
+          <TypographySmall>
+            Published: <span className="underline">{date}</span>
+          </TypographySmall>
+          {updated && (
+            <TypographyMuted>
+              Updated: <span className="underline">{updated}</span>
+            </TypographyMuted>
+          )}
+        </div>
+        <TypographyMuted className="pt-2 uppercase text-muted-foreground">
+          {article.tags.map((tag) => tag).join(" / ")}
+        </TypographyMuted>
       </div>
-      <TypographyMuted className="pt-2 uppercase text-muted-foreground">
-        {article.tags.map((tag) => tag).join(" / ")}
-      </TypographyMuted>
 
       <BlockContent className="mt-9" content={article.body} />
 
