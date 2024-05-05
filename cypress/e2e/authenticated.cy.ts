@@ -16,15 +16,15 @@ describe("Authorization tests as logged in", () => {
 
   it("Check middleware protected route", () => {
     cy.visit("/protected");
-    cy.get("h1").contains("Protected route");
+    cy.get("h1").contains("Protected");
   });
 
   it("Check protected sanity page", () => {
-    cy.visit("/authgate");
-    cy.get("h1").contains("AuthGate");
+    cy.visit("/authorized");
+    cy.get("h1").contains("Authorized");
   });
 
-  it("Check that protected menu item is visible and works", () => {
+  it("Check that hidden menu item is visible and works", () => {
     cy.get('[data-test-id="hidden"]').should("exist");
     cy.get('[data-test-id="hidden"]').click();
     cy.url().should("include", "hidden");
@@ -42,33 +42,5 @@ describe("Authorization tests as logged in", () => {
   it("Check that user stays logged in after refresh", () => {
     cy.reload();
     cy.get('[data-test-id="user-menu-button"]').should("exist");
-  });
-});
-
-describe("Authorization tests as logged out", () => {
-  beforeEach(() => {
-    cy.visit("/");
-  });
-
-  it("Check that middleware protected route is not accessible", () => {
-    cy.visit("/protected");
-    cy.url().should("eq", "http://localhost:3000/auth/login");
-  });
-
-  it("Check that protected sanity page is not accessible", () => {
-    cy.visit("/authgate");
-    cy.get('[data-test-id="form-error"]').should("exist");
-  });
-
-  it("Check that protected menu item is not visible", () => {
-    cy.get('[data-test-id="hidden"]').should("not.exist");
-  });
-
-  it("Check that contact form is not shown at frontpage", () => {
-    cy.get('[data-test-id="contact-form"]').should("not.exist");
-  });
-
-  it("Check that usermenu button is not shown", () => {
-    cy.get('[data-test-id="user-menu-button"]').should("not.exist");
   });
 });

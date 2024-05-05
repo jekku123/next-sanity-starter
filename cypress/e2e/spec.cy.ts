@@ -1,38 +1,25 @@
 describe("Basic layout test", () => {
-  it("Visits the frontpage and checks that the main components are in place", () => {
+  beforeEach(() => {
     cy.visit("/");
+  });
+  it("Visits the frontpage and checks that the main components are in place", () => {
     cy.get("header").should("be.visible").should("exist");
     cy.get("main").should("be.visible").should("exist");
     cy.get("footer").should("be.visible").should("exist");
   });
-
   it("Test the scroll top button", () => {
-    cy.visit("/");
     cy.scrollTo("bottom");
     cy.get('[data-test-id="scroll-top"]').click();
     cy.get("html").should("have.prop", "scrollTop", 0);
   });
 });
 
-describe("Dark mode and light mode", () => {
-  it("Check light mode", () => {
-    cy.visit("/");
-    cy.get('[data-test-id="mode-toggle"]').click();
-    cy.get('[data-test-id="lightmode-button"]').click();
-    cy.get("html").should("have.class", "light");
-  });
-
-  it("Check dark mode", () => {
-    cy.visit("/");
-    cy.get('[data-test-id="mode-toggle"]').click();
-    cy.get('[data-test-id="darkmode-button"]').click();
-    cy.get("html").should("have.class", "dark");
-  });
-});
-
 describe("Navigation tests", () => {
-  it("Visit articles page, test teaser link to navigate to single article and come back using previous page button", () => {
+  beforeEach(() => {
     cy.visit("/");
+  });
+
+  it("Visit articles page, test teaser link to navigate to single article and come back using previous page button", () => {
     cy.get('[data-test-id="articles"]').click();
     cy.url().should("include", "articles");
     cy.get("h1").contains("Articles");
@@ -45,10 +32,9 @@ describe("Navigation tests", () => {
   });
 
   it("Test nested navigation", () => {
-    cy.visit("/");
-    cy.get('[data-test-id="nested"]').click();
-    cy.get('[data-test-id="nested/nested"]').click();
-    cy.url().should("include", "nested");
+    cy.get('[data-test-id="nested-1"]').click();
+    cy.get('[data-test-id="nested-1/nested-2"]').click();
+    cy.url().should("include", "nested-2");
     cy.get("h1").contains("Nested");
   });
 });

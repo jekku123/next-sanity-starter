@@ -23,9 +23,9 @@ export default async function Header({
   return (
     <header className="top-0 z-50 w-full flex-shrink-0 bg-background md:sticky">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
-        <MobileMenu menu={menu} className="flex lg:hidden" />
+        <MobileMenu menu={menu} className="flex sm:hidden" />
         <SiteTitle title={title} logo={logo} />
-        <MainMenu menu={menu} className="hidden lg:flex" />
+        <MainMenu menu={menu} className="hidden sm:flex" />
         <div className="z-50 flex items-center space-x-4">
           {!user ? (
             <>

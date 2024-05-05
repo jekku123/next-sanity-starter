@@ -9,7 +9,10 @@ export default function ContactSection({
   content: ContactSectionType;
 }) {
   return (
-    <div className="mt-6 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+    <div
+      className="mt-6 grid w-full grid-cols-1 gap-4 md:grid-cols-2"
+      data-test-id="contact-section"
+    >
       <div className="flex flex-col gap-4">
         <TypographyH1>{content.heading}</TypographyH1>
         <BlockContent className="px-2" content={content.body} />
