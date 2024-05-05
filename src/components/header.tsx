@@ -23,9 +23,9 @@ export default async function Header({
   return (
     <header className="top-0 z-50 w-full flex-shrink-0 bg-background md:sticky">
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between p-6">
-        <MobileMenu menu={menu} className="flex sm:hidden" />
+        <MobileMenu menu={menu} className="flex md:hidden" />
         <SiteTitle title={title} logo={logo} />
-        <MainMenu menu={menu} className="hidden sm:flex" />
+        <MainMenu menu={menu} className="hidden md:flex" />
         <div className="z-50 flex items-center space-x-4">
           {!user ? (
             <>
@@ -52,7 +52,7 @@ function SiteTitle({
   return (
     <Link
       href="/"
-      className="z-50 hidden items-center space-x-3 text-2xl font-bold sm:flex"
+      className="z-50 hidden items-center space-x-3 text-2xl font-bold md:flex"
       data-test-id="header-logo"
     >
       <Image
@@ -62,7 +62,9 @@ function SiteTitle({
         height={35}
         className="rounded-full object-cover"
       />
-      {title?.showInHeader && <span>{title.text}</span>}
+      {title?.showInHeader && (
+        <span className="hidden lg:flex">{title.text}</span>
+      )}
     </Link>
   );
 }
