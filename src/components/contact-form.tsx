@@ -17,16 +17,12 @@ import {
 
 import { sendContactFormAction } from "@/lib/sanity/actions/contact";
 import { ContactSchema } from "@/lib/zod/contact-form";
-import { UserRole } from "@/types/authentication";
-import { RoleGate } from "./auth/role-gate";
 import { FormError } from "./form-error";
 import { FormSuccess } from "./form-success";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 
-import { ContactSection } from "@/lib/zod/section";
-
-export const ContactForm = ({ content }: { content?: ContactSection }) => {
+export const ContactForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -60,86 +56,73 @@ export const ContactForm = ({ content }: { content?: ContactSection }) => {
   };
 
   return (
-    <RoleGate allowedRoles={[UserRole.USER]}>
-      {/* <Card className="mx-auto w-full max-w-sm">
-        <CardHeader className="space-y-2 text-center">
-          <CardTitle className="text-2xl">
-            {content?.heading || "Contact Us"}
-          </CardTitle>
-          <CardDescription>{content?.subHeading || ""}</CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-4"> */}
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6"
-          data-test-id="contact-form"
-        >
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="John Doe"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="john@doe.com"
-                      type="email"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Message</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      className="resize-none"
-                      {...field}
-                      disabled={isPending}
-                      placeholder="This is my message"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit" className="w-full">
-            Send
-          </Button>
-        </form>
-      </Form>
-      {/* </CardContent>
-        <CardFooter></CardFooter>
-      </Card> */}
-    </RoleGate>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6"
+        data-test-id="contact-form"
+      >
+        <div className="space-y-4">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder="John Doe"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder="john@doe.com"
+                    type="email"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Message</FormLabel>
+                <FormControl>
+                  <Textarea
+                    className="resize-none"
+                    {...field}
+                    disabled={isPending}
+                    placeholder="This is my message"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <FormError message={error} />
+        <FormSuccess message={success} />
+        <Button disabled={isPending} type="submit" className="w-full">
+          Send
+        </Button>
+      </form>
+    </Form>
   );
 };
