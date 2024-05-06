@@ -18,10 +18,11 @@ const singletonActions = new Set(["publish", "discardChanges", "restore"]);
 const singletonTypes = new Set(["frontpage", "settings"]);
 // Define the hidden document types
 const hiddenTypes = new Set([
-  "session",
-  "account",
-  "verificationToken",
-  "passwordResetToken",
+  "",
+  // "session",
+  // "account",
+  // "verificationToken",
+  // "passwordResetToken",
 ]);
 
 const singletonListItems = (

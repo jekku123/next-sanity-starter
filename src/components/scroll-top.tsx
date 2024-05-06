@@ -54,12 +54,12 @@ export function ScrollTop() {
           whileTap={{ scale: 0.95 }}
           onClick={scrollToTop}
           className={cn(
-            "fixed bottom-14 right-7 z-10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xl sm:right-14",
+            "fixed bottom-14 right-7 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xl sm:right-14",
             pulse && "animate-pulse",
           )}
           data-test-id="scroll-top"
         >
-          <ArrowUpIcon size="30" />
+          <ArrowUpIcon size="20" />
         </motion.div>
       )}
     </AnimatePresence>

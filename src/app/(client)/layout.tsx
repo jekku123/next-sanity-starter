@@ -7,6 +7,7 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+import PageAnimatePresence from "@/components/page-transition/page-animate-presence";
 import { ScrollTop } from "@/components/scroll-top";
 import { ThemeProvider } from "@/components/theme-provider";
 import { auth } from "@/lib/next-auth/auth";
@@ -46,7 +47,7 @@ export default async function RootLayout({
                 logo={settings.logo}
               />
               <main className="mx-auto w-full max-w-6xl grow px-6 py-6 md:py-9">
-                {children}
+                <PageAnimatePresence>{children}</PageAnimatePresence>
               </main>
               <Footer menu={menus.footer} />
             </div>
