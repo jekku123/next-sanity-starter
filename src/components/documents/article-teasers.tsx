@@ -30,7 +30,7 @@ export function ArticleTeaser({ article }: { article: ArticleTeaserType }) {
         <div className="mb-2 overflow-hidden rounded-t-xl">
           <SanityImage
             image={article.image}
-            className="max-h-[200px] transform transition-transform duration-700 group-hover:scale-110"
+            className="max-h-[180px] transform transition-transform duration-700 group-hover:scale-110"
           />
         </div>
       )}
