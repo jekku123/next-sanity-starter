@@ -2,7 +2,6 @@ import { formatDate } from "@/lib/utils";
 import { ArticleTeaser as ArticleTeaserType } from "@/lib/zod/article-teaser";
 import Link from "next/link";
 import { SanityImage } from "../sanity-image";
-import { AspectRatio } from "../ui/aspect-ratio";
 
 export default function ArticleTeasers({
   articles,
@@ -29,12 +28,10 @@ export function ArticleTeaser({ article }: { article: ArticleTeaserType }) {
     >
       {article.image && (
         <div className="mb-2 overflow-hidden rounded-t-xl">
-          <AspectRatio
-            ratio={16 / 9}
-            className="transform transition-transform duration-700 group-hover:scale-110"
-          >
-            <SanityImage image={article.image} />
-          </AspectRatio>
+          <SanityImage
+            image={article.image}
+            className="max-h-[200px] transform transition-transform duration-700 group-hover:scale-110"
+          />
         </div>
       )}
       <div className="flex h-full flex-col p-3">

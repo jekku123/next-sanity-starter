@@ -1,5 +1,3 @@
-"use client";
-
 import { formatDate, formatDateFull } from "@/lib/utils";
 import { Article as ArticleType } from "@/lib/zod/article";
 import BlockContent from "../block-content";
@@ -15,7 +13,7 @@ export default function Article({ article }: { article: ArticleType }) {
     <article className="mx-auto w-full max-w-5xl px-6 py-4">
       <SanityImage
         image={article.image}
-        className="max-h-[420px] w-full rounded-xl"
+        className="max-h-[420px] w-full rounded-xl object-cover"
       />
       <div className="ml-1">
         <div className="mt-2 flex items-center gap-4">
