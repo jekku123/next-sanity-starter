@@ -45,7 +45,7 @@ export default async function RootLayout({
                 title={settings.title}
                 logo={settings.logo}
               />
-              <main className="mx-auto w-full max-w-6xl grow px-6 py-4">
+              <main className="mx-auto w-full max-w-6xl grow px-6 py-9">
                 {children}
               </main>
               <Footer menu={menus.footer} />

@@ -16,7 +16,7 @@ export default function Article({ article }: { article: ArticleType }) {
         className="max-h-[420px] w-full rounded-xl object-cover"
       />
       <div className="ml-1">
-        <div className="mt-2 flex items-center gap-4">
+        <div className="mt-2 flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-4">
           <TypographySmall>
             Published: <span className="underline">{date}</span>
           </TypographySmall>
