@@ -1,9 +1,8 @@
-import { ArticleTeaser } from "@/components/documents/article-teasers";
 import { PaginationController } from "@/components/pagination-controller";
-import { TypographyH1 } from "@/components/typography";
 import { getSettings } from "@/lib/sanity/client";
 import { getArticlesResultSet } from "@/lib/sanity/utils/get-articles-resultset";
 import { Metadata } from "next";
+import Listing from "./_components/listing";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
@@ -56,16 +55,7 @@ export default async function ArticlesPage({
 
   return (
     <div className="mx-auto w-full">
-      <TypographyH1 className="text-center md:text-start">
-        Articles
-      </TypographyH1>
-      <ul className="mx-auto mb-12 mt-9 grid grid-cols-1 gap-9 md:grid-cols-2 lg:grid-cols-3">
-        {items.map((article) => (
-          <li key={article._id}>
-            <ArticleTeaser article={article} />
-          </li>
-        ))}
-      </ul>
+      <Listing items={items} />
       <PaginationController {...paginationProps} />
     </div>
   );
