@@ -16,7 +16,7 @@ export default async function ArticlesListingSection({
 
   return (
     <div className="flex flex-col gap-6">
-      <TypographyH1>Articles</TypographyH1>
+      <TypographyH1>{content.title}</TypographyH1>
 
       {articles ? (
         <ArticleTeasers articles={articles} />
