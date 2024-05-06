@@ -1,4 +1,4 @@
-## Next.js Sanity Starter [![Tests](https://github.com/jekku123/next-sanity-starter/actions/workflows/main.yml/badge.svg)](https://github.com/jekku123/next-sanity-starter/actions/workflows/main.yml)
+## Next.js Sanity Starter [![Tests](https://github.com/jekku123/next-sanity-starter/actions/workflows/build-test-deploy.yml/badge.svg)](https://github.com/jekku123/next-sanity-starter/actions/workflows/build-test-deploy.yml)[![Deployment](https://github.com/jekku123/next-sanity-starter/actions/workflows/preview.yml/badge.svg)](https://github.com/jekku123/next-sanity-starter/actions/workflows/preview.yml)
 
 This is a starter template for [Next.js](https://nextjs.org) and [Sanity](https://www.sanity.io) with a focus on performance and developer experience.
 
