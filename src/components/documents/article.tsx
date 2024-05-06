@@ -10,7 +10,7 @@ export default function Article({ article }: { article: ArticleType }) {
   const updated = article._updatedAt ? formatDate(article._updatedAt) : null;
 
   return (
-    <article className="mx-auto w-full max-w-5xl px-6 py-4">
+    <article className="mx-auto w-full max-w-5xl">
       <SanityImage
         image={article.image}
         className="max-h-[420px] w-full rounded-xl object-cover"
