@@ -12,7 +12,7 @@ import { sendVerificationEmail } from "@/lib/next-auth/utils/mail";
 import { generateVerificationToken } from "@/lib/next-auth/utils/tokens";
 import { LoginSchema } from "@/lib/zod/auth-forms";
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
+export async function login(values: z.infer<typeof LoginSchema>) {
   const validatedFields = LoginSchema.safeParse(values);
 
   if (!validatedFields.success) {
@@ -58,4 +58,4 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
     throw error;
   }
-};
+}

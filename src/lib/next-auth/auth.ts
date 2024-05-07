@@ -21,8 +21,8 @@ export const {
   trustHost: true, // Required to run CI e2e tests with cypress
   secret: env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "auth/login",
-    error: "auth/error",
+    signIn: "/auth/login",
+    error: "/auth/error",
   },
   adapter: SanityAdapter(client),
   session: { strategy: "jwt" },
