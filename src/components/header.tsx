@@ -14,9 +14,9 @@ export default async function Header({
   title,
   logo,
 }: {
-  menu: MenuItem[];
-  title: Settings["title"];
-  logo: Settings["logo"];
+  menu?: MenuItem[];
+  title?: Settings["title"];
+  logo?: Settings["logo"];
 }) {
   const user = await currentUser();
 
@@ -46,9 +46,12 @@ function SiteTitle({
   title,
   logo,
 }: {
-  title: Settings["title"];
-  logo: Settings["logo"];
+  title?: Settings["title"];
+  logo?: Settings["logo"];
 }) {
+  if (!title || !logo) {
+    return <p>Pagebuilder</p>;
+  }
   return (
     <Link
       href="/"

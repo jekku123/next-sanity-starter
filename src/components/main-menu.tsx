@@ -22,14 +22,14 @@ export function MainMenu({
   menu,
   className,
 }: {
-  menu: MenuItem[];
+  menu?: MenuItem[];
   className?: string;
 }) {
   return (
     <div className={className}>
       <NavigationMenu data-test-id="main-menu">
         <NavigationMenuList>
-          {menu.map((item) => {
+          {menu?.map((item) => {
             return (
               <AuthGateClient key={item._key} isProtected={item.isProtected}>
                 <NavigationMenuItem

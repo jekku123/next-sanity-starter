@@ -4,11 +4,11 @@ import { SocialIcon } from "react-social-icons";
 export default function SocialLinks({
   socialLinks,
 }: {
-  socialLinks: MenuItem[];
+  socialLinks?: MenuItem[];
 }) {
   return (
     <ul className="flex gap-3">
-      {socialLinks.map((item) => (
+      {socialLinks?.map((item) => (
         <li key={item._key}>
           <SocialIcon
             fgColor="currentColor"

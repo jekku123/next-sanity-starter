@@ -1,7 +1,6 @@
 import { createClient } from "next-sanity";
 
 import { env, useCdn } from "@/env";
-import { validateAndCleanupMenu } from "../zod/menu";
 import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";
 
@@ -35,16 +34,6 @@ export async function getSlugsByType(type: string) {
   }`;
   const params = await client.fetch(query, { type });
   return params;
-}
-
-export async function getMetadataBySlug(slug: string) {
-  const query = `*[slug.current == $slug][0] {
-    title,
-    description,
-  }`;
-  const metadata = await client.fetch(query, { slug });
-  const validatedMetadata = validateAndCleanupMetadata(metadata);
-  return validatedMetadata;
 }
 
 export async function getResourceBySlugTypeAndParams(
@@ -81,6 +70,16 @@ export async function getSettings() {
   return validatedSettings;
 }
 
+export async function getMetadataBySlug(slug: string) {
+  const query = `*[slug.current == $slug][0] {
+    title,
+    description,
+  }`;
+  const metadata = await client.fetch(query, { slug });
+  const validatedMetadata = validateAndCleanupMetadata(metadata);
+  return validatedMetadata;
+}
+
 export async function getMenu(slug: string) {
   const query = `*[_type == "navigation" && slug.current == $slug][0] 
   {
@@ -101,11 +100,6 @@ export async function getMenu(slug: string) {
   }`;
 
   const menu = await client.fetch(query, { slug });
-  const validatedMenu = validateAndCleanupMenu(menu);
 
-  if (!validatedMenu) {
-    throw new Error(`Menu with slug ${slug} not found`);
-  }
-
-  return validatedMenu;
+  return menu;
 }

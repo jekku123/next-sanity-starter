@@ -35,11 +35,15 @@ const itemVariants = {
 
 interface MobileMenuProps {
   className?: string;
-  menu: MenuItem[];
+  menu?: MenuItem[] | null;
 }
 
 export function MobileMenu({ className, menu }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
+
+  if (!menu) {
+    return null;
+  }
 
   return (
     <div className={cn("z-50", className)}>

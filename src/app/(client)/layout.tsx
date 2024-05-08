@@ -16,8 +16,8 @@ import { SessionProvider } from "next-auth/react";
 export async function generateMetadata(): Promise<Metadata> {
   const { settings } = await getCommonPageProps();
   return {
-    title: settings.title.text,
-    description: settings.description,
+    title: settings?.title.text ?? "Untitled",
+    description: settings?.description ?? "No description",
   };
 }
 
@@ -42,15 +42,15 @@ export default async function RootLayout({
             <div className="flex min-h-screen flex-col">
               <Header
                 menu={menus.main}
-                title={settings.title}
-                logo={settings.logo}
+                title={settings?.title}
+                logo={settings?.logo}
               />
 
               <main className="mx-auto w-full max-w-6xl grow px-6 py-6 md:py-9">
                 {children}
               </main>
 
-              <Footer menu={menus.footer} />
+              <Footer menu={menus.main} />
             </div>
             <ScrollTop />
           </ThemeProvider>
