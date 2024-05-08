@@ -29,6 +29,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import SeparatorWithText from "../ui/separator-with-text";
 import { SocialLogin } from "./social-login";
 
@@ -36,6 +37,7 @@ export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -55,6 +57,11 @@ export const RegisterForm = () => {
       register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
+        if (process.env.NODE_ENV !== "development") {
+          setTimeout(() => {
+            router.push("/auth/login");
+          }, 1500);
+        }
       });
     });
   };

@@ -120,19 +120,22 @@ export const LoginForm = () => {
                         data-test-id="login-form-password"
                       />
                     </FormControl>
-                    <Button
-                      size="sm"
-                      variant="link"
-                      asChild
-                      className="px-0 font-normal"
-                    >
-                      <Link
-                        href="/auth/reset"
-                        data-test-id="login-form-forgot-password"
+                    {process.env.NODE_ENV === "development" && (
+                      <Button
+                        size="sm"
+                        variant="link"
+                        asChild
+                        className="px-0 font-normal"
                       >
-                        Forgot password?
-                      </Link>
-                    </Button>
+                        <Link
+                          href="/auth/reset"
+                          data-test-id="login-form-forgot-password"
+                        >
+                          Forgot password?
+                        </Link>
+                      </Button>
+                    )}
+
                     <FormMessage />
                   </FormItem>
                 )}

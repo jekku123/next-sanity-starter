@@ -34,14 +34,19 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     email,
     role: UserRole.USER,
     password: hashedPassword,
+    emailVerified: process.env.NODE_ENV !== "development",
   });
 
-  const verificationToken = await generateVerificationToken(email);
+  if (process.env.NODE_ENV === "development") {
+    const verificationToken = await generateVerificationToken(email);
 
-  await sendVerificationEmail(
-    verificationToken.identifier,
-    verificationToken.token,
-  );
+    await sendVerificationEmail(
+      verificationToken.identifier,
+      verificationToken.token,
+    );
 
-  return { success: "Confirmation email sent" };
+    return { success: "Confirmation email sent" };
+  }
+
+  return { success: "Successfully signed up!" };
 };
