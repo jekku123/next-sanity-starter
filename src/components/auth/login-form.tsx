@@ -40,6 +40,8 @@ export const LoginForm = () => {
       ? "Email already in use with different provider!"
       : "";
 
+  const email = searchParams.get("email") || null;
+
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -47,7 +49,7 @@ export const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: "",
+      email: email || "",
       password: "",
     },
   });

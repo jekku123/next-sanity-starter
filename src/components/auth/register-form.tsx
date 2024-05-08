@@ -59,7 +59,7 @@ export const RegisterForm = () => {
         setSuccess(data.success);
         if (process.env.NODE_ENV !== "development") {
           setTimeout(() => {
-            router.push("/auth/login");
+            router.push(`/auth/login?email=${values.email}`);
           }, 1500);
         }
       });
