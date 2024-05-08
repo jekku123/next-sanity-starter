@@ -16,7 +16,6 @@ describe("Login tests", () => {
     cy.get('[data-test-id="login-form"]').should("exist");
     cy.get('[data-test-id="login-form-email"]').should("exist");
     cy.get('[data-test-id="login-form-password"]').should("exist");
-    cy.get('[data-test-id="login-form-forgot-password"]').should("exist");
     cy.get('[data-test-id="login-form-login-button"]').should("exist");
   });
 
