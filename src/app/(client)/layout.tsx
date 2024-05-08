@@ -46,7 +46,7 @@ export default async function RootLayout({
                 logo={settings?.logo}
               />
 
-              <main className="mx-auto w-full max-w-6xl grow px-6 py-6 md:py-9">
+              <main className="mx-auto w-full max-w-7xl grow px-6 py-6 md:py-9">
                 {children}
               </main>
 
