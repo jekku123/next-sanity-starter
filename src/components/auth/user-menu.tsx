@@ -12,7 +12,7 @@ import {
 import { Delete, LogOut, UserRound } from "lucide-react";
 import { User } from "next-auth";
 import { useState } from "react";
-import { DeleteUserDialog } from "./delete-user-button";
+import { DeleteUserDialog } from "./delete-user-dialog";
 
 export const UserMenu = ({ user }: { user: User }) => {
   const [open, setOpen] = useState(false);
