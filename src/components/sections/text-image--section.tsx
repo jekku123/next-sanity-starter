@@ -11,7 +11,7 @@ export default function TextImageSection({ content }: { content: TextImage }) {
         <div className="col-span-2 flex flex-col gap-4">
           <BlockContent content={content.body} />
         </div>
-        <SanityImage image={content.image} />
+        <SanityImage className="rounded-xl" image={content.image} />
       </div>
     </div>
   );

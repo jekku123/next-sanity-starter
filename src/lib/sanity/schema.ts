@@ -10,6 +10,7 @@ import link from "./schemaTypes/objects/link";
 import navItem from "./schemaTypes/objects/nav-item";
 import articlesListing from "./schemaTypes/sections/articles-listing";
 import contactForm from "./schemaTypes/sections/contact-form";
+import cta from "./schemaTypes/sections/cta";
 import portableText from "./schemaTypes/sections/formatted-text";
 import hero from "./schemaTypes/sections/hero";
 import textImage from "./schemaTypes/sections/text-image";
@@ -30,6 +31,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     navItem,
     submissions,
     contactForm,
+    cta,
     ...userSchemaTypes,
   ],
 };

@@ -1,16 +1,14 @@
-import { Hero } from "@/lib/zod/section";
-import BlockContent from "../block-content";
-import { SanityImage } from "../sanity-image";
+import { Cta } from "@/lib/zod/section";
 import SanityLink from "../sanity-link";
-import { TypographyH1 } from "../typography";
+import { TypographyH1, TypographyParagraph } from "../typography";
 import { Button } from "../ui/button";
 
-export default function HeroSection({ content }: { content: Hero }) {
+export default function CtaSection({ content }: { content: Cta }) {
   return (
-    <div className="grid w-full grid-cols-1 gap-6  md:grid-cols-2">
-      <div className="mr-5 flex flex-col justify-center gap-4">
+    <section className="w-full">
+      <div className="flex w-full max-w-4xl flex-col gap-4">
         <TypographyH1>{content.title}</TypographyH1>
-        <BlockContent content={content.body} />
+        <TypographyParagraph>{content.description}</TypographyParagraph>
         <div className="flex items-center space-x-4">
           {content.primaryLink && (
             <SanityLink href={content.primaryLink}>
@@ -24,7 +22,6 @@ export default function HeroSection({ content }: { content: Hero }) {
           )}
         </div>
       </div>
-      <SanityImage image={content.image} className="rounded-xl" />
-    </div>
+    </section>
   );
 }

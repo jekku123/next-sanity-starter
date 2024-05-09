@@ -59,12 +59,7 @@ export function TypographyH4({ children, className }: TypographyProps) {
 
 export function TypographyParagraph({ children, className }: TypographyProps) {
   return (
-    <p
-      className={cn(
-        "leading-7 text-muted-foreground [&:not(:first-child)]:mt-4",
-        className,
-      )}
-    >
+    <p className={cn("leading-7 text-muted-foreground", className)}>
       {children}
     </p>
   );

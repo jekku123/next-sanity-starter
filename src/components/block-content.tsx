@@ -34,7 +34,9 @@ export default async function BlockContent({
       h3: ({ children }: any) => <TypographyH3>{children}</TypographyH3>,
       h4: ({ children }: any) => <TypographyH4>{children}</TypographyH4>,
       normal: ({ children }: any) => (
-        <TypographyParagraph>{children}</TypographyParagraph>
+        <TypographyParagraph className="[&:not(:first-child)]:mt-4">
+          {children}
+        </TypographyParagraph>
       ),
       blockquote: ({ children }: any) => (
         <TypographyBlockquote>{children}</TypographyBlockquote>

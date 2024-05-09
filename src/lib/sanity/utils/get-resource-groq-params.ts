@@ -5,10 +5,7 @@ export type ResourceType = "frontpage" | "page" | "article";
 export default function getResourceGroqParams(type: ResourceType) {
   if (type === "frontpage") {
     return groq`{
-    _id,
-    _type,
-    slug,
-    title,
+    ...,
     content[] {
       ...,
       _type == "hero" => {
@@ -24,19 +21,41 @@ export default function getResourceGroqParams(type: ResourceType) {
           external,
         }
       },
+      _type == "cta" => {
+        ...,
+        primaryLink {
+          ...,
+          "internal": internal->slug.current,
+          external,
+        },
+        secondaryLink {
+          ...,
+          "internal": internal->slug.current,
+          external,
+        },
+      },
     }
   }`;
   }
 
   if (type === "page") {
     return groq`{
-      _id,
-      _type,
-      slug,
-      title,
-      isProtected,
+      ...,
       content[]{
         ...,
+        _type == "cta" => {
+          ...,
+          primaryLink {
+            ...,
+            "internal": internal->slug.current,
+            external,
+          },
+          secondaryLink {
+            ...,
+            "internal": internal->slug.current,
+            external,
+          },
+        },
         _type == "formattedText" => {
           ...,
             ...,
@@ -76,15 +95,8 @@ export default function getResourceGroqParams(type: ResourceType) {
 
   if (type === "article") {
     return groq`{
-      _id,
-      _type,
-      title,
-      description,
-      image,
-      _createdAt,
-      _updatedAt,
+      ...,
       body[],
-      tags,
     }`;
   }
 

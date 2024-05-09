@@ -51,6 +51,9 @@ export default defineType({
         {
           type: "contactSection",
         },
+        {
+          type: "cta",
+        },
       ],
       validation: (Rule) => Rule.required(),
     },

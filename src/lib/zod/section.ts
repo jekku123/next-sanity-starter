@@ -49,6 +49,16 @@ export const ContactSectionSchema = z.object({
   body: z.any(),
 });
 
+export const CtaSchema = z.object({
+  _type: z.literal("cta"),
+  _key: z.string(),
+  title: z.string(),
+  description: z.string(),
+  primaryLink: LinkSchema.optional().nullable(),
+  secondaryLink: LinkSchema.optional().nullable(),
+});
+
+export type Cta = z.infer<typeof CtaSchema>;
 export type ContactSection = z.infer<typeof ContactSectionSchema>;
 export type TextImage = z.infer<typeof TextImageSchema>;
 export type Hero = z.infer<typeof HeroSchema>;
@@ -61,4 +71,5 @@ export type Section =
   | TextImage
   | FormattedText
   | ArticlesListing
-  | ContactSection;
+  | ContactSection
+  | Cta;

@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   ArticlesListingSchema,
   ContactSectionSchema,
+  CtaSchema,
   FormattedTextSchema,
   HeroSchema,
   TextImageSchema,
@@ -14,6 +15,7 @@ const FrontPageElementsSchema = z.discriminatedUnion("_type", [
   FormattedTextSchema,
   ArticlesListingSchema,
   ContactSectionSchema,
+  CtaSchema,
 ]);
 
 const FrontPageSchema = z.object({
