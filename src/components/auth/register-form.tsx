@@ -57,7 +57,7 @@ export const RegisterForm = () => {
       register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
-        if (process.env.NODE_ENV !== "development") {
+        if (process.env.NODE_ENV !== "development" && data.success) {
           setTimeout(() => {
             router.push(`/auth/login?email=${values.email}`);
           }, 1500);
