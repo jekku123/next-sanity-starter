@@ -7,8 +7,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, UserRound } from "lucide-react";
+import { Delete, LogOut, UserRound } from "lucide-react";
 import { User } from "next-auth";
+import DeleteAccountButton from "./delete-account-button";
 
 export const UserMenu = async ({ user }: { user: User }) => {
   return (
@@ -29,6 +30,14 @@ export const UserMenu = async ({ user }: { user: User }) => {
             Logout
           </DropdownMenuItem>
         </LogoutButton>
+        {!user.isOAuth && (
+          <DeleteAccountButton userId={user.id!}>
+            <DropdownMenuItem>
+              <Delete className="mr-2 h-4 w-4" />
+              Delete account
+            </DropdownMenuItem>
+          </DeleteAccountButton>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
