@@ -50,7 +50,7 @@ export default async function RootLayout({
                 {children}
               </main>
 
-              <Footer menu={menus.main} />
+              <Footer menu={menus.footer} />
             </div>
             <ScrollTop />
           </ThemeProvider>
