@@ -42,7 +42,7 @@ export default async function RootLayout({
   const session = await auth();
   const messages = await getMessages();
 
-  console.log({ locale, messages });
+  console.log("At Layout:", { locale, messages });
 
   return (
     <SessionProvider session={session}>

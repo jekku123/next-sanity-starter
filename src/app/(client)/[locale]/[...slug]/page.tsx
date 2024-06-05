@@ -1,7 +1,7 @@
 import Article from "@/components/documents/article";
 import Page from "@/components/documents/page";
 import {
-  getResourceBySlugTypeAndParams,
+  getResourceBySlugTypeAndParams3,
   getResourceTypeBySlug,
   getSlugsByType,
 } from "@/lib/sanity/client";
@@ -48,10 +48,13 @@ export const revalidate = 60;
 export default async function CustomPage({
   params,
 }: {
-  params: { slug: string[] };
+  params: { slug: string[]; locale: string };
 }) {
   // join the slug array to a string with slashes (e.g. ["articles", "article-1"] => "articles/article-1")
   const slug = `${params.slug.join("/")}`;
+  const locale = params.locale;
+
+  console.log("At Slug:", { slug, locale });
 
   // get the type of the resource with the given slug (e.g. "page", "article"..)
   const type: ResourceType = await getResourceTypeBySlug(slug);
@@ -61,11 +64,19 @@ export default async function CustomPage({
     return notFound();
   }
 
-  // get the resource with the given slug, type and get the params for the query using the getPageParams function
-  const resource = await getResourceBySlugTypeAndParams(
+  const keke = await getResourceBySlugTypeAndParams3(
     slug,
     type,
     getResourceGroqParams(type),
+    locale,
+  );
+
+  // get the resource with the given slug, type and get the params for the query using the getPageParams function
+  const resource = await getResourceBySlugTypeAndParams3(
+    slug,
+    type,
+    getResourceGroqParams(type),
+    locale,
   );
 
   // validate and cleanup the resource based on the type

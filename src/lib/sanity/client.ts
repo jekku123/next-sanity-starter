@@ -36,6 +36,31 @@ export async function getSlugsByType(type: string) {
   return params;
 }
 
+export async function getResourceBySlugTypeAndParams3(
+  slug: string,
+  type: string,
+  params: string,
+  language: string,
+) {
+  try {
+    const query = `*[_type == $type && slug.current == $slug && language == $language][0]{
+    ${params},
+    language,
+    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      title,
+      slug,
+      language
+    },
+  }`;
+
+    const resource = await client.fetch(query, { slug, type, language });
+    console.log("INTERNATIONALIZED RESOURCE: ", resource);
+    return resource;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+}
 export async function getResourceBySlugTypeAndParams(
   slug: string,
   type: string,
@@ -52,7 +77,7 @@ export async function getResourceBySlugTypeAndParams(
 }
 
 export async function getFrontPage(params: string) {
-  const query = `*[_type == "frontpage"][0]${params}`;
+  const query = `*[_type == "frontpage"][0]{${params}}`;
   const resource = await client.fetch(query);
   return resource;
 }

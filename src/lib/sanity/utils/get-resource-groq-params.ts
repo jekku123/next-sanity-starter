@@ -4,7 +4,7 @@ export type ResourceType = "frontpage" | "page" | "article";
 
 export default function getResourceGroqParams(type: ResourceType) {
   if (type === "frontpage") {
-    return groq`{
+    return groq`
     ...,
     content[] {
       ...,
@@ -35,11 +35,11 @@ export default function getResourceGroqParams(type: ResourceType) {
         },
       },
     }
-  }`;
+  `;
   }
 
   if (type === "page") {
-    return groq`{
+    return groq`
       ...,
       content[]{
         ...,
@@ -89,15 +89,15 @@ export default function getResourceGroqParams(type: ResourceType) {
             external,
           },
         },
-      },
-    }`;
+      }
+    `;
   }
 
   if (type === "article") {
-    return groq`{
+    return groq`
       ...,
-      body[],
-    }`;
+      body[]
+    `;
   }
 
   return "";

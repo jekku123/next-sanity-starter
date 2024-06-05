@@ -2,6 +2,7 @@
  * This configuration is used to for the Sanity Studio that’s mounted on the `/app/src/studio/[[...index]]/page.tsx` route
  */
 
+import { documentInternationalization } from "@sanity/document-internationalization";
 import { visionTool } from "@sanity/vision";
 import { DocumentDefinition, defineConfig } from "sanity";
 import { StructureBuilder, structureTool } from "sanity/structure";
@@ -70,6 +71,14 @@ export default defineConfig({
   plugins: [
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
+    documentInternationalization({
+      // Required configuration
+      supportedLanguages: [
+        { id: "en", title: "English" },
+        { id: "fi", title: "Finnish" },
+      ],
+      schemaTypes: ["page"],
+    }),
     structureTool({
       structure: (S) =>
         S.list()

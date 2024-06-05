@@ -2,16 +2,15 @@ import { auth } from "@/lib/next-auth/auth";
 
 import createIntlMiddleware from "next-intl/middleware";
 import { NextAuthRequest } from "node_modules/next-auth/lib";
+import { locales } from "./i18n";
 import {
   DEFAULT_LOGIN_PATH,
   DEFAULT_LOGIN_REDIRECT,
   apiAuthPrefix,
   authRoutes,
   protectedRoutes,
+  publicRoutes,
 } from "./lib/next-auth/routes";
-
-const locales = ["en", "fi"];
-const publicPages = ["/auth/login", "/auth/error"];
 
 const intlMiddleware = createIntlMiddleware({
   locales,
@@ -20,6 +19,7 @@ const intlMiddleware = createIntlMiddleware({
 });
 
 const authMiddleware = auth(
+  // @ts-ignore - next-auth types are not up to date
   function onSuccess(req) {
     const { nextUrl } = req;
     const isLoggedIn = !!req.auth;
@@ -27,6 +27,11 @@ const authMiddleware = auth(
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
     const isAuthRoute = authRoutes.includes(nextUrl.pathname);
     const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
+    const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+
+    if (isPublicRoute) {
+      return void null;
+    }
 
     if (isApiAuthRoute) {
       return void null;
