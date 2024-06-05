@@ -3,10 +3,17 @@ import { getFrontPage } from "@/lib/sanity/client";
 import getResourceGroqParams from "@/lib/sanity/utils/get-resource-groq-params";
 
 import { validateAndCleanupFrontPage } from "@/lib/zod/frontpage";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export const revalidate = 60;
 
-export default async function FrontPage() {
+export default async function FrontPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  unstable_setRequestLocale(locale);
+
   const frontpage = await getFrontPage(getResourceGroqParams("frontpage"));
   const validatedFrontpage = validateAndCleanupFrontPage(frontpage);
 
