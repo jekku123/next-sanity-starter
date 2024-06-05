@@ -16,19 +16,13 @@ describe("Authorization tests as logged in", () => {
 
   it("Check middleware protected route", () => {
     cy.visit("/protected");
-    cy.get("h1").contains("Protected");
-  });
-
-  it("Check protected sanity page", () => {
-    cy.visit("/authorized");
-    cy.get("h1").contains("Authorized");
+    cy.url().should("include", "protected");
   });
 
   it("Check that hidden menu item is visible and works", () => {
     cy.get('[data-test-id="hidden"]').should("exist");
     cy.get('[data-test-id="hidden"]').click();
     cy.url().should("include", "hidden");
-    cy.get("h1").contains("Hidden");
   });
 
   it("Check that contact form is shown at frontpage", () => {

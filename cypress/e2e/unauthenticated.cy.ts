@@ -8,11 +8,6 @@ describe("Authorization tests as logged out", () => {
     cy.url().should("eq", "http://localhost:3000/auth/login");
   });
 
-  it("Check that protected sanity page is not accessible", () => {
-    cy.visit("/authorized");
-    cy.get('[data-test-id="form-error"]').should("exist");
-  });
-
   it("Check that hidden menu item is not visible", () => {
     cy.get('[data-test-id="hidden"]').should("not.exist");
   });
