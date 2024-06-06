@@ -28,8 +28,13 @@ const authMiddleware = auth(
     const isAuthRoute = authRoutes.includes(nextUrl.pathname);
     const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
     const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+    const isStudioRoute = nextUrl.pathname.startsWith("/studio");
 
     if (isPublicRoute) {
+      return void null;
+    }
+
+    if (isStudioRoute) {
       return void null;
     }
 

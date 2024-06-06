@@ -29,5 +29,10 @@
     "dark-mode": "Tumma",
     "light-mode": "Vaalea",
     "system": "Oletus"
+  },
+  "LanguageSwitcher": {
+    "switch-language": "Vaihda kieltä",
+    "english": "Englanti",
+    "finnish": "Suomi"
   }
 }

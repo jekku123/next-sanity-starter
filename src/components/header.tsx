@@ -5,6 +5,7 @@ import { Settings } from "@/lib/zod/settings";
 import Image from "next/image";
 import Link from "next/link";
 import { UserMenu } from "./auth/user-menu";
+import LanguageSwitcher from "./language-switcher";
 import { MainMenu } from "./main-menu";
 import { MobileMenu } from "./mobile-menu";
 import { ModeToggle } from "./ui/mode-toggle";
@@ -36,6 +37,7 @@ export default async function Header({
             <UserMenu user={user} />
           )}
           <ModeToggle />
+          <LanguageSwitcher />
         </div>
       </nav>
     </header>

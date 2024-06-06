@@ -29,5 +29,10 @@
     "dark-mode": "Dark mode",
     "light-mode": "Light mode",
     "system": "System"
+  },
+  "LanguageSwitcher": {
+    "switch-language": "Switch language",
+    "english": "English",
+    "finnish": "Finnish"
   }
 }

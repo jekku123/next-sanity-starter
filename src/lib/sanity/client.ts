@@ -139,3 +139,28 @@ export async function getMenu(slug: string) {
 
   return menu;
 }
+
+export async function getMenu2(slug: string, language: string) {
+  const query = `*[_type == "navigation" && slug.current == $slug && language == $language][0] 
+  {
+    _id,
+    _type,
+    title,
+    language,
+    items[] {
+      _key,
+      label,
+      "href": coalesce(external, internal->slug.current, nextjsRoute),
+      isProtected,
+      subItems[] {
+        _key,
+        label,
+        "href": coalesce(external, internal->slug.current, nextjsRoute),
+      }
+    }
+  }`;
+
+  const menu = await client.fetch(query, { slug, language });
+
+  return menu;
+}
