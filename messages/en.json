@@ -5,5 +5,9 @@
   "NotFound": {
     "title": "Page not found",
     "back-to-previous-page": "Back to home"
+  },
+  "ArticlesListingSection": {
+    "no-articles": "No articles found.",
+    "view-all-articles": "View all articles"
   }
 }

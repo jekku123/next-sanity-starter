@@ -5,5 +5,9 @@
   "NotFound": {
     "title": "Sivua ei löytynyt",
     "back-to-previous-page": "Takaisin edelliselle sivulle"
+  },
+  "ArticlesListingSection": {
+    "no-articles": "Ei artikkeleita.",
+    "view-all-articles": "Katso kaikki artikkelit"
   }
 }
