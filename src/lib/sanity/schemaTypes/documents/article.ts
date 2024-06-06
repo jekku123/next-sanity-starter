@@ -1,4 +1,5 @@
-import { defineType } from "sanity";
+import { defineField, defineType } from "sanity";
+import { isUniqueOtherThanLanguage } from "./page";
 
 export default defineType({
   name: "article",
@@ -17,18 +18,39 @@ export default defineType({
       title: "Description",
       validation: (Rule) => Rule.required(),
     },
-    {
+    // {
+    //   name: "slug",
+    //   type: "slug",
+    //   title: "Slug",
+    //   options: {
+    //     source: (doc) => `articles/${doc.title}`,
+    //     isUnique: (value, context) => context.defaultIsUnique(value, context),
+    //     slugify: (input) =>
+    //       input.toLowerCase().replace(/\s+/g, "-").slice(0, 200),
+    //   },
+    //   validation: (Rule) => Rule.required(),
+    // },
+    defineField({
       name: "slug",
-      type: "slug",
       title: "Slug",
+      type: "slug",
       options: {
-        source: (doc) => `articles/${doc.title}`,
-        isUnique: (value, context) => context.defaultIsUnique(value, context),
-        slugify: (input) =>
+        source: "title",
+        maxLength: 96,
+        // isUnique: (value: string, context: SlugValidationContext) =>
+        //   context.defaultIsUnique(value, context),
+        slugify: (input: string) =>
           input.toLowerCase().replace(/\s+/g, "-").slice(0, 200),
+        isUnique: isUniqueOtherThanLanguage,
       },
       validation: (Rule) => Rule.required(),
-    },
+    }),
+    defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
     {
       name: "image",
       type: "image",

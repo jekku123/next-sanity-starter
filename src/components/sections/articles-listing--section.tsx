@@ -1,6 +1,6 @@
 import { getArticles } from "@/lib/sanity/utils/get-articles";
 import { ArticlesListing } from "@/lib/zod/section";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import ArticleTeasers from "../documents/article-teasers";
 import { TypographyH1 } from "../typography";
@@ -13,7 +13,11 @@ export default async function ArticlesListingSection({
 }: {
   content: ArticlesListing;
 }) {
-  const articles = await getArticles({ limit: content.limit || undefined });
+  const locale = await getLocale();
+  const articles = await getArticles({
+    limit: content.limit || undefined,
+    language: locale,
+  });
   const t = await getTranslations("ArticlesListingSection");
 
   return (

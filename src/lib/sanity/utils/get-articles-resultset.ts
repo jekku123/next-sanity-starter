@@ -4,12 +4,14 @@ import { client } from "../client";
 export async function getArticlesResultSet({
   limit = 6,
   offset = 0,
+  language = "en",
 }: {
   limit?: number;
   offset?: number;
+  language?: string;
 } = {}) {
   const query = `{
-    "items": *[_type == "article"]|order(_createdAt desc)
+    "items": *[_type == "article" && language == $language]|order(_createdAt desc)
     ${
       limit
         ? `[${offset ? offset : "0"}
@@ -30,7 +32,7 @@ export async function getArticlesResultSet({
      "total": count(*[_type == "article"])
 }`;
 
-  const articleResultSet = await client.fetch(query);
+  const articleResultSet = await client.fetch(query, { language });
 
   const validatedArticleResultSet =
     validateAndCleanupArticleResultSet(articleResultSet);

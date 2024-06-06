@@ -17,8 +17,9 @@ export const revalidate = 60;
 export default async function ArticlesPage({
   params,
 }: {
-  params?: { page: string[] };
+  params?: { page: string[]; locale: string };
 }) {
+  const locale = params?.locale;
   const page = params?.page;
   const currentPage = parseInt(Array.isArray(page) ? page[0] : page || "1");
 
@@ -27,6 +28,7 @@ export default async function ArticlesPage({
   const { totalPages, items } = await getArticlesResultSet({
     limit: PAGE_SIZE,
     offset: currentPage ? PAGE_SIZE * (currentPage - 1) : 0,
+    language: locale,
   });
 
   const prevEnabled = currentPage > 1;

@@ -7,11 +7,13 @@ import { client } from "../client";
 export async function getArticles({
   limit,
   order = "desc",
+  language = "en",
 }: {
   limit?: number;
   order?: "asc" | "desc";
+  language?: string;
 } = {}): Promise<ArticleTeaser[] | null> {
-  const query = `*[_type == "article"]${
+  const query = `*[_type == "article" && language == $language]${
     order ? `| order(_createdAt ${order})` : ""
   }${limit ? `[0...${limit}]` : ""} {
       _id,
@@ -24,7 +26,7 @@ export async function getArticles({
       _createdAt,
     }`;
 
-  const resource = await client.fetch(query);
+  const resource = await client.fetch(query, { language });
 
   const validatedArticleTeasers = resource.reduce(
     (articles: ArticleTeaser[], article: any) => {
