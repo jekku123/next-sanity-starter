@@ -1,5 +1,6 @@
 import { HomeIcon } from "lucide-react";
 import { defineField, defineType } from "sanity";
+import { isUniqueOtherThanLanguage } from "./page";
 
 export default defineType({
   name: "frontpage",
@@ -27,9 +28,19 @@ export default defineType({
       options: {
         source: "title",
         maxLength: 96,
+        // isUnique: (value: string, context: SlugValidationContext) =>
+        //   context.defaultIsUnique(value, context),
+        slugify: (input: string) =>
+          input.toLowerCase().replace(/\s+/g, "-").slice(0, 200),
+        isUnique: isUniqueOtherThanLanguage,
       },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "language",
+      type: "string",
       readOnly: true,
-      validation: (rule) => rule.required(),
+      hidden: true,
     }),
     {
       name: "content",

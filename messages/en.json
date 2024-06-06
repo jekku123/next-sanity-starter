@@ -1,5 +1,9 @@
 {
-  "Index": {
-    "title": "Hello world!"
+  "FrontPage": {
+    "frontpage-not-found": "Frontpage not found."
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "back-to-previous-page": "Back to home"
   }
 }

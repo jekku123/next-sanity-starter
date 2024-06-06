@@ -25,6 +25,16 @@ const FrontPageSchema = z.object({
   slug: z.object({
     current: z.string(),
   }),
+  language: z.string(),
+  _translations: z.array(
+    z.object({
+      title: z.string(),
+      slug: z.object({
+        current: z.string(),
+      }),
+      language: z.string(),
+    }),
+  ),
   content: z.array(FrontPageElementsSchema),
 });
 

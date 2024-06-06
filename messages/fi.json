@@ -1,5 +1,9 @@
 {
-  "Index": {
-    "title": "Hei maailma!"
+  "FrontPage": {
+    "frontpage-not-found": "Etusivua ei löytynyt."
+  },
+  "NotFound": {
+    "title": "Sivua ei löytynyt",
+    "back-to-previous-page": "Takaisin edelliselle sivulle"
   }
 }

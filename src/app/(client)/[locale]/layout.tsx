@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const locales = ["en", "de"];
+const locales = ["en", "fi"];
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -41,8 +41,6 @@ export default async function RootLayout({
   const { menus, settings } = await getCommonPageProps();
   const session = await auth();
   const messages = await getMessages();
-
-  console.log("At Layout:", { locale, messages });
 
   return (
     <SessionProvider session={session}>

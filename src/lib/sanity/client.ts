@@ -1,6 +1,7 @@
 import { createClient } from "next-sanity";
 
 import { env, useCdn } from "@/env";
+import { validateAndCleanupFrontPage } from "../zod/frontpage";
 import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";
 
@@ -76,10 +77,20 @@ export async function getResourceBySlugTypeAndParams(
   }
 }
 
-export async function getFrontPage(params: string) {
-  const query = `*[_type == "frontpage"][0]{${params}}`;
-  const resource = await client.fetch(query);
-  return resource;
+export async function getFrontPage(params: string, language: string) {
+  const query = `*[_type == "frontpage" && language == $language][0]{
+    ${params},
+    language,
+    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      title,
+      slug,
+      language
+    },
+  }`;
+  const resource = await client.fetch(query, { language });
+  const validatedFrontpage = validateAndCleanupFrontPage(resource);
+
+  return validatedFrontpage;
 }
 
 export async function getSettings() {

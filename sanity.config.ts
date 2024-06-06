@@ -26,6 +26,15 @@ const hiddenTypes = new Set([
   // "passwordResetToken",
 ]);
 
+const SINGLETONS = [
+  { id: "frontpage", _type: "frontpage", title: "Frontpage" },
+  { id: "settings", _type: "settings", title: "Settings" },
+];
+const LANGUAGES = [
+  { id: `en`, title: `English` },
+  { id: `fi`, title: `Finnish` },
+];
+
 const singletonListItems = (
   S: StructureBuilder,
   singletonTypeDefs: DocumentDefinition[],
@@ -73,11 +82,8 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     documentInternationalization({
       // Required configuration
-      supportedLanguages: [
-        { id: "en", title: "English" },
-        { id: "fi", title: "Finnish" },
-      ],
-      schemaTypes: ["page"],
+      supportedLanguages: LANGUAGES,
+      schemaTypes: ["page", "frontpage"],
     }),
     structureTool({
       structure: (S) =>
