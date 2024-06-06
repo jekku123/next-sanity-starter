@@ -83,7 +83,7 @@ export default defineConfig({
     documentInternationalization({
       // Required configuration
       supportedLanguages: LANGUAGES,
-      schemaTypes: ["page", "frontpage"],
+      schemaTypes: ["page", "frontpage", "navigation"],
     }),
     structureTool({
       structure: (S) =>
