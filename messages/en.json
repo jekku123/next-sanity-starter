@@ -34,5 +34,10 @@
     "switch-language": "Switch language",
     "english": "English",
     "finnish": "Finnish"
+  },
+  "ArticlesListingPage": {
+    "title": "Articles",
+    "search-placeholder": "Search..",
+    "no-articles": "No articles found."
   }
 }
