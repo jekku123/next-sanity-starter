@@ -32,11 +32,12 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  { params }: { params: { slug: string[] } },
+  { params }: { params: { slug: string[]; locale: string } },
   _parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const path = params.slug.join("/");
-  const metadata = await getDynamicMetadata(path);
+  const locale = params.locale;
+  const metadata = await getDynamicMetadata(path, locale);
   return {
     title: metadata.title,
     description: metadata.description,

@@ -1,8 +1,8 @@
-import { getMetadataBySlug, getSettings } from "@/lib/sanity/client";
+import { getMetadataBySlugAndLang, getSettings } from "@/lib/sanity/client";
 
-export async function getDynamicMetadata(path: string) {
+export async function getDynamicMetadata(path: string, locale: string) {
   const [metadata, settings] = await Promise.all([
-    getMetadataBySlug(path),
+    getMetadataBySlugAndLang(path, locale),
     getSettings(),
   ]);
 

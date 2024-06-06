@@ -26,6 +26,7 @@ const FrontPageSchema = z.object({
     current: z.string(),
   }),
   language: z.string(),
+  description: z.string(),
   _translations: z.array(
     z.object({
       title: z.string(),

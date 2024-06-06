@@ -10,17 +10,22 @@ const inter = Inter({ subsets: ["latin"] });
 import { ScrollTop } from "@/components/scroll-top";
 import { ThemeProvider } from "@/components/theme-provider";
 import { auth } from "@/lib/next-auth/auth";
+import { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 
-// export async function generateMetadata(): Promise<Metadata> {
-//   const { settings } = await getCommonPageProps();
-//   return {
-//     title: settings?.title.text ?? "Untitled",
-//     description: settings?.description ?? "No description",
-//   };
-// }
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const { settings } = await getCommonPageProps(locale);
+  return {
+    title: settings?.title.text ?? "Untitled",
+    description: settings?.description ?? "No description",
+  };
+}
 
 const locales = ["en", "fi"];
 

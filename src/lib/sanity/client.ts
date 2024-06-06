@@ -106,41 +106,17 @@ export async function getSettings() {
   return validatedSettings;
 }
 
-export async function getMetadataBySlug(slug: string) {
-  const query = `*[slug.current == $slug][0] {
+export async function getMetadataBySlugAndLang(slug: string, language: string) {
+  const query = `*[slug.current == $slug && language == $language][0] {
     title,
     description,
   }`;
-  const metadata = await client.fetch(query, { slug });
+  const metadata = await client.fetch(query, { slug, language });
   const validatedMetadata = validateAndCleanupMetadata(metadata);
   return validatedMetadata;
 }
 
-export async function getMenu(slug: string) {
-  const query = `*[_type == "navigation" && slug.current == $slug][0] 
-  {
-    _id,
-    _type,
-    title,
-    items[] {
-      _key,
-      label,
-      "href": coalesce(external, internal->slug.current, nextjsRoute),
-      isProtected,
-      subItems[] {
-        _key,
-        label,
-        "href": coalesce(external, internal->slug.current, nextjsRoute),
-      }
-    }
-  }`;
-
-  const menu = await client.fetch(query, { slug });
-
-  return menu;
-}
-
-export async function getMenu2(slug: string, language: string) {
+export async function getMenu(slug: string, language: string) {
   const query = `*[_type == "navigation" && slug.current == $slug && language == $language][0] 
   {
     _id,
