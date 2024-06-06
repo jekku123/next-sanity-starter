@@ -11,11 +11,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Delete, LogOut, UserRound } from "lucide-react";
 import { User } from "next-auth";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { DeleteUserDialog } from "./delete-user-dialog";
 
 export const UserMenu = ({ user }: { user: User }) => {
   const [open, setOpen] = useState(false);
+  const t = useTranslations("UserMenu");
 
   return (
     <>
@@ -33,7 +35,7 @@ export const UserMenu = ({ user }: { user: User }) => {
           <LogoutButton>
             <DropdownMenuItem>
               <LogOut className="mr-2 h-4 w-4" />
-              Logout
+              {t("logout")}
             </DropdownMenuItem>
           </LogoutButton>
           {!user.isOAuth && (
@@ -42,7 +44,7 @@ export const UserMenu = ({ user }: { user: User }) => {
               data-test-id="delete-user-trigger"
             >
               <Delete className="mr-2 h-4 w-4" />
-              Delete Account
+              {t("delete-account")}
             </DropdownMenuItem>
           )}
         </DropdownMenuContent>

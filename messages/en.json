@@ -6,8 +6,28 @@
     "title": "Page not found",
     "back-to-previous-page": "Back to home"
   },
+  "ContactForm": {
+    "title": "Contact us",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "message-placeholder": "Type your message here...",
+    "submit": "Submit",
+    "success": "Message sent successfully.",
+    "error": "An error occurred while sending the message."
+  },
   "ArticlesListingSection": {
     "no-articles": "No articles found.",
     "view-all-articles": "View all articles"
+  },
+  "UserMenu": {
+    "logout": "Logout",
+    "delete-account": "Delete account"
+  },
+  "ModeToggle": {
+    "toggle-theme": "Toggle theme",
+    "dark-mode": "Dark mode",
+    "light-mode": "Light mode",
+    "system": "System"
   }
 }

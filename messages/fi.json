@@ -6,8 +6,28 @@
     "title": "Sivua ei löytynyt",
     "back-to-previous-page": "Takaisin edelliselle sivulle"
   },
+  "ContactForm": {
+    "title": "Ota yhteyttä",
+    "name": "Nimi",
+    "email": "Sähköposti",
+    "message": "Viesti",
+    "message-placeholder": "Kirjoita viestisi tähän...",
+    "submit": "Lähetä",
+    "success": "Viesti lähetetty onnistuneesti. Kiitos!",
+    "error": "Viestin lähettäminen epäonnistui. Yritä uudelleen."
+  },
   "ArticlesListingSection": {
     "no-articles": "Ei artikkeleita.",
     "view-all-articles": "Katso kaikki artikkelit"
+  },
+  "UserMenu": {
+    "logout": "Kirjaudu ulos",
+    "delete-account": "Poista tili"
+  },
+  "ModeToggle": {
+    "toggle-theme": "Vaihda teemaa",
+    "dark-mode": "Tumma",
+    "light-mode": "Vaalea",
+    "system": "Oletus"
   }
 }

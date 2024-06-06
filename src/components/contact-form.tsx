@@ -17,6 +17,7 @@ import {
 
 import { sendContactFormAction } from "@/lib/sanity/actions/contact";
 import { ContactSchema } from "@/lib/zod/contact-form";
+import { useTranslations } from "next-intl";
 import { FormError } from "./form-error";
 import { FormSuccess } from "./form-success";
 import { Input } from "./ui/input";
@@ -26,6 +27,7 @@ export const ContactForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+  const t = useTranslations("ContactForm");
 
   const form = useForm<z.infer<typeof ContactSchema>>({
     resolver: zodResolver(ContactSchema),
@@ -68,7 +70,7 @@ export const ContactForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>{t("name")}</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -85,7 +87,7 @@ export const ContactForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t("email")}</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -103,13 +105,13 @@ export const ContactForm = () => {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Message</FormLabel>
+                <FormLabel>{t("message")}</FormLabel>
                 <FormControl>
                   <Textarea
                     className="resize-none"
                     {...field}
                     disabled={isPending}
-                    placeholder="This is my message"
+                    placeholder={t("message-placeholder")}
                   />
                 </FormControl>
                 <FormMessage />
@@ -120,7 +122,7 @@ export const ContactForm = () => {
         <FormError message={error} />
         <FormSuccess message={success} />
         <Button disabled={isPending} type="submit" className="w-full">
-          Send
+          {t("submit")}
         </Button>
       </form>
     </Form>
