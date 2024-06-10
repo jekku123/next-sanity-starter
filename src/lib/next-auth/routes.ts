@@ -2,7 +2,7 @@
  * An array of routes that are accessible to the public
  * These routes do not require authentication
  */
-export const publicRoutes: string[] = ["/studio", "/auth/new-verification"];
+export const publicRoutes: string[] = ["/studio"];
 
 /**
  * An array of routes that are protected
@@ -20,6 +20,7 @@ export const authRoutes: string[] = [
   "/auth/error",
   "/auth/reset",
   "/auth/new-password",
+  "/auth/new-verification",
 ];
 
 /**

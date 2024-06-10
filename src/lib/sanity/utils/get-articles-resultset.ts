@@ -29,7 +29,7 @@ export async function getArticlesResultSet({
       tags,
       _createdAt,
     },
-     "total": count(*[_type == "article"])
+     "total": count(*[_type == "article" && language == $language])
 }`;
 
   const articleResultSet = await client.fetch(query, { language });

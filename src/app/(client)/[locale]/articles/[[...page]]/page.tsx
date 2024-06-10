@@ -23,7 +23,7 @@ export default async function ArticlesPage({
   const page = params?.page;
   const currentPage = parseInt(Array.isArray(page) ? page[0] : page || "1");
 
-  const PAGE_SIZE = 6;
+  const PAGE_SIZE = 3;
 
   const { totalPages, items } = await getArticlesResultSet({
     limit: PAGE_SIZE,
@@ -34,7 +34,7 @@ export default async function ArticlesPage({
   const prevEnabled = currentPage > 1;
   const nextEnabled = currentPage < totalPages;
 
-  const pageRoot = "/all-articles";
+  const pageRoot = "/articles";
   const prevPage = currentPage - 1;
   const nextPage = currentPage + 1;
   const prevPageHref =

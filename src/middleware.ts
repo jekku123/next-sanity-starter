@@ -1,7 +1,7 @@
 import { auth } from "@/lib/next-auth/auth";
 
 import createIntlMiddleware from "next-intl/middleware";
-import { NextAuthRequest } from "node_modules/next-auth/lib";
+import { NextRequest } from "next/server";
 import { locales } from "./i18n";
 import {
   DEFAULT_LOGIN_PATH,
@@ -18,47 +18,39 @@ const intlMiddleware = createIntlMiddleware({
   defaultLocale: "en",
 });
 
-const authMiddleware = auth(
-  // @ts-ignore - next-auth types are not up to date
-  function onSuccess(req) {
-    const { nextUrl } = req;
-    const isLoggedIn = !!req.auth;
+const authMiddleware = auth((req) => {
+  const { nextUrl } = req;
+  const isLoggedIn = !!req.auth;
 
-    const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-    const isAuthRoute = authRoutes.includes(nextUrl.pathname);
-    const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
-    const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
-    const isStudioRoute = nextUrl.pathname.startsWith("/studio");
+  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isStudioRoute = nextUrl.pathname.startsWith("/studio");
 
-    if (isPublicRoute) {
-      return void null;
-    }
+  if (isPublicRoute) {
+    return void null;
+  }
 
-    if (isStudioRoute) {
-      return void null;
-    }
+  if (isStudioRoute) {
+    return void null;
+  }
 
-    if (isApiAuthRoute) {
-      return void null;
-    }
+  if (isApiAuthRoute) {
+    return void null;
+  }
 
-    if (isAuthRoute && isLoggedIn) {
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
-    }
+  if (isAuthRoute && isLoggedIn) {
+    return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+  }
 
-    if (isProtectedRoute && !isLoggedIn) {
-      return Response.redirect(new URL(DEFAULT_LOGIN_PATH, nextUrl));
-    }
-    return intlMiddleware(req);
-  },
-  {
-    callbacks: {
-      authorized: ({ token }: { token: string }) => token != null,
-    },
-  },
-);
+  if (isProtectedRoute && !isLoggedIn) {
+    return Response.redirect(new URL(DEFAULT_LOGIN_PATH, nextUrl));
+  }
+  return intlMiddleware(req);
+});
 
-export default function middleware(req: NextAuthRequest) {
+export default function middleware(req: NextRequest) {
   // const publicPathnameRegex = RegExp(
   //   `^(/(${locales.join("|")}))?(${publicPages
   //     .flatMap((p) => (p === "/" ? ["", "/"] : p))
