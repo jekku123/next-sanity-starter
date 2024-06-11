@@ -32,7 +32,7 @@ export default async function ArticlesListingSection({
 
       <div className="place-self-center">
         <Button asChild>
-          <Link href="/articles">{t("view-all-articles")}</Link>
+          <Link href="/all-articles">{t("view-all-articles")}</Link>
         </Button>
       </div>
     </div>

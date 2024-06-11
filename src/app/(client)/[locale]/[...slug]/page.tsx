@@ -55,8 +55,6 @@ export default async function CustomPage({
   const slug = `${params.slug.join("/")}`;
   const locale = params.locale;
 
-  console.log("At Slug:", { slug, locale });
-
   // get the type of the resource with the given slug (e.g. "page", "article"..)
   const type: ResourceType = await getResourceTypeBySlug(slug);
 

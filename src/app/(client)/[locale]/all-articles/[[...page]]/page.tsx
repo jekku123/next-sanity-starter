@@ -34,7 +34,7 @@ export default async function ArticlesPage({
   const prevEnabled = currentPage > 1;
   const nextEnabled = currentPage < totalPages;
 
-  const pageRoot = "/articles";
+  const pageRoot = "/all-articles";
   const prevPage = currentPage - 1;
   const nextPage = currentPage + 1;
   const prevPageHref =

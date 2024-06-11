@@ -55,7 +55,6 @@ export async function getResourceBySlugTypeAndParams3(
   }`;
 
     const resource = await client.fetch(query, { slug, type, language });
-    console.log("INTERNATIONALIZED RESOURCE: ", resource);
     return resource;
   } catch (e) {
     console.error(e);
