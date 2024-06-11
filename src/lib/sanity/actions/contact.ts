@@ -1,30 +1,35 @@
 "use server";
 
-import { ContactSchema } from "@/lib/zod/contact-form";
-import { z } from "zod";
+import { ContactFormType, contactFormBaseSchema } from "@/lib/zod/contact-form";
+import { getTranslations } from "next-intl/server";
 import { client } from "../client";
 
-export async function sendContactFormAction(
-  values: z.infer<typeof ContactSchema>,
-) {
-  const validatedFields = ContactSchema.safeParse(values);
+export async function sendContactFormAction(values: ContactFormType) {
+  const t = await getTranslations("ContactForm");
+
+  const validatedFields = contactFormBaseSchema(t).safeParse(values);
 
   if (!validatedFields.success) {
-    return { error: "Invalid Fields!" };
+    const errors = validatedFields.error.flatten().fieldErrors;
+
+    return {
+      success: false,
+      errors: {
+        name: errors.name ?? "",
+        email: errors.email ?? "",
+        message: errors.message ?? "",
+      },
+    };
   }
 
   const { name, email, message } = validatedFields.data;
 
-  const submission = await client.create({
+  const data = await client.create({
     _type: "submission",
     name,
     email,
     message,
   });
 
-  if (!submission) {
-    return { error: "Submission failed" };
-  }
-
-  return { success: "Submission successful" };
+  return { success: true, data };
 }

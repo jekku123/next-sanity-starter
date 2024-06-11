@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +15,7 @@ import {
 } from "@/components/ui/form";
 
 import { sendContactFormAction } from "@/lib/sanity/actions/contact";
-import { ContactSchema } from "@/lib/zod/contact-form";
+import { ContactFormType, contactFormBaseSchema } from "@/lib/zod/contact-form";
 import { useTranslations } from "next-intl";
 import { FormError } from "./form-error";
 import { FormSuccess } from "./form-success";
@@ -29,8 +28,10 @@ export const ContactForm = () => {
   const [isPending, startTransition] = useTransition();
   const t = useTranslations("ContactForm");
 
-  const form = useForm<z.infer<typeof ContactSchema>>({
-    resolver: zodResolver(ContactSchema),
+  const contactFormSchema = contactFormBaseSchema(t);
+
+  const form = useForm<ContactFormType>({
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -38,19 +39,37 @@ export const ContactForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof ContactSchema>) => {
+  const onSubmit = (values: ContactFormType) => {
     setError("");
     setSuccess("");
 
     startTransition(() => {
       sendContactFormAction(values)
         .then((data) => {
-          if (data?.error) {
-            setError(data.error);
+          if (data?.errors) {
+            const errors = data.errors;
+
+            if (errors.name) {
+              form.setError("name", {
+                message: errors.name[0],
+                type: "server",
+              });
+            } else if (errors.email) {
+              form.setError("email", {
+                message: errors.email[0],
+                type: "server",
+              });
+            } else if (errors.message) {
+              form.setError("message", {
+                message: errors.message[0],
+                type: "server",
+              });
+            }
           }
+
           if (data?.success) {
             form.reset();
-            setSuccess(data.success);
+            setSuccess("Message sent successfully");
           }
         })
         .catch(() => setError("Something went wrong"));

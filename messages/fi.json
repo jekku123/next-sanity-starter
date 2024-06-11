@@ -14,7 +14,13 @@
     "message-placeholder": "Kirjoita viestisi tähän...",
     "submit": "Lähetä",
     "success": "Viesti lähetetty onnistuneesti. Kiitos!",
-    "error": "Viestin lähettäminen epäonnistui. Yritä uudelleen."
+    "error": "Viestin lähettäminen epäonnistui. Yritä uudelleen.",
+    "errors": {
+      "name": "Nimi on pakollinen.",
+      "email": "Sähköposti on pakollinen.",
+      "email-invalid": "Sähköposti on virheellinen.",
+      "message": "Viesti on pakollinen."
+    }
   },
   "ArticlesListingSection": {
     "no-articles": "Ei artikkeleita.",

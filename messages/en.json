@@ -14,7 +14,13 @@
     "message-placeholder": "Type your message here...",
     "submit": "Submit",
     "success": "Message sent successfully.",
-    "error": "An error occurred while sending the message."
+    "error": "An error occurred while sending the message.",
+    "errors": {
+      "name": "Name is required.",
+      "email": "Email is required.",
+      "email-invalid": "Email is invalid.",
+      "message": "Message is required."
+    }
   },
   "ArticlesListingSection": {
     "no-articles": "No articles found.",
