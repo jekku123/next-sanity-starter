@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { getTranslations } from "next-intl/server";
 import {
   Pagination,
   PaginationContent,
@@ -18,7 +19,7 @@ type PaginationControllerProps = {
   nextEnabled: boolean;
 };
 
-export function PaginationController({
+export async function PaginationController({
   prevPageHref,
   nextPageHref,
   pageRoot,
@@ -27,12 +28,15 @@ export function PaginationController({
   prevEnabled,
   nextEnabled,
 }: PaginationControllerProps) {
+  const t = await getTranslations("PaginationController");
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
             href={(prevPageHref as string) || ""}
+            title={t("previous")}
             className={
               prevEnabled
                 ? "cursor-pointer"
@@ -57,6 +61,7 @@ export function PaginationController({
         <PaginationItem>
           <PaginationNext
             href={(nextPageHref as string) || ""}
+            title={t("next")}
             className={cn(
               !nextEnabled && "pointer-events-none cursor-not-allowed",
             )}

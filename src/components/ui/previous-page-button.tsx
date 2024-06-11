@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 
 import { ArrowLeftIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Button, ButtonProps } from "./button";
 
@@ -13,6 +14,7 @@ export function PreviousPageButton({
   children,
   ...props
 }: PreviousPageProps) {
+  const t = useTranslations("BackButton");
   const router = useRouter();
 
   const navigateBack = () => {
@@ -23,7 +25,7 @@ export function PreviousPageButton({
     <div className="flex">
       <Button
         onClick={navigateBack}
-        aria-label="back-button"
+        aria-label="back-utton"
         className={cn("group", className)}
         data-test-id="previous-page-button"
         {...props}
@@ -32,7 +34,7 @@ export function PreviousPageButton({
           aria-hidden
           className="mr-3 h-5 w-5 transition-transform duration-500 group-hover:-translate-x-2"
         />
-        {children || "Previous Page"}
+        {children || t("previous-page")}
       </Button>
     </div>
   );

@@ -39,5 +39,17 @@
     "title": "Artikkelit",
     "search-placeholder": "Hae..",
     "no-articles": "Ei artikkeleita."
+  },
+  "BackButton": {
+    "previous-page": "Edellinen sivu"
+  },
+  "ArticlePage": {
+    "published": "Julkaistu",
+    "updated": "Päivitetty",
+    "author": "Kirjoittaja"
+  },
+  "PaginationController": {
+    "previous": "Edellinen",
+    "next": "Seuraava"
   }
 }

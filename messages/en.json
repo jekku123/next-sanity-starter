@@ -39,5 +39,17 @@
     "title": "Articles",
     "search-placeholder": "Search..",
     "no-articles": "No articles found."
+  },
+  "BackButton": {
+    "previous-page": "Previous page"
+  },
+  "ArticlePage": {
+    "published": "Published",
+    "updated": "Updated",
+    "author": "Author"
+  },
+  "PaginationController": {
+    "previous": "Previous",
+    "next": "Next"
   }
 }
