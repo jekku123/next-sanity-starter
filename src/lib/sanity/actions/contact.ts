@@ -7,7 +7,14 @@ import { client } from "../client";
 export async function sendContactFormAction(values: ContactFormType) {
   const t = await getTranslations("ContactForm");
 
-  const validatedFields = contactFormBaseSchema(t).safeParse(values);
+  const translatedErrors = {
+    name: t("errors.name"),
+    email: t("errors.email"),
+    message: t("errors.message"),
+  };
+
+  const validatedFields =
+    contactFormBaseSchema(translatedErrors).safeParse(values);
 
   if (!validatedFields.success) {
     const errors = validatedFields.error.flatten().fieldErrors;

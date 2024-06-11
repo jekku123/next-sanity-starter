@@ -28,7 +28,13 @@ export const ContactForm = () => {
   const [isPending, startTransition] = useTransition();
   const t = useTranslations("ContactForm");
 
-  const contactFormSchema = contactFormBaseSchema(t);
+  const translatedErrors = {
+    name: t("errors.name"),
+    email: t("errors.email"),
+    message: t("errors.message"),
+  };
+
+  const contactFormSchema = contactFormBaseSchema(translatedErrors);
 
   const form = useForm<ContactFormType>({
     resolver: zodResolver(contactFormSchema),

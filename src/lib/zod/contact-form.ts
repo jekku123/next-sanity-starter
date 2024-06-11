@@ -1,18 +1,23 @@
-import { useTranslations } from "next-intl";
 import * as z from "zod";
 
-export const contactFormBaseSchema = (
-  t: ReturnType<typeof useTranslations<"ContactForm">>,
-) =>
+export const contactFormBaseSchema = ({
+  name,
+  email,
+  message,
+}: {
+  name: string;
+  email: string;
+  message: string;
+}) =>
   z.object({
     name: z.string().min(1, {
-      message: t("errors.name"),
+      message: name,
     }),
     email: z.string().email({
-      message: t("errors.email"),
+      message: email,
     }),
     message: z.string().min(6, {
-      message: t("errors.message"),
+      message: message,
     }),
   });
 
