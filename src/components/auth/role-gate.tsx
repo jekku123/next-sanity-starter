@@ -1,6 +1,6 @@
 "use client";
 
-import { useCurrentRole } from "@/hooks/use-current-role";
+import { useCurrentRole } from "@/lib/next-auth/hooks/use-current-role";
 import { UserRole } from "@/types/authentication";
 import { FormError } from "../form-error";
 

@@ -1,7 +1,7 @@
 import { auth } from "@/lib/next-auth/auth";
 
 import createIntlMiddleware from "next-intl/middleware";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { locales } from "./i18n";
 import {
   DEFAULT_LOGIN_PATH,
@@ -9,7 +9,6 @@ import {
   apiAuthPrefix,
   authRoutes,
   protectedRoutes,
-  publicRoutes,
 } from "./lib/next-auth/routes";
 
 const intlMiddleware = createIntlMiddleware({
@@ -25,12 +24,7 @@ const authMiddleware = auth((req) => {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isStudioRoute = nextUrl.pathname.startsWith("/studio");
-
-  if (isPublicRoute) {
-    return void null;
-  }
 
   if (isStudioRoute) {
     return void null;
@@ -41,11 +35,11 @@ const authMiddleware = auth((req) => {
   }
 
   if (isAuthRoute && isLoggedIn) {
-    return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+    return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
   }
 
   if (isProtectedRoute && !isLoggedIn) {
-    return Response.redirect(new URL(DEFAULT_LOGIN_PATH, nextUrl));
+    return NextResponse.redirect(new URL(DEFAULT_LOGIN_PATH, nextUrl));
   }
   return intlMiddleware(req);
 });

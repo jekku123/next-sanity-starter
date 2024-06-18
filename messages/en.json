@@ -27,6 +27,7 @@
     "view-all-articles": "View all articles"
   },
   "UserMenu": {
+    "settings": "Settings",
     "logout": "Logout",
     "delete-account": "Delete account"
   },
@@ -57,5 +58,8 @@
   "PaginationController": {
     "previous": "Previous",
     "next": "Next"
+  },
+  "DashboardPage": {
+    "title": "Dashboard"
   }
 }

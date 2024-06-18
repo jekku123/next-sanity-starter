@@ -1,6 +1,6 @@
 "use client";
 
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { useCurrentUser } from "@/lib/next-auth/hooks/use-current-user";
 
 type AuthGateClientProps = {
   children: React.ReactNode;

@@ -9,7 +9,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Delete, LogOut, UserRound } from "lucide-react";
+import { Link } from "@/navigation";
+import { Delete, LogOut, SettingsIcon, UserRound } from "lucide-react";
 import { User } from "next-auth";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -32,6 +33,10 @@ export const UserMenu = ({ user }: { user: User }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40" align="center">
           <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+          <DropdownMenuItem>
+            <SettingsIcon className="mr-2 h-4 w-4" />
+            <Link href="/settings">{t("settings")}</Link>
+          </DropdownMenuItem>
           <LogoutButton>
             <DropdownMenuItem>
               <LogOut className="mr-2 h-4 w-4" />

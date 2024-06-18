@@ -8,7 +8,7 @@ export const publicRoutes: string[] = ["/studio"];
  * An array of routes that are protected
  * These routes require authentication and will redirect unauthenticated users to /auth/login
  */
-export const protectedRoutes: string[] = ["/protected"];
+export const protectedRoutes: string[] = ["/protected", "/settings"];
 
 /**
  * An array of routes that are used for authentication

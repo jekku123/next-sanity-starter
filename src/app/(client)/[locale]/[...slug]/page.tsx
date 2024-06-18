@@ -13,6 +13,7 @@ import getResourceGroqParams, {
 import { validateAndCleanupArticle } from "@/lib/zod/article";
 import { validateAndCleanupPage } from "@/lib/zod/page";
 import { Metadata, ResolvingMetadata } from "next";
+import { unstable_setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 // Add the types of the resources you want to generate static pages for
@@ -51,9 +52,11 @@ export default async function CustomPage({
 }: {
   params: { slug: string[]; locale: string };
 }) {
+  const locale = params.locale;
+  unstable_setRequestLocale(locale);
+
   // join the slug array to a string with slashes (e.g. ["articles", "article-1"] => "articles/article-1")
   const slug = `${params.slug.join("/")}`;
-  const locale = params.locale;
 
   // get the type of the resource with the given slug (e.g. "page", "article"..)
   const type: ResourceType = await getResourceTypeBySlug(slug);
@@ -62,13 +65,6 @@ export default async function CustomPage({
   if (!type) {
     return notFound();
   }
-
-  const keke = await getResourceBySlugTypeAndParams3(
-    slug,
-    type,
-    getResourceGroqParams(type),
-    locale,
-  );
 
   // get the resource with the given slug, type and get the params for the query using the getPageParams function
   const resource = await getResourceBySlugTypeAndParams3(

@@ -54,3 +54,10 @@ export type PasswordResetToken = {
   token: string;
   expires: string;
 };
+
+export type SessionUser =
+  | (User & {
+      role: UserRole;
+      isOAuth: boolean;
+    })
+  | undefined;

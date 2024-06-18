@@ -47,9 +47,9 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <SessionProvider session={session}>
-      <html lang={locale} suppressHydrationWarning>
-        <body className={inter.className}>
+    <html lang={locale} suppressHydrationWarning>
+      <body className={inter.className}>
+        <SessionProvider session={session}>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider
               attribute="class"
@@ -63,18 +63,14 @@ export default async function RootLayout({
                   title={settings?.title}
                   logo={settings?.logo}
                 />
-
-                <main className="mx-auto w-full max-w-7xl grow px-6 py-6 md:py-9">
-                  {children}
-                </main>
-
+                {children}
                 <Footer menu={menus.footer} />
               </div>
               <ScrollTop />
             </ThemeProvider>
           </NextIntlClientProvider>
-        </body>
-      </html>
-    </SessionProvider>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }

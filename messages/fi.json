@@ -27,6 +27,7 @@
     "view-all-articles": "Katso kaikki artikkelit"
   },
   "UserMenu": {
+    "settings": "Asetukset",
     "logout": "Kirjaudu ulos",
     "delete-account": "Poista tili"
   },
@@ -57,5 +58,8 @@
   "PaginationController": {
     "previous": "Edellinen",
     "next": "Seuraava"
+  },
+  "DashboardPage": {
+    "title": "Dashboard"
   }
 }

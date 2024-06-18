@@ -2,6 +2,7 @@ import { PaginationController } from "@/components/pagination-controller";
 import { getSettings } from "@/lib/sanity/client";
 import { getArticlesResultSet } from "@/lib/sanity/utils/get-articles-resultset";
 import { Metadata } from "next";
+import { unstable_setRequestLocale } from "next-intl/server";
 import Listing from "./_components/listing";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -17,9 +18,11 @@ export const revalidate = 60;
 export default async function ArticlesPage({
   params,
 }: {
-  params?: { page: string[]; locale: string };
+  params: { page: string[]; locale: string };
 }) {
   const locale = params?.locale;
+  unstable_setRequestLocale(locale);
+
   const page = params?.page;
   const currentPage = parseInt(Array.isArray(page) ? page[0] : page || "1");
 
