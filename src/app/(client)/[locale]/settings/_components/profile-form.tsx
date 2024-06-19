@@ -27,6 +27,8 @@ export const ProfileForm = ({ user }: { user: User }) => {
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
+  const isOauth = user?.isOAuth;
+
   const form = useForm<z.infer<typeof SettingsSchema>>({
     resolver: zodResolver(SettingsSchema),
     defaultValues: {
@@ -72,7 +74,7 @@ export const ProfileForm = ({ user }: { user: User }) => {
                 <FormControl>
                   <Input
                     {...field}
-                    disabled={isPending}
+                    disabled={isPending || isOauth}
                     data-test-id="profile-form-name"
                   />
                 </FormControl>
@@ -89,7 +91,7 @@ export const ProfileForm = ({ user }: { user: User }) => {
                 <FormControl>
                   <Input
                     {...field}
-                    disabled={isPending}
+                    disabled={isPending || isOauth}
                     type="email"
                     data-test-id="profile-form-email"
                   />
@@ -107,7 +109,7 @@ export const ProfileForm = ({ user }: { user: User }) => {
                 <FormControl>
                   <Input
                     {...field}
-                    disabled={isPending}
+                    disabled={isPending || isOauth}
                     type="password"
                     data-test-id="profile-form-password"
                   />
@@ -125,7 +127,7 @@ export const ProfileForm = ({ user }: { user: User }) => {
                 <FormControl>
                   <Input
                     {...field}
-                    disabled={isPending}
+                    disabled={isPending || isOauth}
                     type="password"
                     data-test-id="profile-form-newPassword"
                   />
@@ -138,13 +140,19 @@ export const ProfileForm = ({ user }: { user: User }) => {
         <FormError message={error} />
         <FormSuccess message={success} />
         <Button
-          disabled={isPending}
+          disabled={isPending || isOauth}
           type="submit"
           className="w-full"
           data-test-id="profile-save-button"
         >
           Save
         </Button>
+        {isOauth && (
+          <p className="text-sm text-destructive">
+            You are using an OAuth provider to sign in. You cannot change your
+            profile details.
+          </p>
+        )}
       </form>
     </Form>
   );

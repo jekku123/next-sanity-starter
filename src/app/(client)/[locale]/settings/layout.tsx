@@ -14,7 +14,7 @@ export default async function DashboardLayout({
   return (
     <>
       <TypographyH2>Settings</TypographyH2>
-      <div className="mt-6 flex grow">
+      <div className="mt-4 flex grow">
         <div className="w-1/4 border-r">
           <Sidebar />
         </div>
