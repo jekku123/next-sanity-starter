@@ -61,7 +61,7 @@ export const ProfileForm = ({ user }: { user: User }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full space-y-6 px-4"
+        className="w-full space-y-6"
         data-test-id="profile-form"
       >
         <div className="space-y-4">

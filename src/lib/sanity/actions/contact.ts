@@ -3,6 +3,7 @@
 import { currentUser } from "@/lib/next-auth/utils/auth";
 import { ContactFormType, contactFormBaseSchema } from "@/lib/zod/contact-form";
 import { getTranslations } from "next-intl/server";
+import { revalidatePath } from "next/cache";
 import { client } from "../client";
 
 export async function sendContactFormAction(values: ContactFormType) {
@@ -49,5 +50,21 @@ export async function sendContactFormAction(values: ContactFormType) {
     message,
   });
 
+  revalidatePath("/settings/submissions");
+
   return { success: true, data };
+}
+
+export async function deleteSubmissionAction(id: string) {
+  const user = await currentUser();
+
+  if (!user) {
+    return { error: "Unauthorized" };
+  }
+
+  await client.delete(id);
+
+  revalidatePath("/settings/submissions");
+
+  return { success: true };
 }

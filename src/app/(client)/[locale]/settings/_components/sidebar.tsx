@@ -1,25 +1,46 @@
-import { Command, CommandItem, CommandList } from "@/components/ui/command";
-import { Link } from "@/navigation";
+"use client";
 
-const sidebarItems = [
-  { id: 1, href: "/settings", label: "Profile" },
-  { id: 2, href: "/settings/submissions", label: "Submissions" },
-];
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Link, usePathname } from "@/navigation";
 
-export default function Sidebar() {
+interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
+  items: {
+    href: string;
+    title: string;
+  }[];
+}
+
+export default function SidebarNav({
+  className,
+  items,
+  ...props
+}: SidebarNavProps) {
+  const pathname = usePathname();
+
   return (
-    <div className="px-2">
-      <Command>
-        <CommandList>
-          {sidebarItems.map(({ href, label, id }) => (
-            <Link href={href} key={id} className="group">
-              <CommandItem className="cursor-pointer group-hover:underline">
-                {label}
-              </CommandItem>
-            </Link>
-          ))}
-        </CommandList>
-      </Command>
-    </div>
+    <nav
+      className={cn(
+        "mr-2 flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1",
+        className,
+      )}
+      {...props}
+    >
+      {items.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            pathname === item.href
+              ? "bg-muted hover:bg-muted"
+              : "hover:bg-transparent hover:underline",
+            "justify-start",
+          )}
+        >
+          {item.title}
+        </Link>
+      ))}
+    </nav>
   );
 }

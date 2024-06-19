@@ -1,9 +1,8 @@
+import { TypographyH3 } from "@/components/typography";
 import { currentUser } from "@/lib/next-auth/utils/auth";
 import { getSubmissionsByUserId } from "@/lib/sanity/client";
 import { unstable_setRequestLocale } from "next-intl/server";
 import SubmissionsTable from "./submissions-table";
-
-export const revalidate = 60;
 
 export default async function SubmissionsPage({
   params: { locale },
@@ -15,5 +14,10 @@ export default async function SubmissionsPage({
 
   const submissions = await getSubmissionsByUserId(user?.id!);
 
-  return <SubmissionsTable submissions={submissions} />;
+  return (
+    <>
+      <TypographyH3 className="mb-4">Submissions</TypographyH3>
+      <SubmissionsTable submissions={submissions} />
+    </>
+  );
 }

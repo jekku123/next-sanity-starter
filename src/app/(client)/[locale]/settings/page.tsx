@@ -1,3 +1,4 @@
+import { TypographyH3 } from "@/components/typography";
 import { currentUser } from "@/lib/next-auth/utils/auth";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { ProfileForm } from "./_components/profile-form";
@@ -18,6 +19,7 @@ export default async function ProfilePage({
 
   return (
     <>
+      <TypographyH3 className="mb-4">Profile</TypographyH3>
       <ProfileForm user={user} />
     </>
   );
