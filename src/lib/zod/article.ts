@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { SanityDocument } from "next-sanity";
 import { ImageSchema } from "./image";
+import { PortableTextSchema } from "./portable-text";
 
 export const ArticleBaseSchema = z.object({
   _type: z.literal("article"),
@@ -15,7 +16,7 @@ export const ArticleBaseSchema = z.object({
 
 const ArticleSchema = ArticleBaseSchema.extend({
   _updatedAt: z.string().optional().nullable(),
-  body: z.any(),
+  body: PortableTextSchema,
 });
 
 export function validateAndCleanupArticle(
@@ -26,7 +27,7 @@ export function validateAndCleanupArticle(
   } catch (error) {
     if (error instanceof z.ZodError) {
       const { name = "ZodError", issues = [] } = error;
-      console.log(JSON.stringify({ name, issues, article }, null, 2));
+      console.log(JSON.stringify({ name, issues }, null, 2));
     }
     return null;
   }

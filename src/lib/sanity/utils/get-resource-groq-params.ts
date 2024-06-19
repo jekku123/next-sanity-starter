@@ -41,7 +41,7 @@ export default function getResourceGroqParams(type: ResourceType) {
   if (type === "page") {
     return groq`
       ...,
-      content[]{
+      content[] {
         ...,
         _type == "cta" => {
           ...,
@@ -57,7 +57,6 @@ export default function getResourceGroqParams(type: ResourceType) {
           },
         },
         _type == "formattedText" => {
-          ...,
             ...,
             body[] {
               ...,
@@ -95,8 +94,7 @@ export default function getResourceGroqParams(type: ResourceType) {
 
   if (type === "article") {
     return groq`
-      ...,
-      body[]
+      ...
     `;
   }
 

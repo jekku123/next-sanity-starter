@@ -38,7 +38,7 @@ export async function getSlugsByType(type: string) {
   return params;
 }
 
-export async function getResourceBySlugTypeAndParams3(
+export async function getResourceBySlugTypeParamsAndLang(
   slug: string,
   type: string,
   params: string,
@@ -56,20 +56,7 @@ export async function getResourceBySlugTypeAndParams3(
   }`;
 
     const resource = await client.fetch(query, { slug, type, language });
-    return resource;
-  } catch (e) {
-    console.error(e);
-    return null;
-  }
-}
-export async function getResourceBySlugTypeAndParams(
-  slug: string,
-  type: string,
-  params: string,
-) {
-  try {
-    const query = `*[_type == $type && slug.current == $slug][0]${params}`;
-    const resource = await client.fetch(query, { slug, type });
+
     return resource;
   } catch (e) {
     console.error(e);

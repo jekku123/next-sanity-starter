@@ -12,6 +12,7 @@ import {
 
 import {
   AlertDialog,
+  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -22,7 +23,6 @@ import {
 import { formatDate } from "@/lib/utils";
 import { Submission } from "@/lib/zod/submission";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -89,27 +89,11 @@ export default function SubmissionsTable({
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>
-              <AlertDialog open={open} onOpenChange={setOpen}>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>Delete Submission?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      Are you sure? This action cannot be undone.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <Button
-                      variant="destructive"
-                      data-test-id="delete-submission-button"
-                      onClick={() => handleDelete(submission._id)}
-                    >
-                      Delete
-                    </Button>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+              <SubmissionDeleteAlertDialog
+                open={open}
+                setOpen={setOpen}
+                handleDelete={() => handleDelete(submission._id)}
+              />
             </TableRow>
           ))}
         </TableBody>
@@ -121,22 +105,12 @@ export default function SubmissionsTable({
 function SubmissionDeleteAlertDialog({
   open,
   setOpen,
-  submission,
+  handleDelete,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
-  submission: Submission;
+  handleDelete: () => Promise<void>;
 }) {
-  const handleDelete = async () => {
-    deleteSubmissionAction(submission._id)
-      .then((data) => {
-        if (data?.error) {
-          console.error(data.error);
-        }
-      })
-      .catch(() => console.error("Something went wrong"));
-  };
-
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
@@ -149,13 +123,12 @@ function SubmissionDeleteAlertDialog({
 
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button
-            variant="destructive"
+          <AlertDialogAction
             data-test-id="delete-submission-button"
             onClick={handleDelete}
           >
             Delete
-          </Button>
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

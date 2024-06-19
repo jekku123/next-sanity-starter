@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { BlockSchema } from "./block";
+
 import { ImageSchema } from "./image";
 import { LinkSchema } from "./link";
+import { PortableTextSchema } from "./portable-text";
 
 /**
  * Schema for the different types of sections that can be added to a page
@@ -14,7 +15,7 @@ export const HeroSchema = z.object({
   _type: z.literal("hero"),
   _key: z.string(),
   title: z.string(),
-  body: BlockSchema,
+  body: PortableTextSchema,
   image: ImageSchema,
   primaryLink: LinkSchema.optional().nullable(),
   secondaryLink: LinkSchema.optional().nullable(),
@@ -24,7 +25,7 @@ export const TextImageSchema = z.object({
   _type: z.literal("textImage"),
   _key: z.string(),
   title: z.string(),
-  body: BlockSchema,
+  body: PortableTextSchema,
   image: ImageSchema,
 });
 
@@ -32,7 +33,7 @@ export const FormattedTextSchema = z.object({
   _type: z.literal("formattedText"),
   _key: z.string(),
   title: z.string(),
-  body: z.any(),
+  body: PortableTextSchema,
 });
 
 export const ArticlesListingSchema = z.object({
@@ -46,7 +47,7 @@ export const ContactSectionSchema = z.object({
   _type: z.literal("contactSection"),
   _key: z.string(),
   heading: z.string(),
-  body: z.any(),
+  body: PortableTextSchema,
 });
 
 export const CtaSchema = z.object({

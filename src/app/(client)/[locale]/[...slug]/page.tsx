@@ -1,7 +1,7 @@
 import Article from "@/components/documents/article";
 import Page from "@/components/documents/page";
 import {
-  getResourceBySlugTypeAndParams3,
+  getResourceBySlugTypeParamsAndLang,
   getResourceTypeBySlug,
   getSlugsByType,
 } from "@/lib/sanity/client";
@@ -67,7 +67,7 @@ export default async function CustomPage({
   }
 
   // get the resource with the given slug, type and get the params for the query using the getPageParams function
-  const resource = await getResourceBySlugTypeAndParams3(
+  const resource = await getResourceBySlugTypeParamsAndLang(
     slug,
     type,
     getResourceGroqParams(type),
