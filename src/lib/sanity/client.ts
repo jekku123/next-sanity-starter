@@ -4,6 +4,7 @@ import { env, useCdn } from "@/env";
 import { validateAndCleanupFrontPage } from "../zod/frontpage";
 import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";
+import { Submission, validateAndCleanupSubmission } from "../zod/submission";
 
 export const client = createClient({
   apiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION,
@@ -138,4 +139,24 @@ export async function getMenu(slug: string, language: string) {
   const menu = await client.fetch(query, { slug, language });
 
   return menu;
+}
+
+export async function getSubmissionsByUserId(
+  userId: string,
+): Promise<Submission[]> {
+  const query = `*[_type == "submission" && user._ref == $userId] {
+    _id,
+    _createdAt,
+    name,
+    email,
+    message,
+  }`;
+
+  const submissions = await client.fetch(query, { userId });
+
+  const validatedSubmissions = submissions
+    .map((submission: any) => validateAndCleanupSubmission(submission))
+    .filter(Boolean) as Submission[];
+
+  return validatedSubmissions;
 }

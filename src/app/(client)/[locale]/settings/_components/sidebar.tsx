@@ -3,7 +3,7 @@ import { Link } from "@/navigation";
 
 const sidebarItems = [
   { id: 1, href: "/settings", label: "Profile" },
-  { id: 2, href: "/settings/messages", label: "Messages" },
+  { id: 2, href: "/settings/submissions", label: "Submissions" },
 ];
 
 export default function Sidebar() {

@@ -20,5 +20,12 @@ export default defineType({
       title: "Message",
       type: "text",
     }),
+    defineField({
+      name: "user",
+      title: "User",
+      type: "reference",
+      to: [{ type: "user" }],
+      readOnly: true,
+    }),
   ],
 });

@@ -1,10 +1,17 @@
 "use server";
 
+import { currentUser } from "@/lib/next-auth/utils/auth";
 import { ContactFormType, contactFormBaseSchema } from "@/lib/zod/contact-form";
 import { getTranslations } from "next-intl/server";
 import { client } from "../client";
 
 export async function sendContactFormAction(values: ContactFormType) {
+  const user = await currentUser();
+
+  if (!user) {
+    return { success: false, errors: { name: "Unauthorized" } };
+  }
+
   const t = await getTranslations("ContactForm");
 
   const translatedErrors = {
@@ -33,6 +40,10 @@ export async function sendContactFormAction(values: ContactFormType) {
 
   const data = await client.create({
     _type: "submission",
+    user: {
+      _type: "reference",
+      _ref: user.id,
+    },
     name,
     email,
     message,

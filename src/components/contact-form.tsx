@@ -43,6 +43,7 @@ export const ContactForm = () => {
       email: "",
       message: "",
     },
+    mode: "onBlur",
   });
 
   const onSubmit = (values: ContactFormType) => {
