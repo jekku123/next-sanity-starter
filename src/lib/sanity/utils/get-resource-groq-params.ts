@@ -13,12 +13,10 @@ export default function getResourceGroqParams(type: ResourceType) {
         primaryLink {
           ...,
           "internal": internal->slug.current,
-          external,
         },
         secondaryLink {
           ...,
           "internal": internal->slug.current,
-          external,
         }
       },
       _type == "cta" => {
@@ -26,12 +24,10 @@ export default function getResourceGroqParams(type: ResourceType) {
         primaryLink {
           ...,
           "internal": internal->slug.current,
-          external,
         },
         secondaryLink {
           ...,
           "internal": internal->slug.current,
-          external,
         },
       },
     }
@@ -48,12 +44,10 @@ export default function getResourceGroqParams(type: ResourceType) {
           primaryLink {
             ...,
             "internal": internal->slug.current,
-            external,
           },
           secondaryLink {
             ...,
             "internal": internal->slug.current,
-            external,
           },
         },
         _type == "formattedText" => {
@@ -80,12 +74,10 @@ export default function getResourceGroqParams(type: ResourceType) {
           primaryLink {
             ...,
             "internal": internal->slug.current,
-            external,
           },
           secondaryLink {
             ...,
             "internal": internal->slug.current,
-            external,
           },
         },
       }

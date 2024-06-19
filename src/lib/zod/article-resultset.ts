@@ -9,6 +9,8 @@ export const ArticleResultSetSchema = z.object({
   total: z.number(),
 });
 
+export type ArticleResultSet = z.infer<typeof ArticleResultSetSchema>;
+
 export function validateAndCleanupArticleResultSet(
   resource: any,
 ): ArticleResultSet | null {
@@ -33,5 +35,3 @@ export function validateAndCleanupArticleResultSet(
     return null;
   }
 }
-
-export type ArticleResultSet = z.infer<typeof ArticleResultSetSchema>;

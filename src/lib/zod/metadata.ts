@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const MetadataSchema = z.object({
   title: z.string(),
-  description: z.string().optional().nullable(),
+  description: z.string(),
 });
 
 export function validateAndCleanupMetadata(

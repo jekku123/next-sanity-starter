@@ -75,6 +75,20 @@ export default defineType({
         {
           type: "block",
         },
+        {
+          type: "image",
+          options: {
+            hotspot: true,
+            metadata: ["blurhash"],
+          },
+          fields: [
+            {
+              name: "alt",
+              type: "string",
+              title: "Alternative Text",
+            },
+          ],
+        },
       ],
       validation: (Rule) => Rule.required(),
     },

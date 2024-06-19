@@ -11,6 +11,7 @@ export default async function ProfilePage({
   params: { locale: string };
 }) {
   unstable_setRequestLocale(locale);
+
   const user = await currentUser();
 
   if (!user) {

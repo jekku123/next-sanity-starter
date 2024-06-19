@@ -1,7 +1,11 @@
+import "server-only";
+
 import { createClient } from "next-sanity";
 
 import { env, useCdn } from "@/env";
+import { Slug } from "sanity";
 import { validateAndCleanupFrontPage } from "../zod/frontpage";
+import { validateAndCleanupMenu } from "../zod/menu";
 import { validateAndCleanupMetadata } from "../zod/metadata";
 import { validateAndCleanupSettings } from "../zod/settings";
 import { Submission, validateAndCleanupSubmission } from "../zod/submission";
@@ -38,14 +42,26 @@ export async function getSlugsByType(type: string) {
   return params;
 }
 
-export async function getResourceBySlugTypeParamsAndLang(
-  slug: string,
+export async function getSlugsByTypeAndLocale(
   type: string,
+  language: string,
+): Promise<{ slug: Slug }[]> {
+  const query = `*[_type == $type && language == $language] {
+    slug {
+      current
+    }
+  }`;
+  const slugs = await client.fetch(query, { type, language });
+  return slugs;
+}
+
+export async function getResourceBySlugParamsAndLocale(
+  slug: string,
   params: string,
   language: string,
 ) {
   try {
-    const query = `*[_type == $type && slug.current == $slug && language == $language][0]{
+    const query = `*[slug.current == $slug && language == $language][0] {
     ${params},
     language,
     "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
@@ -55,7 +71,7 @@ export async function getResourceBySlugTypeParamsAndLang(
     },
   }`;
 
-    const resource = await client.fetch(query, { slug, type, language });
+    const resource = await client.fetch(query, { slug, language });
 
     return resource;
   } catch (e) {
@@ -65,7 +81,7 @@ export async function getResourceBySlugTypeParamsAndLang(
 }
 
 export async function getFrontPage(params: string, language: string) {
-  const query = `*[_type == "frontpage" && language == $language][0]{
+  const query = `*[_type == "frontpage" && language == $language][0] {
     ${params},
     language,
     "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
@@ -90,6 +106,7 @@ export async function getSettings() {
   }`;
   const settings = await client.fetch(query);
   const validatedSettings = validateAndCleanupSettings(settings);
+
   return validatedSettings;
 }
 
@@ -124,8 +141,9 @@ export async function getMenu(slug: string, language: string) {
   }`;
 
   const menu = await client.fetch(query, { slug, language });
+  const validatedMenu = validateAndCleanupMenu(menu);
 
-  return menu;
+  return validatedMenu;
 }
 
 export async function getSubmissionsByUserId(

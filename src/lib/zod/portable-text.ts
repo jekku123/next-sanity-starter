@@ -32,6 +32,7 @@ export const PortableTextListSchema = PortableTextBlockSchema.extend({
 });
 
 export const PortableTextImageSchema = PortableTextBaseSchema.extend({
+  alt: z.string(),
   asset: z.object({
     _ref: z.string(),
     _type: z.string(),

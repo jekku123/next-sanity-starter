@@ -1,14 +1,14 @@
 import Article from "@/components/documents/article";
 import Page from "@/components/documents/page";
 import {
-  getResourceBySlugTypeParamsAndLang,
+  getResourceBySlugParamsAndLocale,
   getResourceTypeBySlug,
-  getSlugsByType,
 } from "@/lib/sanity/client";
-import { getDynamicMetadata } from "@/lib/sanity/utils/get-metadata";
+import { getDynamicMetadata } from "@/lib/sanity/utils/get-dynamic-metadata";
 import getResourceGroqParams, {
   ResourceType,
 } from "@/lib/sanity/utils/get-resource-groq-params";
+import { getStaticParams } from "@/lib/sanity/utils/get-static-params";
 
 import { validateAndCleanupArticle } from "@/lib/zod/article";
 import { validateAndCleanupPage } from "@/lib/zod/page";
@@ -16,49 +16,36 @@ import { Metadata, ResolvingMetadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+type PageParams = {
+  params: { slug: string[]; locale: string };
+};
+
 // Add the types of the resources you want to generate static pages for
 const pageTypes = ["page", "article"];
 
-export async function generateStaticParams() {
-  const slugs = await Promise.all(
-    pageTypes.map((type) => getSlugsByType(type)),
-  );
-  const flattedParams = slugs
-    .flat()
-    .map((path) => path.slug.current.split("/"));
-
-  return flattedParams.map((params) => ({
-    slug: params,
-  }));
+export async function generateStaticParams({ params }: PageParams) {
+  const staticParams = await getStaticParams(pageTypes, params.locale);
+  return staticParams;
 }
 
 export async function generateMetadata(
-  { params }: { params: { slug: string[]; locale: string } },
-  _parent: ResolvingMetadata,
+  { params }: PageParams,
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const path = params.slug.join("/");
-  const locale = params.locale;
-  const metadata = await getDynamicMetadata(path, locale);
-  return {
-    title: metadata.title,
-    description: metadata.description,
-  };
+  const metadata = await getDynamicMetadata(params, parent);
+  return metadata;
 }
 
 export const revalidate = 60;
 
-export default async function CustomPage({
-  params,
-}: {
-  params: { slug: string[]; locale: string };
-}) {
+export default async function CustomPage({ params }: PageParams) {
+  // join the slug array to a string with slashes (e.g. ["articles", "article-1"] => "articles/article-1")
+  const slug = params.slug.join("/");
   const locale = params.locale;
+
   unstable_setRequestLocale(locale);
 
-  // join the slug array to a string with slashes (e.g. ["articles", "article-1"] => "articles/article-1")
-  const slug = `${params.slug.join("/")}`;
-
-  // get the type of the resource with the given slug (e.g. "page", "article"..)
+  // get the type of the resource with the given slug (e.g. "about-us" => "page", "articles/article-1" => "article")
   const type: ResourceType = await getResourceTypeBySlug(slug);
 
   // if the type is not found then there is no resource with the given slug and we return a 404
@@ -66,11 +53,13 @@ export default async function CustomPage({
     return notFound();
   }
 
-  // get the resource with the given slug, type and get the params for the query using the getPageParams function
-  const resource = await getResourceBySlugTypeParamsAndLang(
+  // get the groq params for the resource based on the type
+  const resourceGroqParams = getResourceGroqParams(type);
+
+  // get the resource with the given slug, type, locale and groq params
+  const resource = await getResourceBySlugParamsAndLocale(
     slug,
-    type,
-    getResourceGroqParams(type),
+    resourceGroqParams,
     locale,
   );
 

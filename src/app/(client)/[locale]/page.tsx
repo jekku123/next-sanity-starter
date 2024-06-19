@@ -12,6 +12,7 @@ export default async function FrontPage({
   params: { locale: string };
 }) {
   unstable_setRequestLocale(locale);
+
   const t = await getTranslations("FrontPage");
 
   const frontpage = await getFrontPage(

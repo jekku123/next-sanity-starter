@@ -28,15 +28,9 @@ export async function getArticles({
 
   const resource = await client.fetch(query, { language });
 
-  const validatedArticleTeasers = resource.reduce(
-    (articles: ArticleTeaser[], article: any) => {
-      const validatedArticleTeaser = validateAndCleanupArticleTeaser(article);
-      return validatedArticleTeaser
-        ? [...articles, validatedArticleTeaser]
-        : articles;
-    },
-    [],
-  );
+  const validatedArticleTeasers = resource
+    .map((article: any) => validateAndCleanupArticleTeaser(article))
+    .filter(Boolean) as ArticleTeaser[];
 
   return validatedArticleTeasers;
 }

@@ -27,7 +27,7 @@ export function validateAndCleanupArticle(
   } catch (error) {
     if (error instanceof z.ZodError) {
       const { name = "ZodError", issues = [] } = error;
-      console.log(JSON.stringify({ name, issues }, null, 2));
+      console.log(JSON.stringify({ name, issues, article }, null, 2));
     }
     return null;
   }

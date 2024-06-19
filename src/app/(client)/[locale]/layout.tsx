@@ -1,6 +1,6 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
-import { getCommonPageProps } from "@/lib/sanity/utils/get-common-page-props";
+import Providers from "@/components/providers";
 
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -8,26 +8,23 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 import { ScrollTop } from "@/components/scroll-top";
-import { ThemeProvider } from "@/components/theme-provider";
-import { auth } from "@/lib/next-auth/auth";
+import { locales } from "@/i18n";
+import { getSettings } from "@/lib/sanity/client";
+import { getLayoutProps } from "@/lib/sanity/utils/get-layout-props";
 import { Metadata } from "next";
-import { SessionProvider } from "next-auth/react";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages, unstable_setRequestLocale } from "next-intl/server";
+import { unstable_setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params: { locale },
 }: {
   params: { locale: string };
 }): Promise<Metadata> {
-  const { settings } = await getCommonPageProps(locale);
+  const settings = await getSettings();
   return {
     title: settings?.title.text ?? "Untitled",
     description: settings?.description ?? "No description",
   };
 }
-
-const locales = ["en", "fi"];
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -42,34 +39,23 @@ export default async function RootLayout({
 }>) {
   unstable_setRequestLocale(locale);
 
-  const { menus, settings } = await getCommonPageProps(locale);
-  const session = await auth();
-  const messages = await getMessages();
+  const { menus, settings } = await getLayoutProps(locale);
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={inter.className}>
-        <SessionProvider session={session}>
-          <NextIntlClientProvider messages={messages}>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <div className="flex min-h-screen flex-col">
-                <Header
-                  menu={menus.main}
-                  title={settings?.title}
-                  logo={settings?.logo}
-                />
-                {children}
-                <Footer menu={menus.footer} />
-              </div>
-              <ScrollTop />
-            </ThemeProvider>
-          </NextIntlClientProvider>
-        </SessionProvider>
+        <Providers>
+          <div className="flex min-h-screen flex-col">
+            <Header
+              menu={menus.main}
+              title={settings?.title}
+              logo={settings?.logo}
+            />
+            {children}
+            <Footer menu={menus.footer} />
+          </div>
+          <ScrollTop />
+        </Providers>
       </body>
     </html>
   );
