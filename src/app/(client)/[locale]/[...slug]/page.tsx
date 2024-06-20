@@ -1,13 +1,12 @@
 import Article from "@/components/documents/article";
 import Page from "@/components/documents/page";
 import {
-  getResourceBySlugParamsAndLocale,
+  getResourceBySlugTypeAndLocale,
   getResourceTypeBySlug,
 } from "@/lib/sanity/client";
 import { getDynamicMetadata } from "@/lib/sanity/utils/get-dynamic-metadata";
-import getResourceGroqParams, {
-  ResourceType,
-} from "@/lib/sanity/utils/get-resource-groq-params";
+import { ResourceType } from "@/lib/sanity/utils/get-groq-projections";
+
 import { getStaticParams } from "@/lib/sanity/utils/get-static-params";
 
 import { validateAndCleanupArticle } from "@/lib/zod/article";
@@ -46,22 +45,15 @@ export default async function CustomPage({ params }: PageParams) {
   unstable_setRequestLocale(locale);
 
   // get the type of the resource with the given slug (e.g. "about-us" => "page", "articles/article-1" => "article")
-  const type: ResourceType = await getResourceTypeBySlug(slug);
+  const type: ResourceType | null = await getResourceTypeBySlug(slug);
 
   // if the type is not found then there is no resource with the given slug and we return a 404
   if (!type) {
     return notFound();
   }
 
-  // get the groq params for the resource based on the type
-  const resourceGroqParams = getResourceGroqParams(type);
-
-  // get the resource with the given slug, type, locale and groq params
-  const resource = await getResourceBySlugParamsAndLocale(
-    slug,
-    resourceGroqParams,
-    locale,
-  );
+  // get the resource with the given slug, locale and groq params
+  const resource = await getResourceBySlugTypeAndLocale(slug, type, locale);
 
   // validate and cleanup the resource based on the type
   const validatedResource =

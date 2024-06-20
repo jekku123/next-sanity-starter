@@ -29,6 +29,7 @@ const PageSchema = z.object({
   _type: z.literal("page"),
   _id: z.string(),
   title: z.string(),
+  description: z.string(),
   slug: z.object({
     current: z.string(),
   }),

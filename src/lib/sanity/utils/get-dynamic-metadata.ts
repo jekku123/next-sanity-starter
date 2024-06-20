@@ -1,4 +1,4 @@
-import { getMetadataBySlugAndLang } from "@/lib/sanity/client";
+import { getMetadataBySlugAndLocale } from "@/lib/sanity/client";
 import { Metadata, ResolvingMetadata } from "next";
 
 export async function getDynamicMetadata(
@@ -9,7 +9,7 @@ export async function getDynamicMetadata(
   const slug = params.slug.join("/");
 
   const [metadata, parentMetadata] = await Promise.all([
-    getMetadataBySlugAndLang(slug, locale),
+    getMetadataBySlugAndLocale(slug, locale),
     parent,
   ]);
 

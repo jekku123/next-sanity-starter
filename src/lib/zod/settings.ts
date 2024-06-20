@@ -1,4 +1,3 @@
-import { SanityDocument } from "next-sanity";
 import { z } from "zod";
 
 export const SettingsSchema = z.object({
@@ -14,9 +13,7 @@ export const SettingsSchema = z.object({
   }),
 });
 
-export function validateAndCleanupSettings(
-  settings: SanityDocument,
-): Settings | null {
+export function validateAndCleanupSettings(settings: any): Settings | null {
   try {
     return SettingsSchema.parse(settings);
   } catch (error) {

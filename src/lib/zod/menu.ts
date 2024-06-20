@@ -1,4 +1,3 @@
-import { SanityDocument } from "next-sanity";
 import { z } from "zod";
 
 export const MenuItemSchema = z.object({
@@ -24,7 +23,7 @@ export const MenuSchema = z.object({
   items: z.array(MenuItemSchema),
 });
 
-export function validateAndCleanupMenu(resource: SanityDocument): Menu | null {
+export function validateAndCleanupMenu(resource: any): Menu | null {
   try {
     return MenuSchema.parse(resource);
   } catch (error) {

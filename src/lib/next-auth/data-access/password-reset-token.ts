@@ -1,3 +1,5 @@
+import "server-only";
+
 import { client } from "@/lib/sanity/client";
 
 export const getPasswordResetTokenByEmail = async (email: string) => {

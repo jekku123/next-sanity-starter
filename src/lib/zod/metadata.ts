@@ -1,4 +1,3 @@
-import { SanityDocument } from "next-sanity";
 import { z } from "zod";
 
 export const MetadataSchema = z.object({
@@ -6,9 +5,7 @@ export const MetadataSchema = z.object({
   description: z.string(),
 });
 
-export function validateAndCleanupMetadata(
-  resource: SanityDocument,
-): Metadata | null {
+export function validateAndCleanupMetadata(resource: any): Metadata | null {
   try {
     return MetadataSchema.parse(resource);
   } catch (error) {

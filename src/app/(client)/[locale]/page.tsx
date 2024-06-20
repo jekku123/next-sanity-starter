@@ -1,6 +1,5 @@
 import Section from "@/components/sections";
 import { getFrontPage } from "@/lib/sanity/client";
-import getResourceGroqParams from "@/lib/sanity/utils/get-resource-groq-params";
 
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
@@ -15,10 +14,7 @@ export default async function FrontPage({
 
   const t = await getTranslations("FrontPage");
 
-  const frontpage = await getFrontPage(
-    getResourceGroqParams("frontpage"),
-    locale,
-  );
+  const frontpage = await getFrontPage(locale);
 
   if (!frontpage) {
     return <div>{t("frontpage-not-found")}</div>;

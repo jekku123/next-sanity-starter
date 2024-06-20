@@ -6,9 +6,11 @@ export default function SocialLinks({
 }: {
   socialLinks?: MenuItem[];
 }) {
+  if (!socialLinks) return null;
+
   return (
     <ul className="flex gap-3">
-      {socialLinks?.map((item) => (
+      {socialLinks.map((item) => (
         <li key={item._key}>
           <SocialIcon
             fgColor="currentColor"

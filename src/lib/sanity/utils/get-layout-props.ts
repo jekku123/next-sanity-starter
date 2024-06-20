@@ -9,8 +9,8 @@ export async function getLayoutProps(locale: string) {
 
   return {
     menus: {
-      main: menus.main?.items ?? [],
-      footer: menus.footer?.items ?? [],
+      main: menus.main?.items || [],
+      footer: menus.footer?.items || [],
     },
     settings,
   };
