@@ -1,5 +1,6 @@
 import { PaginationController } from "@/components/pagination-controller";
-import { getArticlesResultSet } from "@/lib/sanity/utils/get-articles-resultset";
+
+import { getArticlesResultSet } from "@/lib/sanity/data-access/articles";
 import { Metadata, ResolvingMetadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Listing from "./_components/listing";

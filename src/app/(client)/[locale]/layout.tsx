@@ -2,17 +2,17 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 
-import { Inter } from "next/font/google";
-import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
-
 import { ScrollTop } from "@/components/scroll-top";
 import { locales } from "@/i18n";
 import { getSettings } from "@/lib/sanity/client";
 import { getLayoutProps } from "@/lib/sanity/utils/get-layout-props";
 import { Metadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
+
+import { Inter } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata({
   params: { locale },

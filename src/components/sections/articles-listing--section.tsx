@@ -1,4 +1,4 @@
-import { getArticles } from "@/lib/sanity/utils/get-articles";
+import { getArticles } from "@/lib/sanity/data-access/articles";
 import { ArticlesListing } from "@/lib/zod/section";
 import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
@@ -13,12 +13,12 @@ export default async function ArticlesListingSection({
 }: {
   content: ArticlesListing;
 }) {
+  const t = await getTranslations("ArticlesListingSection");
   const locale = await getLocale();
   const articles = await getArticles({
     limit: content.limit || undefined,
     language: locale,
   });
-  const t = await getTranslations("ArticlesListingSection");
 
   return (
     <div className="flex flex-col gap-6">

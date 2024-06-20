@@ -1,6 +1,6 @@
 import { TypographyH3 } from "@/components/typography";
 import { currentUser } from "@/lib/next-auth/utils/auth";
-import { getSubmissionsByUserId } from "@/lib/sanity/client";
+import { getSubmissionsByUserId } from "@/lib/sanity/data-access/submissions";
 import { unstable_setRequestLocale } from "next-intl/server";
 import SubmissionsTable from "./submissions-table";
 

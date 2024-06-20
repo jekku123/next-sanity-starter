@@ -8,8 +8,8 @@ import { DocumentDefinition, defineConfig } from "sanity";
 import { StructureBuilder, structureTool } from "sanity/structure";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import frontpage from "@/lib/sanity/schemaTypes/documents/frontpage";
-import settings from "@/lib/sanity/schemaTypes/documents/settings";
+import frontpage from "@/lib/sanity/schema-types/documents/frontpage";
+import settings from "@/lib/sanity/schema-types/documents/settings";
 import { env } from "./src/env";
 import { schema } from "./src/lib/sanity/schema";
 
@@ -30,6 +30,7 @@ const SINGLETONS = [
   { id: "frontpage", _type: "frontpage", title: "Frontpage" },
   { id: "settings", _type: "settings", title: "Settings" },
 ];
+
 const LANGUAGES = [
   { id: `en`, title: `English` },
   { id: `fi`, title: `Finnish` },
