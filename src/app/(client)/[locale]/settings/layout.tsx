@@ -19,11 +19,11 @@ export default async function DashboardLayout({
   return (
     <>
       <TypographyH2>Settings</TypographyH2>
-      <div className="mt-2 flex grow">
-        <div className="w-1/4 border-r">
+      <div className="mt-2 flex grow flex-col lg:flex-row">
+        <div className="w-full border-b pb-2 lg:w-1/4 lg:border-b-0 lg:border-r lg:pb-0">
           <SidebarNav items={sidebarItems} />
         </div>
-        <div className="flex-1 px-6 py-2">{children}</div>
+        <div className="flex-1 px-0 py-4 lg:px-6 lg:py-2">{children}</div>
       </div>
     </>
   );

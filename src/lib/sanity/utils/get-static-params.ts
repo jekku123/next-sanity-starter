@@ -5,9 +5,7 @@ export async function getStaticParams(pageTypes: string[], locale: string) {
     pageTypes.map((type) => getSlugsByTypeAndLocale(type, locale)),
   );
 
-  const staticParams = slugs
-    .flat()
-    .map((path) => ({ slug: path.slug.current.split("/") }));
+  const staticParams = slugs.flat().map((path) => path.slug.current.split("/"));
 
   return staticParams;
 }

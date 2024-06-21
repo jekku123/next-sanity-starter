@@ -24,7 +24,7 @@ const pageTypes = ["page", "article"];
 
 export async function generateStaticParams({ params }: PageParams) {
   const staticParams = await getStaticParams(pageTypes, params.locale);
-  return staticParams;
+  return staticParams.map((param) => ({ slug: param }));
 }
 
 export async function generateMetadata(

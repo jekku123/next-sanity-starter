@@ -1,11 +1,6 @@
 import { groq } from "next-sanity";
 import {
-  articlesListingSectionProjection,
-  contactSectionProjection,
-  ctaSectionProjection,
-  formattedTextSectionProjection,
-  heroSectionProjection,
-  textImageSectionProjection,
+  contentBuilderProjection,
   translationsProjection,
 } from "./projections";
 
@@ -19,16 +14,7 @@ export function getGroqProjections(type: ResourceType) {
     title,
     description,
     slug,
-    content[] {
-      ${[
-        heroSectionProjection,
-        ctaSectionProjection,
-        textImageSectionProjection,
-        formattedTextSectionProjection,
-        articlesListingSectionProjection,
-        contactSectionProjection,
-      ].join(",")}
-    },
+    ${contentBuilderProjection},
     ${translationsProjection}
   `;
   }
@@ -41,16 +27,7 @@ export function getGroqProjections(type: ResourceType) {
       description,
       slug,
       isProtected,
-      content[] {
-        ${[
-          heroSectionProjection,
-          ctaSectionProjection,
-          textImageSectionProjection,
-          formattedTextSectionProjection,
-          articlesListingSectionProjection,
-          contactSectionProjection,
-        ].join(",")}
-      },
+      ${contentBuilderProjection},
       ${translationsProjection}
     `;
   }

@@ -13,7 +13,8 @@ export const translationsProjection = groq`
     language
   }`;
 
-export const heroSectionProjection = groq`_type == "hero" => {
+export const heroSectionProjection = groq`
+  _type == "hero" => {
     _type,
     _key,
     title,
@@ -27,7 +28,8 @@ export const heroSectionProjection = groq`_type == "hero" => {
     }
   }`;
 
-export const ctaSectionProjection = groq`_type == "cta" => {
+export const ctaSectionProjection = groq`
+  _type == "cta" => {
     _type,
     _key,
     title,
@@ -40,7 +42,8 @@ export const ctaSectionProjection = groq`_type == "cta" => {
     }
   }`;
 
-export const textImageSectionProjection = groq`_type == "textImage" => {
+export const textImageSectionProjection = groq`
+  _type == "textImage" => {
     _type,
     _key,
     title,
@@ -48,23 +51,38 @@ export const textImageSectionProjection = groq`_type == "textImage" => {
     image
   }`;
 
-export const formattedTextSectionProjection = groq`_type == "formattedText" => {
+export const formattedTextSectionProjection = groq`
+  _type == "formattedText" => {
     _type,
     _key,
     title,
     body[]
   }`;
 
-export const articlesListingSectionProjection = groq`_type == "articlesListing" => {
+export const articlesListingSectionProjection = groq`
+  _type == "articlesListing" => {
     _type,
     _key,
     title,
     limit
   }`;
 
-export const contactSectionProjection = groq`_type == "contactSection" => {
+export const contactSectionProjection = groq`
+  _type == "contactSection" => {
     _type,
     _key,
     heading,
     body[]
+  }`;
+
+export const contentBuilderProjection = groq`
+  content[] {
+    ${[
+      heroSectionProjection,
+      ctaSectionProjection,
+      textImageSectionProjection,
+      formattedTextSectionProjection,
+      articlesListingSectionProjection,
+      contactSectionProjection,
+    ].join(",")}
   }`;
