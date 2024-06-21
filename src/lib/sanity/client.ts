@@ -44,12 +44,12 @@ export async function sanityFetch<QueryResult>({
 }
 
 export async function getResourceTypeBySlug(slug: string) {
-  const resource = await sanityFetch<{ _type?: ResourceType }>({
+  const resource = await sanityFetch<any>({
     query: getResourceTypeBySlugQuery,
     params: { slug },
   });
 
-  if (!resource._type) {
+  if (!resource) {
     return null;
   }
 

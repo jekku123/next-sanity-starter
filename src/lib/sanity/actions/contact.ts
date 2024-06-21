@@ -5,6 +5,7 @@ import { ContactFormType, contactFormBaseSchema } from "@/lib/zod/contact-form";
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import { client } from "../client";
+import { deleteSubmissionUseCase } from "../use-cases/submissions";
 
 export async function sendContactFormAction(values: ContactFormType) {
   const user = await currentUser();
@@ -39,7 +40,7 @@ export async function sendContactFormAction(values: ContactFormType) {
 
   const { name, email, message } = validatedFields.data;
 
-  const data = await client.create({
+  await client.create({
     _type: "submission",
     user: {
       _type: "reference",
@@ -52,7 +53,7 @@ export async function sendContactFormAction(values: ContactFormType) {
 
   revalidatePath("/settings/submissions");
 
-  return { success: true, data };
+  return { success: true };
 }
 
 export async function deleteSubmissionAction(id: string) {
@@ -62,9 +63,12 @@ export async function deleteSubmissionAction(id: string) {
     return { error: "Unauthorized" };
   }
 
-  await client.delete(id);
-
-  revalidatePath("/settings/submissions");
-
-  return { success: true };
+  try {
+    await deleteSubmissionUseCase(user, id);
+    revalidatePath("/settings/submissions");
+    return { success: true };
+  } catch (error: any) {
+    console.error(error);
+    return { error: error };
+  }
 }

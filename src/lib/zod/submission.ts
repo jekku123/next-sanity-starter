@@ -1,4 +1,3 @@
-import { SanityDocument } from "next-sanity";
 import { z } from "zod";
 
 export const SubmissionSchema = z.object({
@@ -7,10 +6,16 @@ export const SubmissionSchema = z.object({
   name: z.string().min(1),
   email: z.string().email(),
   message: z.string().min(6),
+  user: z
+    .object({
+      _id: z.string(),
+    })
+    .optional()
+    .nullable(),
 });
 
 export function validateAndCleanupSubmission(
-  submission: SanityDocument,
+  submission: any,
 ): Submission | null {
   try {
     return SubmissionSchema.parse(submission);

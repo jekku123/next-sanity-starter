@@ -1,5 +1,18 @@
 import { groq } from "next-sanity";
 
+export const linkProjection = groq`
+  ...,
+  "internal": internal->slug.current,
+`;
+
+export const translationsProjection = groq`
+  language,
+  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value-> {
+    title,
+    slug,
+    language
+  }`;
+
 export const heroSectionProjection = groq`_type == "hero" => {
     _type,
     _key,
@@ -7,12 +20,10 @@ export const heroSectionProjection = groq`_type == "hero" => {
     body[],
     image,
     primaryLink {
-      ...,
-      "internal": internal->slug.current,
+      ${linkProjection}
     },
     secondaryLink {
-      ...,
-      "internal": internal->slug.current,
+      ${linkProjection}
     }
   }`;
 
@@ -22,12 +33,10 @@ export const ctaSectionProjection = groq`_type == "cta" => {
     title,
     description,
     primaryLink {
-      ...,
-      "internal": internal->slug.current,
+      ${linkProjection}
     },
     secondaryLink {
-      ...,
-      "internal": internal->slug.current,
+      ${linkProjection}
     }
   }`;
 
@@ -43,22 +52,7 @@ export const formattedTextSectionProjection = groq`_type == "formattedText" => {
     _type,
     _key,
     title,
-    body[] {
-      ...,
-      _type == "image" => {
-        ...,
-        asset-> {
-          ...,
-          url,
-          metadata {
-            dimensions {
-              ...,
-              aspectRatio,
-            },
-          },
-        },
-      },
-    },
+    body[]
   }`;
 
 export const articlesListingSectionProjection = groq`_type == "articlesListing" => {
@@ -73,12 +67,4 @@ export const contactSectionProjection = groq`_type == "contactSection" => {
     _key,
     heading,
     body[]
-  }`;
-
-export const translationsProjection = groq`
-  language,
-  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value-> {
-    title,
-    slug,
-    language
   }`;

@@ -30,7 +30,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { deleteSubmissionAction } from "@/lib/sanity/actions/contact";
-import { useOptimistic, useState } from "react";
+import { useOptimistic, useState, useTransition } from "react";
 
 export default function SubmissionsTable({
   submissions,
@@ -45,16 +45,13 @@ export default function SubmissionsTable({
   );
 
   const [open, setOpen] = useState(false);
+  const [_isPending, startTransition] = useTransition();
 
   const handleDelete = async (id: string) => {
-    deleteOptimisticSubmission(id);
-    deleteSubmissionAction(id)
-      .then((data) => {
-        if (data?.error) {
-          console.error(data.error);
-        }
-      })
-      .catch(() => console.error("Something went wrong"));
+    startTransition(() => {
+      deleteOptimisticSubmission(id);
+    });
+    await deleteSubmissionAction(id);
   };
 
   return (

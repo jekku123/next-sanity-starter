@@ -16,7 +16,7 @@ export async function getDynamicMetadata(
   const parentTitle = parentMetadata.title?.absolute;
 
   return {
-    title: `${metadata?.title} | ${parentTitle}`,
+    title: `${metadata?.title || "404"} | ${parentTitle}`,
     description: `${metadata?.description}`,
   };
 }

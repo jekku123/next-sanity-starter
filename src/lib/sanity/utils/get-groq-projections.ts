@@ -57,7 +57,16 @@ export function getGroqProjections(type: ResourceType) {
 
   if (type === "article") {
     return groq`
-      ...
+      _type,
+      _id,
+      title,
+      description,
+      image,
+      tags,
+      _createdAt,
+      _updatedAt,
+      body[],
+      ${translationsProjection}
     `;
   }
 

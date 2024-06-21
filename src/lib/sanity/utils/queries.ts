@@ -46,4 +46,5 @@ export const getFrontPageQuery = (projections: string) =>
 
 export const getResourceBySlugLocaleAndProjectionsQuery = (
   projections: string,
-) => groq`*[slug.current == $slug && language == $language][0]{${projections}}`;
+) =>
+  groq`*[slug.current == $slug && language == $language][0] {${projections}}`;
