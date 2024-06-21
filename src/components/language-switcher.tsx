@@ -33,18 +33,21 @@ export default function LanguageSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <Link href={pathname} locale="en">
-          <DropdownMenuItem data-test-id="language-switcher-english">
-            <CountryFlag countryCode="GB" />
-            {t("english")}
-          </DropdownMenuItem>
-        </Link>
-        <Link href={pathname} locale="fi">
-          <DropdownMenuItem data-test-id="language-switcher-finnish">
-            <CountryFlag countryCode="FI" />
-            {t("finnish")}
-          </DropdownMenuItem>
-        </Link>
+        {locale !== "en" ? (
+          <Link href={pathname} locale="en">
+            <DropdownMenuItem data-test-id="language-switcher-english">
+              <CountryFlag countryCode="GB" />
+              {t("english")}
+            </DropdownMenuItem>
+          </Link>
+        ) : (
+          <Link href={pathname} locale="fi">
+            <DropdownMenuItem data-test-id="language-switcher-finnish">
+              <CountryFlag countryCode="FI" />
+              {t("finnish")}
+            </DropdownMenuItem>
+          </Link>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
