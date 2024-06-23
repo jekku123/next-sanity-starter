@@ -1,4 +1,3 @@
-import { SanityDocument } from "next-sanity";
 import { z } from "zod";
 import {
   ArticlesListingSchema,
@@ -37,7 +36,7 @@ const PageSchema = z.object({
   isProtected: z.boolean().optional(),
 });
 
-export function validateAndCleanupPage(page: SanityDocument): Page | null {
+export function validateAndCleanupPage(page: any): Page | null {
   try {
     const topLevelPageData = PageSchema.omit({
       content: true,

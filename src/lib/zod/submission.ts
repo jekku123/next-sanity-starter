@@ -3,16 +3,23 @@ import { z } from "zod";
 export const SubmissionSchema = z.object({
   _id: z.string(),
   _createdAt: z.string(),
-  name: z.string().min(1),
+  name: z.string(),
   email: z.string().email(),
-  message: z.string().min(6),
-  user: z
-    .object({
-      _id: z.string(),
-    })
-    .optional()
-    .nullable(),
+  message: z.string(),
+  user: z.object({
+    _id: z.string(),
+  }),
 });
+// .transform((data) => {
+//   return {
+//     id: data._id,
+//     createdAt: data._createdAt,
+//     name: data.name,
+//     email: data.email,
+//     message: data.message,
+//     userId: data.user._id,
+//   };
+// });
 
 export function validateAndCleanupSubmission(
   submission: any,

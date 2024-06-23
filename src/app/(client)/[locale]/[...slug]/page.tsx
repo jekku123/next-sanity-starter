@@ -1,11 +1,11 @@
 import Article from "@/components/documents/article";
 import Page from "@/components/documents/page";
+import { Locale } from "@/i18n";
 import {
-  getResourceBySlugTypeAndLocale,
+  getResourceByTypeAndParams,
   getResourceTypeBySlug,
 } from "@/lib/sanity/client";
 import { getDynamicMetadata } from "@/lib/sanity/utils/get-dynamic-metadata";
-import { ResourceType } from "@/lib/sanity/utils/get-groq-projections";
 
 import { getStaticParams } from "@/lib/sanity/utils/get-static-params";
 
@@ -15,15 +15,11 @@ import { Metadata, ResolvingMetadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-type PageParams = {
-  params: { slug: string[]; locale: string };
-};
-
 // Add the types of the resources you want to generate static pages for
-const pageTypes = ["page", "article"];
+const RESOURCE_TYPES = ["page", "article"];
 
 export async function generateStaticParams({ params }: PageParams) {
-  const staticParams = await getStaticParams(pageTypes, params.locale);
+  const staticParams = await getStaticParams(RESOURCE_TYPES, params.locale);
   return staticParams.map((param) => ({ slug: param }));
 }
 
@@ -35,6 +31,10 @@ export async function generateMetadata(
   return metadata;
 }
 
+type PageParams = {
+  params: { slug: string[]; locale: Locale };
+};
+
 export const revalidate = 60;
 
 export default async function CustomPage({ params }: PageParams) {
@@ -45,15 +45,18 @@ export default async function CustomPage({ params }: PageParams) {
   unstable_setRequestLocale(locale);
 
   // get the type of the resource with the given slug (e.g. "about-us" => "page", "articles/article-1" => "article")
-  const type: ResourceType | null = await getResourceTypeBySlug(slug);
+  const type = await getResourceTypeBySlug(slug);
 
   // if the type is not found then there is no resource with the given slug and we return a 404
   if (!type) {
     return notFound();
   }
 
-  // get the resource with the given slug, locale and groq params
-  const resource = await getResourceBySlugTypeAndLocale(slug, type, locale);
+  // get the resource with the given slug, locale and groq projections
+  const resource = await getResourceByTypeAndParams(type, {
+    slug,
+    locale,
+  });
 
   // validate and cleanup the resource based on the type
   const validatedResource =

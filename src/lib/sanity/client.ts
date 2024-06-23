@@ -7,17 +7,18 @@ import {
 } from "next-sanity";
 
 import { env, useCdn } from "@/env";
+import { Locale } from "@/i18n";
 import { Slug } from "sanity";
 import { FrontPage, validateAndCleanupFrontPage } from "../zod/frontpage";
 import { Menu, validateAndCleanupMenu } from "../zod/menu";
 import { Metadata, validateAndCleanupMetadata } from "../zod/metadata";
 import { Settings, validateAndCleanupSettings } from "../zod/settings";
-import { ResourceType, getGroqProjections } from "./utils/get-groq-projections";
+import { ResourceType } from "./utils/get-groq-projections";
 import {
   getFrontPageQuery,
+  getGroqQueryByResourceType,
   getMenuQuery,
   getMetadataQuery,
-  getResourceBySlugLocaleAndProjectionsQuery,
   getResourceTypeBySlugQuery,
   getSettingsQuery,
   getSlugsByTypeAndLocaleQuery,
@@ -43,7 +44,9 @@ export async function sanityFetch<QueryResult>({
   return client.fetch<QueryResult>(query, params, options);
 }
 
-export async function getResourceTypeBySlug(slug: string) {
+export async function getResourceTypeBySlug(
+  slug: string,
+): Promise<ResourceType | null> {
   const resource = await sanityFetch<any>({
     query: getResourceTypeBySlugQuery,
     params: { slug },
@@ -56,7 +59,10 @@ export async function getResourceTypeBySlug(slug: string) {
   return resource._type;
 }
 
-export async function getSlugsByTypeAndLocale(type: string, language: string) {
+export async function getSlugsByTypeAndLocale(
+  type: string,
+  language: Locale,
+): Promise<{ slug: Slug }[]> {
   const slugs = await sanityFetch<{ slug: Slug }[]>({
     query: getSlugsByTypeAndLocaleQuery,
     params: { type, language },
@@ -64,29 +70,30 @@ export async function getSlugsByTypeAndLocale(type: string, language: string) {
   return slugs;
 }
 
-export async function getResourceBySlugTypeAndLocale(
-  slug: string,
-  type: ResourceType,
-  language: string,
-) {
-  const projections = getGroqProjections(type);
+export type ResourceQueryParams = {
+  slug: string;
+  locale: Locale;
+};
 
+export async function getResourceByTypeAndParams(
+  type: ResourceType,
+  params: ResourceQueryParams,
+) {
   const resource = await sanityFetch<any>({
-    query: getResourceBySlugLocaleAndProjectionsQuery(projections),
+    query: getGroqQueryByResourceType(type),
     params: {
-      slug,
-      language,
+      ...params,
     },
   });
 
   return resource;
 }
 
-export async function getFrontPage(language: string) {
-  const projections = getGroqProjections("frontpage");
-
+export async function getFrontPage(
+  language: Locale,
+): Promise<FrontPage | null> {
   const resource = await sanityFetch<FrontPage>({
-    query: getFrontPageQuery(projections),
+    query: getFrontPageQuery(),
     params: { language },
   });
 
@@ -94,7 +101,7 @@ export async function getFrontPage(language: string) {
   return validatedFrontpage;
 }
 
-export async function getSettings() {
+export async function getSettings(): Promise<Settings | null> {
   const settings = await sanityFetch<Settings>({ query: getSettingsQuery });
   const validatedSettings = validateAndCleanupSettings(settings);
   return validatedSettings;
@@ -102,8 +109,8 @@ export async function getSettings() {
 
 export async function getMetadataBySlugAndLocale(
   slug: string,
-  language: string,
-) {
+  language: Locale,
+): Promise<Metadata | null> {
   const metadata = await sanityFetch<Metadata>({
     query: getMetadataQuery,
     params: { slug, language },
@@ -113,7 +120,10 @@ export async function getMetadataBySlugAndLocale(
   return validatedMetadata;
 }
 
-export async function getMenu(slug: string, language: string) {
+export async function getMenu(
+  slug: string,
+  language: Locale,
+): Promise<Menu | null> {
   const menu = await sanityFetch<Menu>({
     query: getMenuQuery,
     params: { slug, language },

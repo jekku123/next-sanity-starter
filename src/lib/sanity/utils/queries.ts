@@ -1,4 +1,5 @@
 import { groq } from "next-sanity";
+import { ResourceType, getGroqProjections } from "./get-groq-projections";
 
 export const getMenuQuery = groq`*[_type == "navigation" && slug.current == $slug && language == $language][0] {
     _id,
@@ -41,10 +42,12 @@ export const getResourceTypeBySlugQuery = groq`*[slug.current == $slug][0] {
       _type
     }`;
 
-export const getFrontPageQuery = (projections: string) =>
-  groq`*[_type == "frontpage" && language == $language][0] {${projections}}`;
+export const getFrontPageQuery = () => {
+  const projections = getGroqProjections("frontpage");
+  return groq`*[_type == "frontpage" && language == $language][0] {${projections}}`;
+};
 
-export const getResourceBySlugLocaleAndProjectionsQuery = (
-  projections: string,
-) =>
-  groq`*[slug.current == $slug && language == $language][0] {${projections}}`;
+export const getGroqQueryByResourceType = (type: ResourceType) => {
+  const projections = getGroqProjections(type);
+  return groq`*[slug.current == $slug && language == $locale][0] {${projections}}`;
+};

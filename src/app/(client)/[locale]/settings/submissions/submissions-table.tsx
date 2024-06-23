@@ -21,7 +21,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { formatDate } from "@/lib/utils";
-import { Submission } from "@/lib/zod/submission";
 
 import {
   DropdownMenu,
@@ -30,18 +29,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { deleteSubmissionAction } from "@/lib/sanity/actions/contact";
+import { SubmissionDto } from "@/lib/sanity/use-cases/submissions";
 import { useOptimistic, useState, useTransition } from "react";
 
 export default function SubmissionsTable({
   submissions,
 }: {
-  submissions: Submission[];
+  submissions: SubmissionDto[];
 }) {
   const [optimisticSubmissions, deleteOptimisticSubmission] = useOptimistic<
-    Submission[],
+    SubmissionDto[],
     string
   >(submissions, (prev, id) =>
-    prev.filter((submission) => submission._id !== id),
+    prev.filter((submission) => submission.id !== id),
   );
 
   const [open, setOpen] = useState(false);
@@ -68,8 +68,8 @@ export default function SubmissionsTable({
         </TableHeader>
         <TableBody>
           {optimisticSubmissions.map((submission) => (
-            <TableRow key={submission._id}>
-              <TableCell>{formatDate(submission._createdAt)}</TableCell>
+            <TableRow key={submission.id}>
+              <TableCell>{formatDate(submission.createdAt)}</TableCell>
               <TableCell>{submission.name}</TableCell>
               <TableCell>{submission.email}</TableCell>
               <TableCell>{submission.message}</TableCell>
@@ -89,7 +89,7 @@ export default function SubmissionsTable({
               <SubmissionDeleteAlertDialog
                 open={open}
                 setOpen={setOpen}
-                handleDelete={() => handleDelete(submission._id)}
+                handleDelete={() => handleDelete(submission.id)}
               />
             </TableRow>
           ))}

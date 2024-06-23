@@ -1,8 +1,9 @@
+import { Locale } from "@/i18n";
 import { getMetadataBySlugAndLocale } from "@/lib/sanity/client";
 import { Metadata, ResolvingMetadata } from "next";
 
 export async function getDynamicMetadata(
-  params: { slug: string[]; locale: string },
+  params: { slug: string[]; locale: Locale },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const locale = params.locale;

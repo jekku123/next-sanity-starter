@@ -8,8 +8,8 @@ import { DocumentDefinition, defineConfig } from "sanity";
 import { StructureBuilder, structureTool } from "sanity/structure";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import frontpage from "@/lib/sanity/schema-types/documents/frontpage";
-import settings from "@/lib/sanity/schema-types/documents/settings";
+import frontpage from "@/lib/sanity/schema/documents/frontpage";
+import settings from "@/lib/sanity/schema/documents/settings";
 import { env } from "./src/env";
 import { schema } from "./src/lib/sanity/schema";
 

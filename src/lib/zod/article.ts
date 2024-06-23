@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-import { SanityDocument } from "next-sanity";
 import { ImageSchema } from "./image";
 import { PortableTextSchema } from "./portable-text";
 
@@ -19,9 +18,7 @@ const ArticleSchema = ArticleBaseSchema.extend({
   body: PortableTextSchema,
 });
 
-export function validateAndCleanupArticle(
-  article: SanityDocument,
-): Article | null {
+export function validateAndCleanupArticle(article: any): Article | null {
   try {
     return ArticleSchema.parse(article);
   } catch (error) {

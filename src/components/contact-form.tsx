@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { sendContactFormAction } from "@/lib/sanity/actions/contact";
+import { createSubmissionAction } from "@/lib/sanity/actions/contact";
 import { ContactFormType, contactFormBaseSchema } from "@/lib/zod/contact-form";
 import { useTranslations } from "next-intl";
 import { FormError } from "./form-error";
@@ -51,7 +51,7 @@ export const ContactForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      sendContactFormAction(values)
+      createSubmissionAction(values)
         .then((data) => {
           if (data?.errors) {
             const errors = data.errors;
