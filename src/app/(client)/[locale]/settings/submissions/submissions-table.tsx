@@ -29,7 +29,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { deleteSubmissionAction } from "@/lib/sanity/actions/contact";
-import { SubmissionDto } from "@/lib/sanity/use-cases/submissions";
+import { SubmissionDto } from "@/lib/sanity/dto/submission.dto";
 import { useOptimistic, useState, useTransition } from "react";
 
 export default function SubmissionsTable({

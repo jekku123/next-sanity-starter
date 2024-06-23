@@ -3,7 +3,7 @@ import Header from "@/components/header";
 import Providers from "@/components/providers";
 
 import { ScrollTop } from "@/components/scroll-top";
-import { locales } from "@/i18n";
+import { Locale, locales } from "@/i18n";
 import { getSettings } from "@/lib/sanity/client";
 import { getLayoutProps } from "@/lib/sanity/utils/get-layout-props";
 import { Metadata } from "next";
@@ -17,7 +17,7 @@ const inter = Inter({ subsets: ["latin"] });
 export async function generateMetadata({
   params: { locale },
 }: {
-  params: { locale: string };
+  params: { locale: Locale };
 }): Promise<Metadata> {
   const settings = await getSettings();
   return {
@@ -35,7 +35,7 @@ export default async function RootLayout({
   params: { locale },
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: Locale };
 }>) {
   unstable_setRequestLocale(locale);
 

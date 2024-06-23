@@ -1,12 +1,13 @@
 import { PaginationController } from "@/components/pagination-controller";
 
+import { Locale } from "@/i18n";
 import { getArticlesResultSet } from "@/lib/sanity/data-access/articles";
 import { Metadata, ResolvingMetadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Listing from "./_components/listing";
 
 type PageParams = {
-  params: { page?: string[]; locale: string };
+  params: { page?: string[]; locale: Locale };
 };
 
 export async function generateMetadata(

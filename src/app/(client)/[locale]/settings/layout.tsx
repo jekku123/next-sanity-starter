@@ -1,4 +1,5 @@
 import { TypographyH2 } from "@/components/typography";
+import { Locale } from "@/i18n";
 import { unstable_setRequestLocale } from "next-intl/server";
 import SidebarNav from "./_components/sidebar";
 
@@ -12,7 +13,7 @@ export default async function DashboardLayout({
   params: { locale },
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: Locale };
 }>) {
   unstable_setRequestLocale(locale);
 

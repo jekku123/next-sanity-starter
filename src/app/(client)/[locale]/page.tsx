@@ -1,4 +1,5 @@
 import Section from "@/components/sections";
+import { Locale } from "@/i18n";
 import { getFrontPage } from "@/lib/sanity/client";
 
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
@@ -8,7 +9,7 @@ export const revalidate = 60;
 export default async function FrontPage({
   params: { locale },
 }: {
-  params: { locale: string };
+  params: { locale: Locale };
 }) {
   unstable_setRequestLocale(locale);
 
