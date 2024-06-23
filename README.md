@@ -10,10 +10,12 @@ This is a starter template for [Next.js](https://nextjs.org) and [Sanity](https:
 - [Auth.js](https://authjs.dev/)
 - [Zod](https://zod.dev/)
 - [Cypress](https://www.cypress.io/)
+- [Next-Intl](https://next-intl-docs.vercel.app/)
 
 ## Features
 
 - **Pages and Articles**: Next.js routing for pages and articles through single catch-all route.
+- **Internationalization**: Internationalization with Next-Intl.
 - **Authentication**: Custom built adapter for OAuth2 authentication with Auth.js and Sanity using database sessions.
 - **Static file generation**: Static file generation for pages and articles.
 - **SEO**: SEO friendly with dynamic metadata for pages and articles.
