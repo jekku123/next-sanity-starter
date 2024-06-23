@@ -91,7 +91,7 @@ export const ProfileForm = ({ user }: { user: User }) => {
                 <FormControl>
                   <Input
                     {...field}
-                    disabled={isPending || isOauth}
+                    disabled
                     type="email"
                     data-test-id="profile-form-email"
                   />
