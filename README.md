@@ -22,6 +22,9 @@ This is a starter template for [Next.js](https://nextjs.org) and [Sanity](https:
 - **Validation** Typesafe data validation using Zod.
 - **Testing**: End-to-end testing with Cypress.
 
+## Live demo
+- [Link](https://next-sanity-starter-one.vercel.app/)
+
 ## Authors and acknowledgment
 
 Jesse Manninen
