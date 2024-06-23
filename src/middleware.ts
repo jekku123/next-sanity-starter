@@ -2,6 +2,7 @@ import { auth } from "@/lib/next-auth/auth";
 
 import createIntlMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
+import { NextAuthRequest } from "node_modules/next-auth/lib";
 import { locales } from "./i18n";
 import {
   DEFAULT_LOGIN_PATH,
@@ -17,7 +18,7 @@ const intlMiddleware = createIntlMiddleware({
   defaultLocale: "en",
 });
 
-const authMiddleware = auth((req) => {
+const authMiddleware = auth((req: NextAuthRequest) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
@@ -27,11 +28,11 @@ const authMiddleware = auth((req) => {
   const isStudioRoute = nextUrl.pathname.startsWith("/studio");
 
   if (isStudioRoute) {
-    return void null;
+    return NextResponse.next();
   }
 
   if (isApiAuthRoute) {
-    return void null;
+    return NextResponse.next();
   }
 
   if (isAuthRoute && isLoggedIn) {
