@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 
 import { Input } from "@/components/ui/input";
-import { newPassword } from "@/lib/next-auth/actions/new-password";
+import { newPasswordAction } from "@/lib/next-auth/actions/new-password";
 import { NewPasswordSchema } from "@/lib/zod/auth-forms";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
@@ -52,7 +52,7 @@ export const NewPasswordForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      newPassword(values, token).then((data) => {
+      newPasswordAction(values, token).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       });

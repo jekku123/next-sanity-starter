@@ -7,7 +7,9 @@ import { sendPasswordResetEmail } from "@/lib/next-auth/utils/mail";
 import { ResetSchema } from "@/lib/zod/auth-forms";
 import { generatePasswordResetToken } from "../utils/tokens";
 
-export const reset = async (values: z.infer<typeof ResetSchema>) => {
+export const resetPasswordAction = async (
+  values: z.infer<typeof ResetSchema>,
+) => {
   const validatedFields = ResetSchema.safeParse(values);
 
   if (!validatedFields.success) {

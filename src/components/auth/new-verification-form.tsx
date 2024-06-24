@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useSearchParams } from "next/navigation";
 
-import { newVerification } from "@/lib/next-auth/actions/new-verification";
+import { newVerificationAction } from "@/lib/next-auth/actions/new-verification";
 import { LoaderIcon } from "lucide-react";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
@@ -26,7 +26,7 @@ export const NewVerificationForm = () => {
       return;
     }
 
-    newVerification(token)
+    newVerificationAction(token)
       .then((data) => {
         setSuccess(data.success);
         setError(data.error);

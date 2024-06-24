@@ -2,6 +2,6 @@
 
 import { signOut } from "@/lib/next-auth/auth";
 
-export const logout = async () => {
+export const logoutAction = async () => {
   await signOut();
 };

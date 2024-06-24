@@ -16,7 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { login } from "@/lib/next-auth/actions/login";
+import { loginAction } from "@/lib/next-auth/actions/login";
 import { LoginSchema } from "@/lib/zod/auth-forms";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
@@ -59,7 +59,7 @@ export const LoginForm = () => {
     setSuccess("");
 
     startTransition(async () => {
-      login(values)
+      loginAction(values)
         .then((data) => {
           if (data?.error) {
             setError(data.error);

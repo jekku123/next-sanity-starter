@@ -1,5 +1,6 @@
 import Section from "@/components/sections";
 import { Locale } from "@/i18n";
+import { getVerificationTokenByToken } from "@/lib/next-auth/data-access/verification-token";
 import { getFrontPage } from "@/lib/sanity/client";
 
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
@@ -20,6 +21,8 @@ export default async function FrontPage({
   if (!frontpage) {
     return <div>{t("frontpage-not-found")}</div>;
   }
+
+  const keke = await getVerificationTokenByToken("keke");
 
   return (
     <>

@@ -12,7 +12,7 @@ import { sendVerificationEmail } from "@/lib/next-auth/utils/mail";
 import { generateVerificationToken } from "@/lib/next-auth/utils/tokens";
 import { LoginSchema } from "@/lib/zod/auth-forms";
 
-export async function login(values: z.infer<typeof LoginSchema>) {
+export async function loginAction(values: z.infer<typeof LoginSchema>) {
   const validatedFields = LoginSchema.safeParse(values);
 
   if (!validatedFields.success) {

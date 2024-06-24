@@ -8,7 +8,7 @@ import { getUserByEmail } from "@/lib/next-auth/data-access/user";
 import { client } from "@/lib/sanity/client";
 import { NewPasswordSchema } from "@/lib/zod/auth-forms";
 
-export const newPassword = async (
+export const newPasswordAction = async (
   values: z.infer<typeof NewPasswordSchema>,
   token?: string | null,
 ) => {

@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { register } from "@/lib/next-auth/actions/register";
+import { registerAction } from "@/lib/next-auth/actions/register";
 import { RegisterSchema } from "@/lib/zod/auth-forms";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
@@ -54,7 +54,7 @@ export const RegisterForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      register(values).then((data) => {
+      registerAction(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
         if (process.env.NODE_ENV !== "development" && data.success) {

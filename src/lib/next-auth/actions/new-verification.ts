@@ -4,7 +4,7 @@ import { getUserByEmail } from "@/lib/next-auth/data-access/user";
 import { getVerificationTokenByToken } from "@/lib/next-auth/data-access/verification-token";
 import { client } from "@/lib/sanity/client";
 
-export const newVerification = async (token: string) => {
+export const newVerificationAction = async (token: string) => {
   const existingToken = await getVerificationTokenByToken(token);
 
   if (!existingToken) {

@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { settings } from "@/lib/next-auth/actions/settings";
+import { updateSettings } from "@/lib/next-auth/actions/settings";
 import { SettingsSchema } from "@/lib/zod/auth-forms";
 import { UserRole } from "@/types/authentication";
 import { User } from "next-auth";
@@ -45,7 +45,7 @@ export const ProfileForm = ({ user }: { user: User }) => {
     setSuccess("");
 
     startTransition(async () => {
-      settings(values)
+      updateSettings(values)
         .then((data) => {
           if (data?.error) {
             setError(data.error);

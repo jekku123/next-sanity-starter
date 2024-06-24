@@ -11,7 +11,9 @@ import bcrypt from "bcryptjs";
 import * as z from "zod";
 import { generateVerificationToken } from "../utils/tokens";
 
-export const register = async (values: z.infer<typeof RegisterSchema>) => {
+export const registerAction = async (
+  values: z.infer<typeof RegisterSchema>,
+) => {
   const validatedFields = RegisterSchema.safeParse(values);
 
   if (!validatedFields.success) {

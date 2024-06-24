@@ -11,7 +11,9 @@ import { SettingsSchema } from "@/lib/zod/auth-forms";
 import { currentUser } from "../utils/auth";
 import { generateVerificationToken } from "../utils/tokens";
 
-export const settings = async (values: z.infer<typeof SettingsSchema>) => {
+export const updateSettings = async (
+  values: z.infer<typeof SettingsSchema>,
+) => {
   const user = await currentUser();
 
   if (!user) {
