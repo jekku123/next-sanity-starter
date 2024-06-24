@@ -1,6 +1,7 @@
+import { env } from "@/env";
 import { Resend } from "resend";
 
-const resend = new Resend("re_cBwzX1ca_FV1AGLw685E6hghyQRu1AmdZ");
+const resend = new Resend(env.RESEND_EMAIL_SECRET);
 
 const domain = "http://localhost:3000";
 

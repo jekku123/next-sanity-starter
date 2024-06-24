@@ -8,6 +8,7 @@ import {
 
 import { env, useCdn } from "@/env";
 import { Locale } from "@/i18n";
+
 import { Slug } from "sanity";
 import { FrontPage, validateAndCleanupFrontPage } from "../zod/frontpage";
 import { Menu, validateAndCleanupMenu } from "../zod/menu";
@@ -61,11 +62,11 @@ export async function getResourceTypeBySlug(
 
 export async function getSlugsByTypeAndLocale(
   type: string,
-  language: Locale,
+  locale: Locale,
 ): Promise<{ slug: Slug }[]> {
   const slugs = await sanityFetch<{ slug: Slug }[]>({
     query: getSlugsByTypeAndLocaleQuery,
-    params: { type, language },
+    params: { type, locale },
   });
   return slugs;
 }
@@ -89,12 +90,10 @@ export async function getResourceByTypeAndParams(
   return resource;
 }
 
-export async function getFrontPage(
-  language: Locale,
-): Promise<FrontPage | null> {
+export async function getFrontPage(locale: Locale): Promise<FrontPage | null> {
   const resource = await sanityFetch<FrontPage>({
     query: getFrontPageQuery(),
-    params: { language },
+    params: { locale },
   });
 
   const validatedFrontpage = validateAndCleanupFrontPage(resource);
@@ -109,11 +108,11 @@ export async function getSettings(): Promise<Settings | null> {
 
 export async function getMetadataBySlugAndLocale(
   slug: string,
-  language: Locale,
+  locale: Locale,
 ): Promise<Metadata | null> {
   const metadata = await sanityFetch<Metadata>({
     query: getMetadataQuery,
-    params: { slug, language },
+    params: { slug, locale },
   });
 
   const validatedMetadata = validateAndCleanupMetadata(metadata);
@@ -122,11 +121,11 @@ export async function getMetadataBySlugAndLocale(
 
 export async function getMenu(
   slug: string,
-  language: Locale,
+  locale: Locale,
 ): Promise<Menu | null> {
   const menu = await sanityFetch<Menu>({
     query: getMenuQuery,
-    params: { slug, language },
+    params: { slug, locale },
   });
   const validatedMenu = validateAndCleanupMenu(menu);
   return validatedMenu;

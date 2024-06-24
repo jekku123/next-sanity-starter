@@ -7,6 +7,7 @@ export const env = createEnv({
     NEXTAUTH_URL: z.string().optional(),
     AUTH_GITHUB_ID: z.string(),
     AUTH_GITHUB_SECRET: z.string(),
+    RESEND_EMAIL_SECRET: z.string(),
   },
   client: {
     NEXT_PUBLIC_SANITY_API_VERSION: z.string().optional(),
@@ -24,6 +25,7 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     AUTH_GITHUB_ID: process.env.AUTH_GITHUB_ID,
     AUTH_GITHUB_SECRET: process.env.AUTH_GITHUB_SECRET,
+    RESEND_EMAIL_SECRET: process.env.RESEND_EMAIL_SECRET,
   },
 });
 

@@ -50,7 +50,7 @@ export type VerificationToken = {
 
 export type PasswordResetToken = {
   _id: string;
-  email: string;
+  identifier: string;
   token: string;
   expires: string;
 };

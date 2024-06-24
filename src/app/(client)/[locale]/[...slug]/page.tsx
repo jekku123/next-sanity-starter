@@ -18,8 +18,12 @@ import { notFound } from "next/navigation";
 // Add the types of the resources you want to generate static pages for
 const RESOURCE_TYPES = ["page", "article"];
 
-export async function generateStaticParams({ params }: PageParams) {
-  const staticParams = await getStaticParams(RESOURCE_TYPES, params.locale);
+type PageParams = {
+  params: { slug: string[]; locale: Locale };
+};
+
+export async function generateStaticParams({ params: { locale } }: PageParams) {
+  const staticParams = await getStaticParams(RESOURCE_TYPES, locale);
   return staticParams.map((param) => ({ slug: param }));
 }
 
@@ -30,10 +34,6 @@ export async function generateMetadata(
   const metadata = await getDynamicMetadata(params, parent);
   return metadata;
 }
-
-type PageParams = {
-  params: { slug: string[]; locale: Locale };
-};
 
 export const revalidate = 60;
 

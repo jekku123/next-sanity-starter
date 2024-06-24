@@ -22,6 +22,7 @@ export const {
   },
   secret: env.NEXTAUTH_SECRET,
   adapter: SanityAdapter(client),
+  session: { strategy: "database" },
 
   providers: [
     GitHub({
@@ -41,23 +42,6 @@ export const {
       return true;
     },
 
-    async session({ session, user }) {
-      if (user.id && session.user) {
-        session.user.id = user.id;
-      }
-
-      if (user.role && session.user) {
-        session.user.role = user.role as UserRole;
-      }
-
-      if (session.user) {
-        session.user.name = user.name;
-        session.user.email = user.email as string;
-      }
-
-      return session;
-    },
-
     async jwt({ token }) {
       if (!token.sub) return token;
 
@@ -73,6 +57,23 @@ export const {
       token.role = existingUser.role;
 
       return token;
+    },
+
+    async session({ session, user }) {
+      if (user.id && session.user) {
+        session.user.id = user.id;
+      }
+
+      if (user.role && session.user) {
+        session.user.role = user.role as UserRole;
+      }
+
+      if (session.user) {
+        session.user.name = user.name;
+        session.user.email = user.email as string;
+      }
+
+      return session;
     },
   },
 });

@@ -2,7 +2,7 @@ import type { SanityClient } from "@sanity/client";
 import { uuid } from "@sanity/uuid";
 
 import { User, UserRole } from "@/types/authentication";
-import type { Adapter, AdapterSession, AdapterUser } from "@auth/core/adapters";
+import type { Adapter, AdapterSession, AdapterUser } from "next-auth/adapters";
 
 export function SanityAdapter(
   sanityClient: SanityClient,

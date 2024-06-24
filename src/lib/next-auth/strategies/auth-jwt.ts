@@ -71,6 +71,23 @@ export const {
       return true;
     },
 
+    async jwt({ token }) {
+      if (!token.sub) return token;
+
+      const existingUser = await getUserById(token.sub);
+
+      if (!existingUser) return token;
+
+      const existingAccount = await getAccountByUserId(existingUser._id);
+
+      token.isOAuth = !!existingAccount;
+      token.name = existingUser.name;
+      token.email = existingUser.email;
+      token.role = existingUser.role;
+
+      return token;
+    },
+
     async session({ session, token }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
@@ -87,23 +104,6 @@ export const {
       }
 
       return session;
-    },
-
-    async jwt({ token }) {
-      if (!token.sub) return token;
-
-      const existingUser = await getUserById(token.sub);
-
-      if (!existingUser) return token;
-
-      const existingAccount = await getAccountByUserId(existingUser._id);
-
-      token.isOAuth = !!existingAccount;
-      token.name = existingUser.name;
-      token.email = existingUser.email;
-      token.role = existingUser.role;
-
-      return token;
     },
   },
 });
