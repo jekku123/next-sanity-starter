@@ -2,8 +2,6 @@ import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 
 import { env } from "@/env";
-import { getAccountByUserId } from "@/lib/next-auth/data-access/account";
-import { getUserById } from "@/lib/next-auth/data-access/user";
 import { SanityAdapter } from "@/lib/next-auth/sanity-adapter";
 import { client } from "@/lib/sanity/client";
 import { UserRole } from "@/types/authentication";
@@ -32,33 +30,6 @@ export const {
   ],
 
   callbacks: {
-    async signIn({ user, account }) {
-      if (account?.provider !== "credentials") return true;
-
-      const existingUser = await getUserById(user.id!);
-
-      if (!existingUser?.emailVerified) return false;
-
-      return true;
-    },
-
-    async jwt({ token }) {
-      if (!token.sub) return token;
-
-      const existingUser = await getUserById(token.sub);
-
-      if (!existingUser) return token;
-
-      const existingAccount = await getAccountByUserId(existingUser._id);
-
-      token.isOAuth = !!existingAccount;
-      token.name = existingUser.name;
-      token.email = existingUser.email;
-      token.role = existingUser.role;
-
-      return token;
-    },
-
     async session({ session, user }) {
       if (user.id && session.user) {
         session.user.id = user.id;

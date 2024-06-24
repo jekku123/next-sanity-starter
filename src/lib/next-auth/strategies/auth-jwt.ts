@@ -4,11 +4,9 @@ import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
 
 import { env } from "@/env";
-import { getAccountByUserId } from "@/lib/next-auth/data-access/account";
-import { getUserById } from "@/lib/next-auth/data-access/user";
+import { getUserByEmail } from "@/lib/next-auth/data-access/user";
 import { SanityAdapter } from "@/lib/next-auth/sanity-adapter";
 import { client } from "@/lib/sanity/client";
-import { LoginSchema } from "@/lib/zod/auth-forms";
 import { UserRole } from "@/types/authentication";
 
 export const {
@@ -21,8 +19,8 @@ export const {
   trustHost: true, // Required to run CI e2e tests with cypress
   secret: env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "auth/login",
-    error: "auth/error",
+    signIn: "/auth/login",
+    error: "/auth/error",
   },
   adapter: SanityAdapter(client),
   session: { strategy: "jwt" },
@@ -34,24 +32,22 @@ export const {
     }),
     Credentials({
       async authorize(credentials) {
-        const validatedFields = LoginSchema.safeParse(credentials);
-        if (!validatedFields.success) return null;
+        const user = await getUserByEmail(credentials.email as string);
 
-        const user_qry = `*[_type == "user" && email == "${credentials?.email}"][0]`;
-        const user = await client.fetch(user_qry);
-
-        if (!user || !user.password) return null;
+        if (!user || !user.emailVerified) return null;
 
         const passwordsMatch = await bcrypt.compare(
-          credentials?.password as string,
+          credentials.password as string,
           user.password,
         );
 
         if (passwordsMatch) {
           return {
             id: user._id,
-            role: user.role,
-            ...user,
+            name: user.name,
+            email: user.email,
+            role: user.role as UserRole,
+            isOAuth: false,
           };
         }
 
@@ -64,44 +60,27 @@ export const {
     async signIn({ user, account }) {
       if (account?.provider !== "credentials") return true;
 
-      const existingUser = await getUserById(user.id!);
-
-      if (!existingUser?.emailVerified) return false;
+      // const existingUser = await getUserById(user.id!);
+      // if (!existingUser?.emailVerified) return false;
 
       return true;
     },
 
-    async jwt({ token }) {
-      if (!token.sub) return token;
+    async jwt({ token, user }) {
+      if (!token.sub || !user) return token;
 
-      const existingUser = await getUserById(token.sub);
-
-      if (!existingUser) return token;
-
-      const existingAccount = await getAccountByUserId(existingUser._id);
-
-      token.isOAuth = !!existingAccount;
-      token.name = existingUser.name;
-      token.email = existingUser.email;
-      token.role = existingUser.role;
+      token.role = user.role;
+      token.isOAuth = user.isOAuth === undefined ? true : user.isOAuth;
 
       return token;
     },
 
     async session({ session, token }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
-      }
+      if (!token.sub || !session.user) return session;
 
-      if (token.role && session.user) {
-        session.user.role = token.role as UserRole;
-      }
-
-      if (session.user) {
-        session.user.name = token.name;
-        session.user.email = token.email as string;
-        session.user.isOAuth = token.isOAuth as boolean;
-      }
+      session.user.id = token.sub;
+      session.user.role = token.role as UserRole;
+      session.user.isOAuth = token.isOAuth as boolean;
 
       return session;
     },

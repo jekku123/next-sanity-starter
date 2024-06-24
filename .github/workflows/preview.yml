@@ -23,6 +23,7 @@ jobs:
           AUTH_GITHUB_ID: ${{ secrets.AUTH_GITHUB_ID }}
           AUTH_GITHUB_SECRET: ${{ secrets.AUTH_GITHUB_SECRET }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          RESEND_EMAIL_SECRET: ${{ secrets.RESEND_EMAIL_SECRET }}
         with:
           build: npm run build
           start: npm start

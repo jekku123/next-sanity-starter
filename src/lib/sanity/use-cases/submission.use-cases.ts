@@ -19,12 +19,8 @@ export async function getSubmissionsByUserIdUseCase(
 ): Promise<SubmissionDto[]> {
   const user = await currentUser();
 
-  if (!user) {
+  if (!user || user.id !== userId) {
     throw new Error("Unauthorized");
-  }
-
-  if (user.id !== userId) {
-    throw new Error("Forbidden");
   }
 
   const submissions = await getSubmissionsByUserId(userId);
