@@ -8,7 +8,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { deleteUserAction } from "@/lib/next-auth/actions/delete-user";
-import { logout } from "@/lib/next-auth/actions/logout";
+import { logoutAction } from "@/lib/next-auth/actions/logout";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -23,7 +23,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 
-export const deleteSchema = z.object({
+export const DeleteSchema = z.object({
   confirm: z.string().refine((v) => v === "Delete", {
     message: "Please type 'Delete' to confirm",
   }),
@@ -38,8 +38,8 @@ export function DeleteUserDialog({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
-  const form = useForm<z.infer<typeof deleteSchema>>({
-    resolver: zodResolver(deleteSchema),
+  const form = useForm<z.infer<typeof DeleteSchema>>({
+    resolver: zodResolver(DeleteSchema),
     defaultValues: {
       confirm: "",
     },
@@ -50,7 +50,7 @@ export function DeleteUserDialog({
     if (res.error) {
       console.error(res.error);
     }
-    await logout();
+    await logoutAction();
   }
 
   return (

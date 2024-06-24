@@ -38,6 +38,7 @@
     "system": "Oletus"
   },
   "LanguageSwitcher": {
+    "language-switcher": "Kielen vaihto",
     "switch-language": "Vaihda kieltä",
     "english": "Englanti",
     "finnish": "Suomi"

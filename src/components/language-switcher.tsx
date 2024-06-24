@@ -30,19 +30,20 @@ export default function LanguageSwitcher() {
           className="z-50"
         >
           <CountryFlag countryCode={flag} />
+          <span className="sr-only">{t("language-switcher")}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {locale !== "en" ? (
           <Link href={pathname} locale="en">
-            <DropdownMenuItem data-test-id="language-switcher-english">
+            <DropdownMenuItem>
               <CountryFlag countryCode="GB" />
               {t("english")}
             </DropdownMenuItem>
           </Link>
         ) : (
           <Link href={pathname} locale="fi">
-            <DropdownMenuItem data-test-id="language-switcher-finnish">
+            <DropdownMenuItem>
               <CountryFlag countryCode="FI" />
               {t("finnish")}
             </DropdownMenuItem>

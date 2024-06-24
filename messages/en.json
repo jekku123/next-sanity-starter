@@ -38,6 +38,7 @@
     "system": "System"
   },
   "LanguageSwitcher": {
+    "language-switcher": "Language switcher",
     "switch-language": "Switch language",
     "english": "English",
     "finnish": "Finnish"
