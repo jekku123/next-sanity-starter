@@ -1,5 +1,4 @@
 import { SupportedLanguages } from "@sanity/document-internationalization";
-import createIntlMiddleware from "next-intl/middleware";
 import { getRequestConfig } from "next-intl/server";
 import { notFound } from "next/navigation";
 import MiddlewareConfig from "node_modules/next-intl/dist/types/src/middleware/NextIntlMiddlewareConfig";
@@ -7,11 +6,11 @@ import MiddlewareConfig from "node_modules/next-intl/dist/types/src/middleware/N
 export type Locale = "en" | "fi";
 export const locales = ["en", "fi"] satisfies Locale[];
 
-export const i18nMiddleware = createIntlMiddleware({
+export const i18nMiddlewareConfig = {
   locales,
   localePrefix: "as-needed",
   defaultLocale: "en",
-} satisfies MiddlewareConfig<Locale[]>);
+} satisfies MiddlewareConfig<Locale[]>;
 
 export const i18nSanityLocaleConfig = [
   { id: "en", title: "English" },

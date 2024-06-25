@@ -3,7 +3,7 @@ import { auth } from "@/lib/next-auth/auth";
 import createIntlMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { NextAuthRequest } from "node_modules/next-auth/lib";
-import { locales } from "./i18n";
+import { i18nMiddlewareConfig } from "./i18n";
 import {
   DEFAULT_LOGIN_PATH,
   DEFAULT_LOGIN_REDIRECT,
@@ -12,11 +12,7 @@ import {
   protectedRoutes,
 } from "./lib/next-auth/routes";
 
-const intlMiddleware = createIntlMiddleware({
-  locales,
-  localePrefix: "as-needed",
-  defaultLocale: "en",
-});
+const intlMiddleware = createIntlMiddleware(i18nMiddlewareConfig);
 
 const authMiddleware = auth((req: NextAuthRequest) => {
   const { nextUrl } = req;

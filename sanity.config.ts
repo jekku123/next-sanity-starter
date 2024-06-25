@@ -8,6 +8,7 @@ import { DocumentDefinition, defineConfig } from "sanity";
 import { StructureBuilder, structureTool } from "sanity/structure";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
+import { i18nSanityLocaleConfig } from "@/i18n";
 import frontpage from "@/lib/sanity/schema/documents/frontpage";
 import settings from "@/lib/sanity/schema/documents/settings";
 import { env } from "./src/env";
@@ -15,26 +16,19 @@ import { schema } from "./src/lib/sanity/schema";
 
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set(["publish", "discardChanges", "restore"]);
+
 // Define the singleton document types
 const singletonTypes = new Set(["frontpage", "settings"]);
+
 // Define the hidden document types
 const hiddenTypes = new Set([
-  "",
-  // "session",
-  // "account",
-  // "verificationToken",
-  // "passwordResetToken",
+  "session",
+  "account",
+  "verificationToken",
+  "passwordResetToken",
 ]);
 
-const SINGLETONS = [
-  { id: "frontpage", _type: "frontpage", title: "Frontpage" },
-  { id: "settings", _type: "settings", title: "Settings" },
-];
-
-const LANGUAGES = [
-  { id: `en`, title: `English` },
-  { id: `fi`, title: `Finnish` },
-];
+const translatedSchemaTypes = ["page", "frontpage", "navigation", "article"];
 
 const singletonListItems = (
   S: StructureBuilder,
@@ -83,8 +77,8 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     documentInternationalization({
       // Required configuration
-      supportedLanguages: LANGUAGES,
-      schemaTypes: ["page", "frontpage", "navigation", "article"],
+      supportedLanguages: i18nSanityLocaleConfig,
+      schemaTypes: translatedSchemaTypes,
     }),
     structureTool({
       structure: (S) =>
