@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link, usePathname } from "@/navigation";
 
+import { i18nLanguageLinks } from "@/i18n";
 import { CountryFlag } from "./ui/country-flag";
 
 export default function LanguageSwitcher() {
@@ -32,23 +33,20 @@ export default function LanguageSwitcher() {
           <CountryFlag countryCode={flag} />
           <span className="sr-only">{t("language-switcher")}</span>
         </Button>
-      </DropdownMenuTrigger>
+      </DropdownMenuTrigger>{" "}
       <DropdownMenuContent align="end">
-        {locale !== "en" ? (
-          <Link href={pathname} locale="en">
-            <DropdownMenuItem>
-              <CountryFlag countryCode="GB" />
-              {t("english")}
-            </DropdownMenuItem>
-          </Link>
-        ) : (
-          <Link href={pathname} locale="fi">
-            <DropdownMenuItem>
-              <CountryFlag countryCode="FI" />
-              {t("finnish")}
-            </DropdownMenuItem>
-          </Link>
-        )}
+        {i18nLanguageLinks
+          .filter((link) => link.locale !== locale)
+          .map(({ title, locale, countryCode }) => {
+            return (
+              <Link key={locale} href={pathname} locale={locale}>
+                <DropdownMenuItem>
+                  <CountryFlag countryCode={countryCode} />
+                  {t(title)}
+                </DropdownMenuItem>
+              </Link>
+            );
+          })}
       </DropdownMenuContent>
     </DropdownMenu>
   );
