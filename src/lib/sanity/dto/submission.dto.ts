@@ -25,6 +25,10 @@ export type GetSubmissionById = (
   id: string,
 ) => Promise<SubmissionDto | undefined>;
 
+export type GetSubmissionsByUserId = (
+  userId: string,
+) => Promise<SubmissionDto[]>;
+
 export type DeleteSubmission = (id: string) => Promise<void>;
 
 export function submissionEntityToCreateSubmissionDtoMapper(

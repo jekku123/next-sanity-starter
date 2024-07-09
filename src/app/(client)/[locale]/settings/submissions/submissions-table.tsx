@@ -28,7 +28,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { deleteSubmissionAction } from "@/lib/sanity/actions/contact";
+import { deleteSubmissionAction } from "@/lib/sanity/actions/submissions";
 import { SubmissionDto } from "@/lib/sanity/dto/submission.dto";
 import { useOptimistic, useState, useTransition } from "react";
 
@@ -45,7 +45,7 @@ export default function SubmissionsTable({
   );
 
   const [open, setOpen] = useState(false);
-  const [_isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const handleDelete = async (id: string) => {
     startTransition(() => {

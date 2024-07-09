@@ -28,7 +28,7 @@ export async function createSubmissionAction(values: ContactFormType) {
 
   try {
     await createSubmissionUseCase(validatedFields.data, user, {
-      create: createSubmission,
+      createSubmission: createSubmission,
     });
     revalidatePath("/settings/submissions");
     return { success: true };
@@ -47,8 +47,8 @@ export async function deleteSubmissionAction(id: string) {
 
   try {
     await deleteSubmissionUseCase(id, user, {
-      getById: getSubmissionById,
-      delete: deleteSubmission,
+      getSubmissionById: getSubmissionById,
+      deleteSubmission: deleteSubmission,
     });
     revalidatePath("/settings/submissions");
     return { success: true };

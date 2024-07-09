@@ -7,6 +7,7 @@ import {
   DeleteSubmission,
   GetSubmissionById,
   SubmissionDto,
+  submissionEntityToCreateSubmissionDtoMapper,
 } from "../dto/submission.dto";
 import SubmissionEntity from "../entities/submission.entity";
 
@@ -32,11 +33,11 @@ export async function deleteSubmissionUseCase(
   submissionId: string,
   user: User,
   ctx: {
-    getById: GetSubmissionById;
-    delete: DeleteSubmission;
+    getSubmissionById: GetSubmissionById;
+    deleteSubmission: DeleteSubmission;
   },
 ) {
-  const submission = await ctx.getById(submissionId);
+  const submission = await ctx.getSubmissionById(submissionId);
 
   if (!submission) {
     throw new Error("Submission not found");
@@ -46,7 +47,7 @@ export async function deleteSubmissionUseCase(
     throw new Error("Forbidden");
   }
 
-  await ctx.delete(submissionId);
+  await ctx.deleteSubmission(submissionId);
 
   return submissionId;
 }
@@ -55,7 +56,7 @@ export async function createSubmissionUseCase(
   values: ContactFormType,
   user: User,
   ctx: {
-    create: CreateSubmission;
+    createSubmission: CreateSubmission;
   },
 ): Promise<void> {
   const submission = new SubmissionEntity({
@@ -63,5 +64,7 @@ export async function createSubmissionUseCase(
     userId: user.id!,
   });
 
-  await ctx.create(submission.toCreateSubmissionDto());
+  await ctx.createSubmission(
+    submissionEntityToCreateSubmissionDtoMapper(submission),
+  );
 }

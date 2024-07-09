@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { CreateSubmissionDto, SubmissionDto } from "../dto/submission.dto";
 
 export default class SubmissionEntity {
   private id?: string;
@@ -61,26 +60,6 @@ export default class SubmissionEntity {
   public updateMessage(message: string) {
     this.message = message;
     this.validate();
-  }
-
-  public toDto(): SubmissionDto {
-    return {
-      id: this.getId()!,
-      name: this.getName(),
-      email: this.getEmail(),
-      message: this.getMessage(),
-      userId: this.getUserId(),
-      createdAt: this.getCreatedAt()!,
-    };
-  }
-
-  public toCreateSubmissionDto(): CreateSubmissionDto {
-    return {
-      name: this.getName(),
-      email: this.getEmail(),
-      message: this.getMessage(),
-      userId: this.getUserId(),
-    };
   }
 
   private validate() {

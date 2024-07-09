@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { createSubmissionAction } from "@/lib/sanity/actions/contact";
+import { createSubmissionAction } from "@/lib/sanity/actions/submissions";
 import { ContactFormType, contactFormBaseSchema } from "@/lib/zod/contact-form";
 import { useTranslations } from "next-intl";
 import { FormError } from "./form-error";
